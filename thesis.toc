@@ -33,8 +33,8 @@
 \contentsline {section}{\numberline {4.1}Architekturübersicht}{36}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Ergebnisdiskussion}{37}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Ausblick}{38}{section.4.3}%
-\contentsline {chapter}{\numberline {A}Anhang}{39}{appendix.A}%
 \contentsline {chapter}{Literaturverzeichnis}{39}{section*.42}%
+\contentsline {chapter}{\numberline {A}Anhang}{41}{appendix.A}%
 \babel@toc {ngerman}{}\relax 
 \babel@toc {ngerman}{}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
