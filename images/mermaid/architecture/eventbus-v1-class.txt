@@ -1,0 +1,33 @@
+classDiagram
+    class BaseModel {
+        <<abstract>>
+        +save()
+    }
+    class LogEntry {
+        <<abstract>>
+        +save()
+    }
+    class Logger {
+        +log(*args, **kwargs)
+    }
+    class Component {
+
+    }
+    class EventBus {
+        +callbacks: list[tuple[callable[[LogEntry], None], Type[LogEntry]]]
+        +register_callback(callback: callable[[LogEntry], None], entry_type: Type[LogEntry]): str
+        +unregister_callback(handle: str)
+        -notify(entry: LogEntry)
+    }
+    class IEventConsumer {
+        <<interface>>
+        +event_handle: str
+        +on_event(entry: LogEntry)
+    }
+    
+    BaseModel <|-- LogEntry
+    LogEntry <.. Logger: creates
+    Logger <-- Component: logs events
+    EventBus <-- LogEntry: notifies
+    EventBus <-- IEventConsumer: (un)registers callbacks
+    IEventConsumer <-- EventBus: notifies

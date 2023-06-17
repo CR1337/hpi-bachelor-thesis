@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant Component
+    participant EventBus
+    participant Event
+    participant EventConsumer
+
+    activate Component
+    Component ->>+ EventBus: log(*args, **kwargs)
+    EventBus --) Event: __init__(*args, **kwargs)
+    EventBus ->>+ EventConsumer: on_event(event)
+    EventConsumer -->>- EventBus: return
+    EventBus -->>- Component: return
+    deactivate Component 

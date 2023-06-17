@@ -1,1 +1,61 @@
 \section{Implementierungsdetails}
+
+\subsection{Warteschlange für die Zugerzeugung}
+
+\lstset{language=python}
+\begin{lstlisting}[caption={Quelltextunterschrift}, label=code:template-method-code]
+class Schedule(ABC):
+
+    _seconds_to_be_spawned: list[int]
+    _blocked: bool
+
+    def maybe_spawn(self, seconds: int, spawner: Spawner):
+        if not self._blocked and self.strategy.should_spawn(seconds):
+            self._seconds_to_be_spawned.append(seconds)
+
+        if len(self._seconds_to_be_spawned) > 0:
+            if self._spawn(spawner, self._seconds_to_be_spawned[-1]):
+                self._seconds_to_be_spawned.pop()
+
+    @abstractmethod
+    def _spawn(self, spawner: Spawner, seconds: int) -> bool:
+    	raise NotImplementedError()
+\end{lstlisting}
+
+\subsection{Erzeugung bedarfsorientierter Züge}
+
+\lstset{language=python}
+\begin{lstlisting}[caption={Quelltextunterschrift}, label=code:template-method-code]
+class DemandScheduleStrategy(ScheduleStrategy):
+    SECONDS_PER_QUARTER_HOUR: int
+    COAL_PER_TRAIN: float
+
+    start_datetime: datetime
+    spawn_seconds: list[int]
+    
+    def __init__(self, ...):
+        ...
+        self._calculate_spawn_seconds()
+        ...
+
+    def _compute_trains_to_spawn(self, produced_electrical_power: float) -> float:
+        coal_consumption = self.compute_coal_consumption(produced_electrical_power)
+        return coal_consumption / self.COAL_PER_TRAIN
+
+    def _calculate_spawn_seconds(self):
+        end_datetime = self.start_datetime + timedelta(
+            seconds=self.end_time - self.start_time
+        )
+        data = self._api.get_data(self.start_datetime, end_datetime)
+        train_accumulator = 0.0
+        for quarter_hour, entry in enumerate(data):
+            train_accumulator += self._compute_trains_to_spawn(entry.value)
+            seconds = int(quarter_hour * self.SECONDS_PER_QUARTER_HOUR + self.start_time)
+            while train_accumulator >= 1.0:
+                self.spawn_ticks.append(seconds)
+                train_accumulator -= 1.0
+                tick += 1
+                
+	def should_spawn(self, seconds: int) -> bool:
+    	return super().should_spawn(seconds) and seconds in self.spawn_seconds
+\end{lstlisting}

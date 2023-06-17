@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant EventConsumer
+    participant EventBus
+
+    activate EventConsumer
+    EventConsumer ->>+ EventBus: register_callback(callback, event_type)
+    EventBus -->- EventConsumer: return handle
+    deactivate EventConsumer

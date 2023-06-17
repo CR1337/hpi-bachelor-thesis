@@ -1,0 +1,44 @@
+classDiagram
+    direction BT
+    class BaseModel {
+        <<abstract>>
+    }
+    class ScheduleConfigurationXSimulationPlatform {
+        +schedule_configuration: ScheduleConfiguration
+        +simulation_platform_is: str
+        +index: int
+    }
+    class SpwanerConfigurationXSchedule {
+        +spawner_configuration: SpawnerConfiguration
+        +schedule_configuration: ScheduleConfiguration
+    }
+    class Spawner {
+        -schedules: dict[str, Schedule]
+        +next_tick(tick: int)
+        +get_schedule(schedule_id: str) Schedule
+    }
+    class SpawnerConfiguration {
+
+    }
+    class ScheduleConfiguration {
+        +schedule_type: str
+        +strategy_type: str
+        +strategy_start_time: int
+        +strategy_end_time: int
+        +train_schedule_train_type: str
+        +regular_strategy_frequency: int
+        +random_strategy_trains_per_1000_seconds: float
+        +random_strategy_seed: int
+        +demand_strategy_power_station: str
+        +demand_strategy_sclaing_factor: float
+        +demand_strategy_start_datetime: datetime
+    }
+
+    BaseModel <|-- ScheduleConfigurationXSimulationPlatform
+    BaseModel <|-- SpwanerConfigurationXSchedule
+    BaseModel <|-- SpawnerConfiguration
+    BaseModel <|-- ScheduleConfiguration
+    ScheduleConfiguration "1" --* ScheduleConfigurationXSimulationPlatform: schedule_configuration
+    ScheduleConfiguration "1" --* SpwanerConfigurationXSchedule: Schedule_configuration
+    SpawnerConfiguration "1" --* SpwanerConfigurationXSchedule: spawner_configuration
+    SpawnerConfiguration "1" --* Spawner: configuration

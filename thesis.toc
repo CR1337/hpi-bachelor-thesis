@@ -23,16 +23,18 @@
 \contentsline {section}{\numberline {3.2}Architekturdiskussion}{25}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Die Datenbank}{25}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}Der Spawner}{25}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Die Konfiguration des Spawners}{25}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Der Eventbus}{25}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Implementierungsdetails}{26}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Simulationsergebnisse}{27}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Schlussbetrachtung}{29}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Architekturübersicht}{30}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Ergebnisdiskussion}{31}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Ausblick}{32}{section.4.3}%
-\contentsline {chapter}{\numberline {A}Anhang}{33}{appendix.A}%
-\contentsline {chapter}{Literaturverzeichnis}{33}{section*.31}%
+\contentsline {subsection}{\numberline {3.2.3}Die Konfiguration des Spawners}{27}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Der Eventbus}{28}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Implementierungsdetails}{32}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Warteschlange für die Zugerzeugung}{32}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Erzeugung bedarfsorientierter Züge}{32}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Simulationsergebnisse}{34}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Schlussbetrachtung}{35}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Architekturübersicht}{36}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Ergebnisdiskussion}{37}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Ausblick}{38}{section.4.3}%
+\contentsline {chapter}{\numberline {A}Anhang}{39}{appendix.A}%
+\contentsline {chapter}{Literaturverzeichnis}{39}{section*.42}%
 \babel@toc {ngerman}{}\relax 
 \babel@toc {ngerman}{}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

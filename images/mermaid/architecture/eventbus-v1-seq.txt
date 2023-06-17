@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Component
+    participant Logger
+    participant LogEntry
+    participant EventBus
+    participant EventConsumer
+
+    activate Component
+    Component ->>+ Logger: log(*args, **kwargs)
+    Logger ->>+ LogEntry: create(*args, **kwargs)
+    LogEntry ->>+ LogEntry: save()
+    LogEntry ->>+ EventBus: notify(self)
+    EventBus ->>+ IEventConsumer: on_event(entry)
+    IEventConsumer -->>- EventBus: return
+    EventBus -->>- LogEntry: return
+    deactivate LogEntry
+    LogEntry -->>- Logger: return
+    Logger -->>- Component: return
+    deactivate Component

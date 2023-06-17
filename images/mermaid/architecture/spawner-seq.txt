@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant Communicator
+    participant Spawner
+    participant Schedule
+    participant ScheduleStrategy
+
+    activate Communicator
+    Communicator ->>+ Spawner: next_tick(tick)
+    Spawner ->>+ Schedule: maybe_spawn(seconds, spawner)
+    Schedule ->>+ ScheduleStrategy: should_spawn
+    ScheduleStrategy -->>- Schedule: return should_spawn
+    opt should_spawn and not schedule.blocked
+        Schedule ->>+ Schedule: spawn(seconds, spawner)
+        Schedule ->>+ Spawner: spawn_train(..)
+        Spawner -->>- Schedule: return
+        deactivate Schedule
+    end
+    Schedule -->>- Spawner: return
+    Spawner -->>- Communicator: return
+    deactivate Communicator

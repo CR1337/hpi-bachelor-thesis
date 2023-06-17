@@ -1,0 +1,33 @@
+classDiagram
+    direction BT
+    class Component {
+        -event_bus: EventBus
+    }
+    class EventBus {
+        +callbacks: list[tuple[callable[[Event], None], EventType]]
+        +register_callback(callback: callable[[Event], None], event_type: EventType) str
+        +unregister_callback(handle: str)
+        +log(*args, **kwargs)
+    }
+    class Logger {
+
+    }
+    class Event {
+        +event_type: EventType
+        +arguments: dict[str, Any]
+    }
+    class EventType {
+        <<enum>>
+    }
+    class IEventConsumer {
+        <<interface>>
+        +event_handle: str
+        +on_event(event: Event)
+    }
+
+    EventBus "1" --* Component: event_bus
+    Event <.. EventBus: creates
+    Event "1" --* EventType: event_type
+    IEventConsumer <|.. Logger
+    IEventConsumer <-- EventBus: notifies
+    EventBus <-- IEventConsumer: (un)registers callbacks
