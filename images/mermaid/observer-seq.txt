@@ -1,0 +1,18 @@
+sequenceDiagram
+    autonumber
+    participant Client
+    participant Publisher
+    participant ConcreteSubscriber1
+    participant ConcreteSubscriber2
+
+    activate Client
+    Client ->>+ Publisher: updateState()
+    Publisher ->>+ Publisher: notify()
+    Publisher ->>+ ConcreteSubscriber1: update(context)
+    ConcreteSubscriber1 --)- Publisher: return
+    Publisher ->>+ ConcreteSubscriber2: update(context)
+    ConcreteSubscriber2 --)- Publisher: return
+    deactivate Publisher
+    Publisher --)- Client: return
+    deactivate Client
+

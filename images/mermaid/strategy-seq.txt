@@ -1,0 +1,16 @@
+sequenceDiagram
+    autonumber
+    participant Client
+    participant ConcreteStrategy
+    participant Context
+
+    activate Client
+    Client -->>+ ConcreteStrategy: creates
+    ConcreteStrategy --)- Client: return strategy
+    Client ->>+ Context: setStrategy(strategy)
+    Context --)- Client: return
+    Client ->>+ Context: doSomething()
+    Context ->>+ ConcreteStrategy: execute(data)
+    ConcreteStrategy --)- Context: return
+    Context --)- Client: return
+    deactivate Client

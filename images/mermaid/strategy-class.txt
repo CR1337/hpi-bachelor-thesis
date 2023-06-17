@@ -1,0 +1,22 @@
+classDiagram
+    class Context {
+        -strategy
+        +setStrategy(strategy)
+        +doSomething()
+    }
+    class Strategy {
+        <<interface>>
+        +execute(data)
+    }
+    class ConcreteStrategy {
+        +execute(data)
+    }
+    class Client {
+
+    }
+
+    ConcreteStrategy <.. Client: creates
+    Context <-- Client: uses
+    Context <-- Client: sets strategy
+    Strategy "1" --* Context: strategy
+    Strategy <|.. ConcreteStrategy

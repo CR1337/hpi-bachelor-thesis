@@ -1,0 +1,24 @@
+classDiagram
+    class Mediator {
+        <<interface>>
+        +notify(sender)
+    }
+    class ConcreteMediator {
+        -component1
+        -component2
+        +notify(sender)
+    }
+    class Component1 {
+        -mediator
+    }
+    class Component2 {
+        -mediator
+    }
+
+    Mediator <|.. ConcreteMediator
+    Component1 --* ConcreteMediator: component1
+    Component2 --* ConcreteMediator: component2
+    Mediator --* Component1: mediator
+    Mediator --* Component2: mediator
+
+

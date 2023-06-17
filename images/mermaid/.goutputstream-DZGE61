@@ -1,0 +1,24 @@
+classDiagram
+    class Client {
+
+    }
+    class Publisher {
+        +subscribers
+        +subscribe(subscriber)
+        +unsubscribe(subscriber)
+        +notify()
+        +updateState()
+    }
+    class Subscriber {
+        <<interface>>
+        +update(context)
+    }
+    class ConcreteSubscriber {
+        +update(context)
+    }
+
+    ConcreteSubscriber <.. Client: creates
+    Publisher <-- Client: registers subscriber
+    Publisher <-- Client: updates state
+    Subscriber --o Publisher: subscribers
+    Subscriber <|.. ConcreteSubscriber

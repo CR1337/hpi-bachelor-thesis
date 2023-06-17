@@ -1,0 +1,25 @@
+classDiagram
+    class Visitor {
+        <<interface>>
+        +visit(element)
+    }
+    class Element {
+        <<interface>>
+        +accept(visitor)
+    }
+    class ConcreteVisitor {
+        +visit(element)
+    }
+    class ConcreteElement {
+        +accept(visitor)
+    }
+    class Client {
+
+    }
+
+    Visitor <|.. ConcreteVisitor
+    Element <|.. ConcreteElement
+    ConcreteVisitor <-- Client: uses
+    Element <-- Client: uses
+    ConcreteElement <-- Visitor: visits
+    Visitor <-- Element: accepts

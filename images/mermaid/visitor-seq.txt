@@ -1,0 +1,16 @@
+sequenceDiagram
+    %% https://vainolo.com/2012/07/30/the-visitor-design-pattern-with-sequence-diagrams/
+    autonumber
+    participant Client
+    participant Visitor
+    participant Element
+
+    activate Client
+    Client ->>+ Visitor: doSomething()
+    Visitor ->>+ Element: visit(visitor)
+    Element ->>+ Visitor: accept(element)
+    Visitor --)- Element: return
+    Element --)- Visitor: return
+    Visitor --)- Client: return
+    deactivate Client
+

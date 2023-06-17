@@ -1,0 +1,18 @@
+classDiagram
+    class Creator {
+        <<abstract>>
+        +createProduct()
+    }
+    class Product {
+        <<interface>>
+    }
+    class ConcreteProduct {
+        
+    }
+    class ConcreteCreator {
+        +createProduct()
+    }
+
+    Creator <|-- ConcreteCreator
+    Product <|.. ConcreteProduct
+    Product <.. Creator: creates

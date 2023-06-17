@@ -2,14 +2,14 @@
 \usepackage[ngerman,bibtex]{osm-thesis} % <= Sprache der Arbeit ("ngerman"/"english"), Biblatex-Backend ("bibtex"/"biber")
 
 % ABOUT
-\newcommand{\hpitype}{Bachelorarbeit/Masterarbeit}
-\newcommand{\hpiauthor}{Maxi Musterfrau}
-\newcommand{\hpititle}{Die Geräusche eines zerknitterten Bonboneinwickelpapiers als Untersuchung eines~ungeordneten~Systems}
-\newcommand{\hpititleother}{The Noise from a Crumpled Candy Wrapper as a Probe of a Disordered~System} % <= das Studienreferat verlangt einen deutschen UND englischen Titel
-\newcommand{\hpisupervisor}{Prof.\,Dr.\,Andreas Polze, Max Mustermann}
+\newcommand{\hpitype}{Bachelorarbeit}
+\newcommand{\hpiauthor}{Christian J. Raue}
+\newcommand{\hpititle}{Vergleich von regelmäßigen, randomisierten und bedarfsorientierten Abfahrtsplänen von Zügen im Kontext einer Verkehrssimulation}
+\newcommand{\hpititleother}{Comparison of regular, randomized, and on-demand train departure schedules in the context of a traffic simulation} % <= das Studienreferat verlangt einen deutschen UND englischen Titel
+\newcommand{\hpisupervisor}{Prof.\,Dr.\,Andreas Polze, Arne Boockmeyer, Lukas Pirl}
 \newcommand{\hpichair}{Professur für Betriebssysteme und Middleware}
-\newcommand{\hpiexternalsupervisor}{Wile\,E. Coyote, Road Runner}
-\newcommand{\hpiexternal}{ACME Cooperation}
+\newcommand{\hpiexternalsupervisor}{Henry Huebler, Götz Gassauer}
+\newcommand{\hpiexternal}{DB Systel GmbH}
 \newcommand{\hpidate}{\today}
 
 % DOCUMENT
@@ -32,9 +32,29 @@
 
 	% Textteil
 	\pagenumbering{arabic}
-	\include{content/chapter1} % example
-	\include{content/chapter2} % example
-	\include{content/chapter3} % example
+
+	\chapter{Einleitung}
+	\include{content/1_einleitung/1_1_strukturwandel}
+	\include{content/1_einleitung/1_2_schienennetz}
+	\include{content/1_einleitung/1_3_gemeinsame_nutzung}
+	\include{content/1_einleitung/1_4_team}
+
+	\chapter{Grundlagen}
+	\include{content/2_grundlagen/2_1_fahrplaene}
+	\include{content/2_grundlagen/2_2_abfahrtsplaene}
+	\include{content/2_grundlagen/2_3_design_patterns}
+	\include{content/2_grundlagen/2_4_orm}
+
+	\chapter{Hauptteil}
+	\include{content/3_hauptteil/3_1_kohlebedarf}
+	\include{content/3_hauptteil/3_2_architektur}
+	\include{content/3_hauptteil/3_3_implementierung}
+	\include{content/3_hauptteil/3_4_ergebnisse}
+
+	\chapter{Schlussbetrachtung}
+	\include{content/4_schlussbetrachtung/4_1_architektur}
+	\include{content/4_schlussbetrachtung/4_2_ergebnisse}
+	\include{content/4_schlussbetrachtung/4_3_ausblick}
 
 	% Bibliographie
 	\ifisbook\cleardoubleemptypage\fi
