@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant Client
+    participant BaseModel
+
+    activate Client
+    Client ->>+ BaseModel: create(**kwargs)
+    BaseModel ->>+ BaseModel: save()
+    deactivate BaseModel
+    BaseModel -->>- Client: return
+    deactivate Client

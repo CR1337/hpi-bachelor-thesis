@@ -1,0 +1,81 @@
+flowchart RL
+    0{0 ABSTRACT}
+    1[[1 Einleitung]]
+    1_1(1_1 Strukturwandel in der Lausitz)
+    1_2(1_2 Das Schienennetz der LEAG)
+    1_3(1_3 FlexiDug - Geminsam Nutzung durch Personen- und Güterzüge)
+    1_4(1_4 Das Softwareprojekt und die Interaktion im Tea)
+    2[[2 Grundlagen]]
+    2_1(2_1 Fahrpläne)
+    2_2(2_2 Abfahrtspläne)
+    2_3(2_3 Design Patterns)
+    2_3_1{{2_3_1 Strategy Pattern}}
+    2_3_2{{2_3_2 Template Method}}
+    2_3_3{{2_3_3 Observer Pattern}}
+    2_3_4{{2_3_4 Mediator Pattern}}
+    2_3_5{{2_3_5 Visitor Pattern und Double Dispatch}}
+    2_3_6{{2_3_6 Factory Method}}
+    2_4(2_4 Object-Relational-Mapping)
+    2_5(2_5 Die Smard API)
+    3[[3 Hauptteil]]
+    3_1(3_1 Die Berechnung des Kohlebedarfs)
+    3_2(3_2 Architekturdiskussion)
+    3_2_1{{3_2_1 Die Datenbank}}
+    3_2_2{{3_2_2 Der Spawner}}
+    3_2_3{{3_2_3 Die Konfiguration des Spawners}}
+    3_2_4{{3_2_4 Der Eventbus}}
+    3_3(3_3 Implementierungsdetails)
+    3_3_1{{3_3_1 Warteschlange für die Zugerzeugung}}
+    3_3_2{{3_3_2 Erzeugung bedarfsorientierter Züge}}
+    3_4(3_4 Simulationsergebnisse)
+    4[[4 Schlussbetrachtung]]
+    4_1(4_1 Architekturübersicht)
+    4_2(4_2 Ergebnisdiskussion)
+    4_3(4_3 Ausblick)
+
+    0 --> 1
+    0 --> 2
+    0 --> 3
+    0 --> 4
+
+    1 --> 1_1
+    1 --> 1_2
+    1 --> 1_3
+    1 --> 1_4
+    2 --> 2_1
+    2 --> 2_2
+    2 --> 2_3
+    2 --> 2_4
+    2 --> 2_5
+    2_3 --> 2_3_1
+    2_3 --> 2_3_2
+    2_3 --> 2_3_3
+    2_3 --> 2_3_4
+    2_3 --> 2_3_5
+    2_3 --> 2_3_6
+    3 --> 3_1
+    3 --> 3_2
+    3 --> 3_3
+    3 --> 3_4
+    3_2 --> 3_2_1
+    3_2 --> 3_2_2
+    3_2 --> 3_2_3
+    3_2 --> 3_2_4
+    3_3 --> 3_3_1
+    3_3 --> 3_3_2
+    4 --> 4_1
+    4 --> 4_2
+    4 --> 4_3
+
+    3 --> 1_4
+    2_2 --> 2_1
+    3_2 --> 2_3
+    3_2 --> 2_4
+    3_2 --> 2_5
+    3_1 --> 2_5
+    3_3 --> 3_2
+    4_1 --> 3_2
+    3_2_3 --> 3_2_1
+    4_3 --> 3_2_4
+    4_2 --> 3_4
+    3_2_1 --> 2_4

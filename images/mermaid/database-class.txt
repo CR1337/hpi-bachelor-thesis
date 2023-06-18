@@ -1,0 +1,23 @@
+classDiagram
+    direction RL
+    namespace peewee {
+        class Model {
+            <<abstract>>
+            +create(**kwargs)
+            +save()
+        }
+    }
+    class BaseModel {
+        <<abstract>>
+        +id: str
+        +created_at: datetime
+        +updated_at: datetime
+        +readable_id: str
+        +save()
+    }
+    class SerializableBaseModel {
+        +to_dict() dict[str, Any]
+    }
+
+    Model <|-- BaseModel
+    BaseModel <|-- SerializableBaseModel
