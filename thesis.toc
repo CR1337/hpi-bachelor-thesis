@@ -23,19 +23,19 @@
 \contentsline {section}{\numberline {3.1}Die Berechnung des Kohlebedarfs}{24}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Architekturdiskussion}{25}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Die Datenbank}{25}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Der Spawner}{25}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Die Konfiguration des Spawners}{27}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Der Eventbus}{28}{subsection.3.2.4}%
-\contentsline {section}{\numberline {3.3}Implementierungsdetails}{32}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Warteschlange für die Zugerzeugung}{32}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Erzeugung bedarfsorientierter Züge}{32}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Simulationsergebnisse}{34}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Schlussbetrachtung}{35}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Architekturübersicht}{36}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Ergebnisdiskussion}{37}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Ausblick}{38}{section.4.3}%
-\contentsline {chapter}{\numberline {A}Anhang}{39}{appendix.A}%
-\contentsline {chapter}{Literaturverzeichnis}{39}{section*.42}%
+\contentsline {subsection}{\numberline {3.2.2}Der Spawner}{26}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Die Konfiguration des Spawners}{28}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Der Eventbus}{29}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}Implementierungsdetails}{33}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Warteschlange für die Zugerzeugung}{33}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Erzeugung bedarfsorientierter Züge}{33}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Simulationsergebnisse}{35}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Schlussbetrachtung}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Architekturübersicht}{38}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Ergebnisdiskussion}{39}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Ausblick}{40}{section.4.3}%
+\contentsline {chapter}{\numberline {A}Anhang}{41}{appendix.A}%
+\contentsline {chapter}{Literaturverzeichnis}{41}{section*.44}%
 \babel@toc {ngerman}{}\relax 
 \babel@toc {ngerman}{}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
