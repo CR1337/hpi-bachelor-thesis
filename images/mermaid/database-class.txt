@@ -16,6 +16,7 @@ classDiagram
         +save()
     }
     class SerializableBaseModel {
+        <<abstract>>
         +to_dict() dict[str, Any]
     }
 
