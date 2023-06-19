@@ -5,3 +5,8 @@
 *.fls
 *.log
 .venv
+thesis-blx.bib
+thesis.pdf
+thesis.synctex.gz
+thesis.synctex(busy)
+thesis.toc
