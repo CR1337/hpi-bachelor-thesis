@@ -1,6 +1,6 @@
 \subsection{Die Datenbank}
 
-Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es läuft in einem eigenen Docker-Container. Da jede unserer Modellklassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\texttt{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \texttt{peewee.Model} erbt, wie in Abbildung \ref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind 
+Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es läuft in einem eigenen Docker-Container. Als Datenbankinterface verwendeten wir das ORM peewee, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\texttt{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \texttt{peewee.Model} erbt, wie in Abbildung \ref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind 
 \begin{itemize}
 	\item die expilizite Definition eines Primärschlüssels (\texttt{id}) mit dem Typ einer Zeichenkette, welcher einen Universally unique identifier (UUID) enthält,
 	\item Daten, wann ein Objekt erzeugt und wann es zuletzt aktualisiert wurde
