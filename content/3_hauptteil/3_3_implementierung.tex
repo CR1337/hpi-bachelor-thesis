@@ -1,4 +1,5 @@
 \section{Implementierungsdetails}
+\todo{Deadline: 27.06.}
 
 \subsection{Warteschlange für die Zugerzeugung}
 
@@ -32,7 +33,7 @@ class DemandScheduleStrategy(ScheduleStrategy):
 
     start_datetime: datetime
     spawn_seconds: list[int]
-    
+
     def __init__(self, ...):
         ...
         self._calculate_spawn_seconds()
@@ -55,7 +56,7 @@ class DemandScheduleStrategy(ScheduleStrategy):
                 self.spawn_ticks.append(seconds)
                 train_accumulator -= 1.0
                 tick += 1
-                
+
 	def should_spawn(self, seconds: int) -> bool:
     	return super().should_spawn(seconds) and seconds in self.spawn_seconds
 \end{lstlisting}

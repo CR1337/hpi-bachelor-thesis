@@ -1,4 +1,5 @@
 \subsection{Der Spawner}
+\todo{Deadline: 26.06.}
 
 \begin{figure}[!hb]
 	\centering
@@ -16,9 +17,9 @@
 
 Unser System simuliert die Interaktion von Zügen und diese Züge müssen zu bestimmten Zeiten instanziiert werden. Jedoch könne wir keine SUMO-Flows für das Spawning verwenden, weil diese nicht in der Lage sind, das von uns gewünschte Fahrstraßenverhalten abzubilden. Deshalb haben wir die Spawner-Komponente entwickelt, welche mit Hilfe einer Liste von Stationen, einen Zug in die Simulation setzt.
 
-Der *Spawner* erbt wie die meisten anderen Teile der Software von *Component*, um über `next\_tick` auf die nächste Iteration der Simulation reagieren zu können. Außerdem erhält der Spawner somit Zugriff auf den *EventBus*, welcher es ermöglicht, Events zu emittieren und auf emittierte Events zu reagieren. 
+Der *Spawner* erbt wie die meisten anderen Teile der Software von *Component*, um über `next\_tick` auf die nächste Iteration der Simulation reagieren zu können. Außerdem erhält der Spawner somit Zugriff auf den *EventBus*, welcher es ermöglicht, Events zu emittieren und auf emittierte Events zu reagieren.
 
-Der *Spawner* hält eine Liste von *Schedules*. Ein *Schedule* repräsentiert eine Menge von SUMO-Entitäten, den Weg, den diese in der Simulation zurücklegen sowie die Zeitpunkte, zu denen die Entitäten instanziiert werden. Weiterhin kann ein *Schedule* vom *FaultInjector* geblockt werden, um die Erzeugung von Entitäten für einen bestimmtes Zeitintervall zu unterbinden. 
+Der *Spawner* hält eine Liste von *Schedules*. Ein *Schedule* repräsentiert eine Menge von SUMO-Entitäten, den Weg, den diese in der Simulation zurücklegen sowie die Zeitpunkte, zu denen die Entitäten instanziiert werden. Weiterhin kann ein *Schedule* vom *FaultInjector* geblockt werden, um die Erzeugung von Entitäten für einen bestimmtes Zeitintervall zu unterbinden.
 
 Für einen *Schedule* können Spezialisierungen angelegt werden, um auf die Besonderheiten verschiedener Arten von Entitäten Rücksicht zu nehmen. So müssen z.B. bei der Erzeugung von Fußgängern zum Teil andere Faktoren berücksichtigt werden, als bei der Erzeugung von Zügen. Daher haben wir uns entschieden, die Spezialisierung *TrainSpawner*, zur Erzeugung der Züge zu verwenden. Ein *PedestrianSpawner* war geplant, konnte jedoch im Rahmen des Projektes nicht mehr umgesetzt werden. Der *TrainSchedule* enthält zusätzlich Informationen über den Zugtyp (z.B. Personenzug oder Güterzug), die Route, die der Zug abfährt und dessen Haltepunkte. Diese Route ist als Liste von IDs hinterlegt, welche die anzufahrenden Bahnsteige referenzieren.
 
