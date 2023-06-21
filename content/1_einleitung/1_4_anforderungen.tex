@@ -1,3 +1,32 @@
 \section{Anforderungen}
-\todo{Deadline: 23.06.}
-\todo{Ich erkläre grob, was die Anforderungen an das gesamte projekt sind und detailliert, was die Anforderungen an meinen Teil sind.}
+Unser Softwareprojekt hat das Ziel, eine möglichst realistische Simulationumgebung für Schienenverkehr bereitzustellen. Konkret soll ein Benutzer in der Lage sein, ein Szenario zu konfigurieren, es im Anschluss durch Simulation auszuführen und zuletzt produzierte Ergebnisse zu erhalten. Die Konfiguration eines Szenarios sollte folgende Parameter beinhalten:
+\begin{itemize}
+    \item Abfahrtsorte und Zeitpunkte von beliebig vielen Zügen, sowie deren Zwischenstationen
+    \item Der Typ jedes Zuges (z.B. Güter- oder Personenzug)
+    \item Verschiedene Fehler, welche unvorhergesehene Ereignisse simulieren (wie z.B. Wiechenstörungen oder ausgefallene Züge)
+    \item Eine textuelle Beschreibung der konfigurierten Simulation
+\end{itemize}
+Die Simulation wird von den Verkehrssimulator SUMO \cite{noauthor_eclipse_nodate} durchgeführt. Da dieser den Schienenverkehr jedoch nicht ausreichend realistisch abbilden kann, bestand usere Aufgabe darin, ihn um entsprechende Funktionalitäten zu erweitern. Diese waren:
+\begin{itemize}
+    \item Eine realistische Stellwerkslogik, die wir vom Lehrstuhl übernommenund angepasst haben \cite{noauthor_interlocking_2023}
+    \item Die Schaffung einer objektorientierten Schnittstelle zu den Teilen der prozeduralen SUMO-API, welche wir für die Simulation von Schienenverkehr benötigen
+    \item Ein Algorithmus, welcher die Züge durch das Schienennetz leitet, dabei Deadlocks vermeidet und die Stellwerkslogik entsprechend steuert.
+    \item Die Beachtung von Zugprioritäten in Abhängigkeit des Zugtyps
+\end{itemize}
+Letztendlich sollen folgende Ergebnisse durch die Simulation generiert werden können:
+\begin{itemize}
+    \item Die Zeitpunkte, zu denen sich ein Zug an den konfigurierten Zwischenstationen befand
+    \item Die Abweichungen dieser Zeitpunkte bei regelmäßig verkehrenden Zügen
+    \item Die Verkehrsmenge, welche angibt, welche Strecke insgesamt von allen Zügen auf dem Schienennetz zurückgelegt wurde
+    \item Die Verkehrsleistung, die die Verkehrsmenge pro Zeiteinheit betrachtet
+\end{itemize}
+
+Im Kontext unseres Projektes dient die Software außerdem dazu, den Zugverkehr auf dem Schienenetz in der Lausitz zu simulieren. Da wir die Fragestellung untersuchen möchten, ob eine gemeinsame Nutzung durch Kohle- und Personenzüge möglich ist, kommen weitere Anforderungen hinzu, die spezifisch für das untersuchte Schienennetz sind. So besteht die Notwendigkeit, die Züge zu entsprechend realistischen Zeitpunkten abfahren zu lassen. Dazu soll die Möglichkeit bestehen, die Kohlezüge anhand eines Kohlebadarfs zu erzeugen, welcher aus historischen Daten stammt. Weiterhin sollen dieser Bedarf und die dazu erzeugten Kohlezüge Teil der generierten Ergebnisse sein.
+
+Diese Arbeit beschäftigt sich mit dem eil der Anwendung, welcher für die Erstellung der Züge zuständig ist. Die spezifischen Anforderungen an diesen Teil der Software sind, wie bereits zuvor erwähnt, die Erzeugung von Zügen zu den korrekten Zeitpunkten an den richtigen Abfahrtsorten. Dazu muss die hier betrachtete Softwarekomponente mit der Schnittstelle zu SUMO kommunizieren und dabei auch den Zugtyp und die Zwischenstationen eines jeden Zuges übergeben. Es soll möglich sein, einen Zug von jeder Station über beliebig viele weitere Stationen zu jeder Station fahren zu lassen. Die Zeitpunkte der Abfahrt sollen durch drei verschiedene Mechanismen erzeugbar sein:
+\begin{itemize}
+    \item Züge fahren in regelmäßigen Zeitabständen ab.
+    \item Züge fahren in zufälligen (einer Gleichverteilung folgenden) Zeitabständen ab.
+    \item Züge fahren anhand eine Kolebedarfs ab.
+\end{itemize}
+Vorerst ist die Unterstützung der Zugtypen für Kohle- und Personenzüge ausreichend.
