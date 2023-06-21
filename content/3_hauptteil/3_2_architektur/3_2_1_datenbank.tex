@@ -1,30 +1,30 @@
 \subsection{Die Datenbank}
 
-Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es läuft in einem eigenen Docker-Container. Als Datenbankinterface verwendeten wir das ORM peewee, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\texttt{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \texttt{peewee.Model} erbt, wie in Abbildung \ref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind 
+Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es läuft in einem eigenen Docker-Container. Als Datenbankinterface verwendeten wir das ORM peewee, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\code{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \code{peewee.Model} erbt, wie in Abbildung \ref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind
 \begin{itemize}
-	\item die expilizite Definition eines Primärschlüssels (\texttt{id}) mit dem Typ einer Zeichenkette, welcher einen Universally unique identifier (UUID) enthält,
+	\item die expilizite Definition eines Primärschlüssels (\code{id}) mit dem Typ einer Zeichenkette, welcher einen Universally unique identifier (UUID) enthält,
 	\item Daten, wann ein Objekt erzeugt und wann es zuletzt aktualisiert wurde
-	\item und einen menschenlesbaren Bezeichner (\texttt{readable\_id}), welcher prozedural erzeugt wird und einer verbesserten Nutzerinteraktion dient.
+	\item und einen menschenlesbaren Bezeichner (\code{readable\_id}), welcher prozedural erzeugt wird und einer verbesserten Nutzerinteraktion dient.
 \end{itemize}
-Weiterhin wurde die Methode \texttt{save} überschrieben aus \texttt{peewee.Model} überschrieben, um darin den Feldern \texttt{created\_at}, \texttt{updated\_at} und \texttt{readable\_id} ihre Werte zuzuweisen.
+Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} überschrieben, um darin den Feldern \code{created\_at}, \code{updated\_at} und \code{readable\_id} ihre Werte zuzuweisen.
 
 \begin{figure}[!hb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-class.png}
-	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \texttt{BaseModel} erbt von \texttt{peewee.Model}, um weitere Funktionalität hinzuzufügen. Davon erbt \texttt{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
+	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \code{BaseModel} erbt von \code{peewee.Model}, um weitere Funktionalität hinzuzufügen. Davon erbt \code{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
 	\label{fig:database-class}
 \end{figure}
 
-Von \texttt{BaseModel} erbt \texttt{SerializableBaseModel}, welches die zusätzliche Methode \texttt{to\_dict} implementiert. Damit lässt sich das Objekt JSON-serialisieren, um es bei Bedarf an das Forntend der Anwendung senden zu können.
+Von \code{BaseModel} erbt \code{SerializableBaseModel}, welches die zusätzliche Methode \code{to\_dict} implementiert. Damit lässt sich das Objekt JSON-serialisieren, um es bei Bedarf an das Forntend der Anwendung senden zu können.
 
 % \begin{figure}[!hb]
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-seq.png}
-	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \texttt{create}.}
+	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \code{create}.}
 	\label{fig:database-seq}
 \end{figure}
 
-Da die hinzugefügten Funkionalitäten in der überschriebenen Methode \texttt{save} implementiert wurden, sind diese gut in das Modell-System von peewee integriert. Da \texttt{save} auch in \texttt{create} aufgerufen wird, wie in Abbildung \ref{fig:database-seq} zu erkennen, ist die Funktionalität damit automatisch auch bei der direkten Erzeugung eines neuen Objekts gegeben.
+Da die hinzugefügten Funkionalitäten in der überschriebenen Methode \code{save} implementiert wurden, sind diese gut in das Modell-System von peewee integriert. Da \code{save} auch in \code{create} aufgerufen wird, wie in Abbildung \ref{fig:database-seq} zu erkennen, ist die Funktionalität damit automatisch auch bei der direkten Erzeugung eines neuen Objekts gegeben.
 
-Alle im Rahmen unseres Projektes definierten Modell-Klassen erben von \texttt{BaseModel} oder \texttt{SerializableBaseModel} und erhalten damit die hinzugefügten Attribute.
+Alle im Rahmen unseres Projektes definierten Modell-Klassen erben von \code{BaseModel} oder \code{SerializableBaseModel} und erhalten damit die hinzugefügten Attribute.

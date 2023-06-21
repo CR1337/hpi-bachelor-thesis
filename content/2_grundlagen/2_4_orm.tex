@@ -21,14 +21,14 @@ Kein ORM löst alle diese Probleme vollständig. Jedes konzentiert sich auf die 
 \subsection{peewee}
 Für unser Softwareprojekt haben wir das ORM ''peewee'' \cite{leifer_coleiferpeewee_2023} ausgewählt. Da das ORM einer der Grundsteine unseres Projektes darstellt, stand die Auswahl des ORM am Anfang Planungsprozesses. Daher war es uns nicht möglich, das ORM  anhand der Anforderungen unserer Softwarearchitektur auszuwählen. Diese stand zu diesem Zeitpunkt, aufgrund der agilen Arbeitsweise unseres Teams, noch nicht in ausreichendem Detailgrad zur Verfügung. Wir haben die Entscheidung stattdessen anhand der allgemeinen Funktionsübersicht und der Benutzerfreundlichkeit getroffen. Zur Auswahl stand außerdem das ORM ''SQLAlchemy'' \cite{noauthor_sqlalchemy_2023}. Obwohl SQLAlchemy einen größeren Funktionsumfang bietet, ist peewee einfacher zu bedienen und man erreicht die gleichen Dinge mit weniger Code. Da dies zugunsten der Entwicklungsgeschwindigkeit geht, haben wir uns letztendlich für peewee entschieden.
 
-Im folgenden wird eine Reihe von Grundfunktionalitäten von peewee vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen. 
+Im folgenden wird eine Reihe von Grundfunktionalitäten von peewee vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
 
 \subsubsection*{Definition von Modellen}
 
-Als ein Modell wird im Kontext von peewee eine Klasse bezeichnet, deren Objekte sich in der verknüpften Datenbank ablegen lassen. Wie in Quelltext \ref{code:peewee-model} zu erkennen ist, lassen sich Modelle definieren, indem die betroffene Klasse von \texttt{peewee.Model} erbt. Die Verknüpfung zur Datenbank lässt sich durch die Definition des Feldes \texttt{db} in der Klasse \texttt{Meta} herstellen. Diese Verknüpfung muss innerhalb einer Klassenhierarchie nur einmal in der obersten Superklasse definiert werden. 
+Als ein Modell wird im Kontext von peewee eine Klasse bezeichnet, deren Objekte sich in der verknüpften Datenbank ablegen lassen. Wie in Quelltext \ref{code:peewee-model} zu erkennen ist, lassen sich Modelle definieren, indem die betroffene Klasse von \code{peewee.Model} erbt. Die Verknüpfung zur Datenbank lässt sich durch die Definition des Feldes \code{db} in der Klasse \code{Meta} herstellen. Diese Verknüpfung muss innerhalb einer Klassenhierarchie nur einmal in der obersten Superklasse definiert werden.
 
 \lstset{language=python}
-\begin{lstlisting}[caption={Python-Code zur Definition eines peewee-Modells. Es modelliert eine Person mit einem Namen und einem Geburtstag. Weiterhin besitzt die Klasse das nicht-persistente Feld \texttt{age}. \cite{noauthor_quickstart_2023}}, label=code:peewee-model]
+\begin{lstlisting}[caption={Python-Code zur Definition eines peewee-Modells. Es modelliert eine Person mit einem Namen und einem Geburtstag. Weiterhin besitzt die Klasse das nicht-persistente Feld \code{age}. \cite{noauthor_quickstart_2023}}, label=code:peewee-model]
 class Person(Model):
     class Meta:
         db = SqliteDatabase('people.db')
@@ -38,18 +38,18 @@ class Person(Model):
     age: int
 \end{lstlisting}
 
-Der Klasse können dann beliebige Attribute und auch Methoden zugewiesen werden. Soll ein Attribut persistent sein, soll es also in der Datenbank abgelegt werden, so muss ihm in der Klassendefinition ein Feld vom Typ \texttt{peewee.Field} zugeweisen werden. Über den Subtyp dieses Feldes wird der Typ der korrespondierenden Spalte in der Datenbanktabelle festgelegt. Andere Attribute, wie \texttt{age} in Quelltext \ref{code:peewee-model} sind Teil des Objektes, aber nicht persistent.
+Der Klasse können dann beliebige Attribute und auch Methoden zugewiesen werden. Soll ein Attribut persistent sein, soll es also in der Datenbank abgelegt werden, so muss ihm in der Klassendefinition ein Feld vom Typ \code{peewee.Field} zugeweisen werden. Über den Subtyp dieses Feldes wird der Typ der korrespondierenden Spalte in der Datenbanktabelle festgelegt. Andere Attribute, wie \code{age} in Quelltext \ref{code:peewee-model} sind Teil des Objektes, aber nicht persistent.
 
 \subsubsection*{Speichern von Objekten}
 
-Objekte lassen sich auf mittels zwei verschiedener Methoden in der Datenbank ablegen. Jede Modell-Klasse erbt die Methode \texttt{create} von \texttt{peewee.Model}. Diese nimmt die gleichen Argumente entgegen wie der eigentlich Konstruktor der Klasse. Wird \texttt{create} aufgerufen, so wird eine Instanz der Klasse erstellt, in die Datenbank geschrieben und im Anschluss zurück gegeben, wie in Quelltext \ref{code:peewee-storing1} ersichtlich wird.
+Objekte lassen sich auf mittels zwei verschiedener Methoden in der Datenbank ablegen. Jede Modell-Klasse erbt die Methode \code{create} von \code{peewee.Model}. Diese nimmt die gleichen Argumente entgegen wie der eigentlich Konstruktor der Klasse. Wird \code{create} aufgerufen, so wird eine Instanz der Klasse erstellt, in die Datenbank geschrieben und im Anschluss zurück gegeben, wie in Quelltext \ref{code:peewee-storing1} ersichtlich wird.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Python-Code zum Erzeugen eines Personen-Objektes und zur Speicherung in der Datenbank in einem Schritt.  \cite{noauthor_quickstart_2023}}, label=code:peewee-storing1]
     uncle_bob = Person.create(name='Bob', birthday=date(1960, 1, 15))
 \end{lstlisting}
 
-Alternativ dazu kann das Objekt auch direkt über den Konstruktor erzeugt werden, wie in Quelltext \ref{code:peewee-storing2} zu erkennen. Durch anschließenden Aufruf von \texttt{save} wird das Objekt dann in die Datenbank gelegt. Diese Methode bietet den Vorteil, dass das Objekt nicht zwangsläufig gespeichert werden muss. Auch erfüllt \texttt{save} die Funktion der Aktualisierung eines Objektes in der Datenbank, nachdem ein bereits existierendes Objekt verändert wurde.
+Alternativ dazu kann das Objekt auch direkt über den Konstruktor erzeugt werden, wie in Quelltext \ref{code:peewee-storing2} zu erkennen. Durch anschließenden Aufruf von \code{save} wird das Objekt dann in die Datenbank gelegt. Diese Methode bietet den Vorteil, dass das Objekt nicht zwangsläufig gespeichert werden muss. Auch erfüllt \code{save} die Funktion der Aktualisierung eines Objektes in der Datenbank, nachdem ein bereits existierendes Objekt verändert wurde.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Python-Code zum Erzeugen eines Personen-Objektes und zur anschließenden Speicherung in der Datenbank.  \cite{noauthor_quickstart_2023}}, label=code:peewee-storing2]
