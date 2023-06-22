@@ -8,7 +8,7 @@ Ein Algorithmus besteht aus mehreren Schritten, die jeweils eine bestimmte Aufga
 
 Jede Klasse, welche einen Algorithmus der selben Struktur implementiert, erbt von einer abstrakten Klassen (\code{AbstractClass}), welche die \code{templateMethod} implementiert. Das wird in Abbildung \ref{fig:template-method-class} gezeigt. Diese gibt das Grundgerüst des Algorithmus vor und ruft darin die einzelnen Teilschritte auf. Diese sind jeweils in eigenen Methoden implementiert. Die Subklassen (\code{ConcreteClass}) definieren diese Methoden zum Teil neu, wenn eine Veränderung des Verhaltens dieses Teilschrittes notwendig ist.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/template-method-class.png}
 	\caption{Klassendiagramm der Template-Method \cite{skobeleva_template_2023}}

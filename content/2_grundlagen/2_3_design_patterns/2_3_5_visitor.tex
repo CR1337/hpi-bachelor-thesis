@@ -9,7 +9,7 @@ Gelegentlich muss eine Operation auf einer Menge von Objekten durchgeführt, die
 
 Der konkrete \emph{Visitor}\footnote{Die deutsche Übersetzung "Besucher" ist in diesem Kontext eher unüblich.} (\code{ConcreteVisitor}) realisiert die Visitor-Schnittstelle (\code{Visitor}), welche die Methode \code{visit} bereitstellt, wie in Abbildung \ref{fig:visitor-class} zu erkennen ist. Diese erlaubt es dem Visitor, ein Element (\code{Element}) zu "besuchen" und auf ihm eine Operation durchzuführen. Die Elemente "akzeptieren" den "Besuch" des Visitors mit Hilfe der Methode \code{accept}, welche als Argument den besuchenden Visitor erhält.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/visitor-class.png}
 	\caption{Klassendiagramm des Visitor-Patterns. \cite{skobeleva_visitor_2023}}
@@ -18,7 +18,7 @@ Der konkrete \emph{Visitor}\footnote{Die deutsche Übersetzung "Besucher" ist in
 
 Abbildung \ref{fig:visitor-seq} zeigt das Verhalten des Visitor-Patterns. Der Anwender\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Meenschen.} trägt dem Visitor auf, eine Operation auf einem Element oder einer Menge von Elementen durchzuführen (1). Der Visitor sendet daraufhin \code{visit} an alle Elemente, auf die er eine Referenz hält (2). Jedes Element ruft daraufhin eine \code{accept}-Methode auf dem Visitor auf (3). Zu beachten ist hierbei, dass es für jede Element-Klasse eine eigene Methode im Visitor gibt. Dies kann realisiert werden durch das Bereitstellen von Methoden mit unterschiedlichen, zu den aufrufenden Klassen korrespondierenden Namen oder durch Multimethoden. Multimethoden sind Methoden, welche je nach Typ der übergebenen Argumente unterschiedliche Implementierungen ausführen. Somit kann der Visitor nach Erhalt von \code{accept} die zum Typ des sendenden Elements passende Operation ausführen. Dieser Mechanismus nennt sich \emph{Double-Dispatch}.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/visitor-seq.png}
 	\caption{Sequenzdiagramm des Visitor-Patterns. \cite{skobeleva_visitor_2023}}
