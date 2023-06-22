@@ -8,7 +8,7 @@ Es kann vorkommen, dass mehrere Varianten eines Algorithmus benötigt werden, we
 
 Wie in Abbildung \ref{fig:strategy-class} abgebildet, besitzt der Kontext (\code{Context}), welcher einen Algorithmus verwenden soll, eine Referenz auf eine Strategie (\code{Strategy}). Die konkrete Strategie (\code{ConcreteStrategy}) wurde dem Kontext zuvor durch den Anwender (\code{Client})\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Meenschen.} mithilfe von \code{setStrategy} zugewiesen. Die konkrete Strategie realisiert die \code{Strategy}-Schnittstelle, sodass Kontext und konkrete Strategie lediglich lose gekoppelt sind. Jede Strategie stellt die Methode `execute` bereit, um den gekapselten Algorithmus auszuführen.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/strategy-class.png}
 	\caption{Klassendiagramm des Strategy-Patterns. \cite{skobeleva_strategy_2023}}
@@ -17,7 +17,7 @@ Wie in Abbildung \ref{fig:strategy-class} abgebildet, besitzt der Kontext (\code
 
 Abbildung \ref{fig:strategy-seq} zeigt die typische Verwendung des Strategy-Patterns. Der Kontext wird initialisiert, indem ihm vom Anwender eine konkrete Strategie zugewiesen wird (3), welche zuvor vom Anwender erzeugt wurde (1). Der Anwender kann von nun an den Kontext dazu veranlassen, eine Aktion durchzuführen, welche die Verwendung des in der hinterlegten Strategie vorhandenen Algorithmus nach sich zieht (5). Der Kontext kann den Algorithmus ausführen (6), ohne Wissen über die konkrete Strategie zu benötigen.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/strategy-seq.png}
 	\caption{Sequenzdiagramm des Strategy-Pattern. \cite{skobeleva_strategy_2023}}

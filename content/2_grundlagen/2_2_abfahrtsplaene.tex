@@ -23,7 +23,7 @@ Der regelmäßige Abfahrtsplan beschreibt die Abfahrt von Zügen in zufälligen 
 Der bedarfsorientierte Abfahrtsplan beschreibt die Abfahrt von Zügen in zeitlichen Abständen, die sich nach einem historischen Kohlebedarf richten. Er dient damit der Modellierung von Kohlezügen. Dieser Abfahrtsplan besitzt eine Kohlebedarfsfunktion $k:\mathbb{N}\to\mathbb{R}$, die angibt, wie viel Kohle in Abhängigkeit von der Zeit $t$ benötigt wird. Sie ergibt sich aus den historischen Kohlebedarfsdaten. Weiterhin existieren der Zeitpunkt $t_0 \in \mathbb{N}$ in Sekunden, an welchem die historischen Daten beginnen und die Zeitspanne $t_r \in \mathbb{N}$ in Sekunden, welche die zeitliche Auflösung der Daten angibt. Weiterhin ist $c\in\mathbb{R}$ die Menge an Kohle, die ein Kohlezug transportieren kann. Zur Berechnung der Abfahrtszeiten wird zunächst die Funktion $a: \mathbb{N} \to \mathbb{R}$ aufgestellt, die den akkumulierten Kohlebedarf zum Zeitpunkt $t$ seit $t_0$ berechnet (siehe Formel \ref{eq:kohle-accu}). Dabei ist $n\in\mathbb{N}$ die Anzahl der Datenpunkte.
 
 \begin{equation}
-    a(t)=\sum_{i=0}^n  k(t_ri+t_0)\label{eq:kohle-accu}
+    a(t)=\sum_{i=0}^{n-1}  k(t_ri+t_0)\label{eq:kohle-accu}
 \end{equation}
 
 Der Abfahrtsplan soll nun stets dann Züge abfahren lassen, wenn die Menge an Kohle, die transportiert werden muss, die Menge erreicht, die ein Zug transportieren kann. Die transportierte Menge wird dann von der bisher akkumulierten Menge abgezogen. Formel \ref{eq:kohle-fmod} stellt das dar.
@@ -34,7 +34,7 @@ Der Abfahrtsplan soll nun stets dann Züge abfahren lassen, wenn die Menge an Ko
 
 Abbildung \ref{fig:demand-math} zeigt schematisch das Verhalten eine bedarfsorientierten Abfahrtsplans. $k(t)$ zeigt den (hier zur Vereinfachung konstanten) Kohlebedarf. $a(t)$ stellt den akkumulierten Kohlebedarf dar. $f(t,c)$ zeigt die akkumulierte Kohlemenge abzüglich der transportierten Kohlemenge. Die Abfahrtszeiten sind durch rote Pfeile markiert.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/demand-math.png}
 	\caption{Schematisches Verhalten eines bedarfsorientierten Abfahrtsplans mit dem Kohlebedarf $k(t)$, dem akkumulierten Kohlebedarf $a(t)$ und der akkumulierten Kohlemenge abzüglich der transportierten Kohlemenge $f(t,c)$. Die roten Pfeile markieren die Abfahrtszeiten der Kohlezüge.}

@@ -9,7 +9,7 @@ Große Softwareprojekte bestehen meist aus einer enormen Anzahl von Klassen bzw.
 
 Der konkrete Mediator (\code{ConcreteMediator}) implementiert die Mediator-Schnittstelle (\code{Mediator}), welches die Methode \code{notify} bereitstellt, um Benachrichtigungen der einzelnen Komponenten (\code{Component}) entgegenzunehmen. Jede Komponente besitzt eine Referenz auf den Mediator, um \code{notify} an ihn senden zu können. Dabei übergibt die Komponente sich selbst, um dem Mediator den Kontext der Benachrichtigung bereitzustellen. In Abhängigkeit des übergebenen Senders und dessen Zustand, führt der Mediator eine (komplexe) Logik aus, welche vollständig innerhalb des Mediators gekapselt ist. Der Mediator hält ebenso Referenzen auf alle Komponenten, die er zu beeinflussen in der Lage sein soll. Die gekapselte Logik kann somit die Interfaces der Komponenten verwenden, um diese zu beeinflussen. Dadurch findet eine indirekte Beeinflussung von Komponenten durch andere Komponenten über den Mediator statt. Das Klassendiagramm dieser Architektur ist in Abbildung \ref{fig:mediator-class} dargestellt.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/mediator-class.png}
 	\caption{Klassendiagramm des Mediator-Patterns \cite{skobeleva_mediator_2023}}
