@@ -1,3 +1,35 @@
 \section{Das Softwareprojekt und die Interaktion im Team}
-\todo{Deadline: 23.06.}
-\todo{Ich stelle dar, welches Teammitglied wofür verantwortlich war, wie die einzelnen Teile ineinander greifen und wie die Zusammenarbeit ablief.}
+
+\subsection{Arbeitspakete und Verantwortlichkeiten}
+
+Das Team besteht aus sechs Personen. Entsprechend wurde das Softwareprojekt in sechs Arbeitspakete geteilt, welche dann getrennt bearbeitet werden konnten. Die zugehörigen Arbeiten und die Pakete mit denen sie sich befassen sind in Tabelle \ref{tab:team-components} dargestellt.
+
+\begin{table}[!ht]
+	\centering
+	\caption{Die Arbeitspakete dieses Projektes, die Arbeiten, welche sich mit diesen Beschäftigen und die Autoren dieser Arbeiten}
+	\label{tab:team-components}
+	\begin{tabular}{|l|m{0.5\linewidth}|l|}
+		\hline
+		\textbf{Arbeitspaket} & \textbf{Titel der Arbeit} & \textbf{Autor} \\
+		\hline
+		\hline
+		die \emph{REST-API} & \citetitle{kamp_architektur_2023}\cite{kamp_architektur_2023} & \citeauthor{kamp_architektur_2023} \\
+		\hline
+		die Fehlerinjektion & \citetitle{persitzky_fehlerinjektion_2023}\cite{persitzky_fehlerinjektion_2023} & \citeauthor{persitzky_fehlerinjektion_2023} \\
+		\hline
+        die Routenberechnung & \citetitle{lietze_evaluierung_2023}\cite{lietze_evaluierung_2023} & \citeauthor{lietze_evaluierung_2023} \\
+		\hline
+        die SUMO-Schnittstelle & \citetitle{ortlam_implementierung_2023}\cite{ortlam_implementierung_2023} & \citeauthor{ortlam_implementierung_2023} \\
+		\hline
+        die Datenauswertung & \citetitle{reisener_entwurf_2023}\cite{reisener_entwurf_2023} & \citeauthor{reisener_entwurf_2023} \\
+		\hline
+        die Zugerzeugung & diese Arbeit &  \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Die REST-API stellt eine Benutzerschnittstelle für die von uns entwickelte Simulationsumgebung bereit. Außerdem beschäftigt sich \citeauthor{kamp_architektur_2023} in seiner Arbeit mit der komponenten-übergreifenden Architektur und der Interaktion der einzelnen Softwarekomponenten. Die Fehlerinjektion dient der Erzeugung von Fehlern, welche der Simulation von unvorhergesehenen und unerwünschten Ereignissen im Rahmen des Bahnverkehrs dienen. Die Routenberechnung plant und steuert die Bewegung der Züge durch das Schienennetz. Sie interagiert mit der Stellwerkslogik und bedient die Schnittstelle zu SUMO. Die SUMO-Schnittstelle ist ein objektorientierter \emph{Wrapper}\footnote{Ein Wrapper dient der Bereitstellung einer anderen Schnittstelle für bereits existierenden Code.}, welcher die für uns wichtigen Aspekte der Schnittstelle zu SUMO kapselt und für uns die Arbeit mit ihnen erleichtert. Die Datenauswertung stellt die Ergebnisse der Simulation grafisch dar und ermöglicht die Analyse der Simulationsergebnisse. Die Zugerzeugung wird in dieser Arbeit ausführlich behandelt.
+
+\subsection{Die Teamarbeit}
+
+Um unser Projekt effizient und flexibel zu gestalten, haben wir agile Arbeitsmethoden angewendet. Dabei haben wir uns auf selbstbestimmtes Arbeiten und Gleichberechtigung aller Teammitglieder fokussiert. Um unsere Arbeit zu organisieren und zu koordinieren, haben wir verschiedene Werkzeuge genutzt. Das wichtigste davon war das GitHub-Repositorium, das uns die Quelltextverwaltung ermöglicht hat. Außerdem haben wir über GitHub ein Wiki als Wissenssammlung und ein Kanban-Board für die Verwaltung unserer Aufgaben erstellt. Das Kanban-Board hat uns geholfen, unsere Aufgaben zu visualisieren und transparent zu machen. Wir haben auch die Anzahl der gleichzeitig zu bearbeitenden Aufgaben begrenzt und unsere Arbeitsabläufe iterativ verbessert. Die Kommunikation haben wir durch das Werkzeug Slack und durch tägliche, morgendliche Meetings gewährleistet.
