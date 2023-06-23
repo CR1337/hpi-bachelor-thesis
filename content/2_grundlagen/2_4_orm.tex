@@ -18,7 +18,7 @@ Die Unterschiede zwischen beiden Paradigmen rufen eine Reihe von Problemen hervo
 \end{itemize}
 Kein ORM löst alle diese Probleme vollständig. Jedes konzentiert sich auf die Aspekte der zu leistenden Abbildung unterschiedlich stark. So kann der Fokus beispielweise mehr auf der strukturellen Abbildung zwischen Klassen und Tabellen liegen oder auf der korrekten Abbildung der Mechanismen. Es gibt daher keine einheitliche oder richtige Lösung. Entsprechend ist die Trennung zwischen objektorientiertem und relationalem Paradigma nie vollständig und hängt vom Einzelfall und den Bedürfnissen des Anwenders ab.
 
-\subsection{peewee}
+\subsection{''peewee''}
 Für unser Softwareprojekt haben wir das ORM ''peewee'' \cite{leifer_coleiferpeewee_2023} ausgewählt. Da das ORM einer der Grundsteine unseres Projektes darstellt, stand die Auswahl des ORM am Anfang Planungsprozesses. Daher war es uns nicht möglich, das ORM  anhand der Anforderungen unserer Softwarearchitektur auszuwählen. Diese stand zu diesem Zeitpunkt, aufgrund der agilen Arbeitsweise unseres Teams, noch nicht in ausreichendem Detailgrad zur Verfügung. Wir haben die Entscheidung stattdessen anhand der allgemeinen Funktionsübersicht und der Benutzerfreundlichkeit getroffen. Zur Auswahl stand außerdem das ORM ''SQLAlchemy'' \cite{noauthor_sqlalchemy_2023}. Obwohl SQLAlchemy einen größeren Funktionsumfang bietet, ist peewee einfacher zu bedienen und man erreicht die gleichen Dinge mit weniger Code. Da dies zugunsten der Entwicklungsgeschwindigkeit geht, haben wir uns letztendlich für peewee entschieden.
 
 Im folgenden wird eine Reihe von Grundfunktionalitäten von peewee vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
