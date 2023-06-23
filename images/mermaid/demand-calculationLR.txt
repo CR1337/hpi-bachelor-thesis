@@ -1,4 +1,15 @@
-flowchart TB
+{
+  "theme": "default",
+  "themeVariables": { "fontSize": "30px"}
+}
+
+
+
+
+
+
+
+flowchart LR
     bnetza[(Bundesnetzagentur)]
     kwdata([Kraftwerksdaten])
     annotation[[Name\nelektrische Leistung in MW\nthermische Leistung in MW\nWirkungsgrad\nEnergieträger\nBundesland]]
@@ -29,5 +40,3 @@ flowchart TB
 
     coal ---> depart
     cap --> depart
-
-
