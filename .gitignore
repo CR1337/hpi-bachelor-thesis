@@ -10,3 +10,5 @@ thesis.pdf
 thesis.synctex.gz
 thesis.synctex(busy)
 thesis.toc
+**.db
+.venv
