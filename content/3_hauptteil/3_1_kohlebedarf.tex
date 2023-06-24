@@ -2,12 +2,12 @@
 
 Im Folgenden wird erläutert, wie aus Stromproduktionsdaten der Kohlebedarf für ein Kraftwerk berechnet wird. Außerdem wird erklärt, wie daraus Abfahrtszeiten für Kohlezüge bestimmt werden können. Viele Informationen dieses Abschnittes, welche mit dem Kohleverkehr in der Lausitz in Zusammenhang stehen, stammen aus einem Interview mit Sascha Lesche von der LEAG (siehe Anhang Eins). Abbildung \ref{fig:demand-calculation} zeigt den Ablauf dieser Berechnung.
 
-\begin{figure}[htb]
+\begin{sidewaysfigure}[htb]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/demand-calculation.png}
 	\caption{Schematische Abbildung der Berechnung des Kohlebedarfs eines Kraftwerkes und der benötigten Anzahl an Kohlezügen aus Stromproduktionsdaten und Kennzahlen von Kraftwerken. Der Zylinder stellt eine Datenquelle dar, die abgerundeten Felder Daten und die Hexagone Konstanten.}
 	\label{fig:demand-calculation}
-\end{figure}
+\end{sidewaysfigure}
 
 Die Bundesnetzagentur stellt Kenndaten zu allen Kraftwerken Deutschlands bereit\cite{noauthor_bundesnetzagentur_nodate}. Die für uns wichtigen Kraftwerksdaten sind der Name des Kraftwerkes, seine elektrische Leistung in MWh, die thermische Leistung in MW, der verwendete Energieträger und das Bundesland, ich welchem sich das Kraftwerk befindet. Diese Daten wurden einmalig in Form einer CSV-Datei heruntergeladen. Im Anschluss wurden die Daten gefiltert, sodass nur noch Kraftwerke mit dem Energieträger Braunkohle innerhalb der \emph{50Hertz}-Regelzone übrige blieben. Diese Zone umfasst die neuen Bundesländer und Hamburg. Aus diesen gefilterten Kraftwerksdaten wurde dann die Gesamtleistung $P_T$ aller Braunkohlekraftwerke in der Regelzone durch Aufsummieren berechnet. Diese Gesamtleistung beträgt rund 10.600 MW. Außerdem wurden für die weitere Berechnung nur noch die drei Lausitzer Kraftwerke betrachtet, welche über das Schienennetz der LEAG mit Braunkohle versorgt werden. Diese Kraftwerke sind \emph{Boxberg}, \emph{Jänschwalde} und \emph{Schwarze Pumpe}.\\
 \\
