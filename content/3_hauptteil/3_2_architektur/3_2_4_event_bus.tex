@@ -68,4 +68,6 @@ Abbildung \ref{fig:eventbus-v2-seq} zeigt den Ablauf der Meldung eines Ereigniss
 	\label{fig:eventbus-v2-seq}
 \end{figure}
 
-Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwändiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \emph{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.
+Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwändiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \emph{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.\\
+\\
+Eine Verwendung findet der Eventbus im aktuellen System nicht. Aus Zeitgründen wurder der Eventbus zwar implementiert, jedch nicht mehr verwendet. Mögliche Verwendungensind im AUsblick dieser Arbeit beschrieben.
