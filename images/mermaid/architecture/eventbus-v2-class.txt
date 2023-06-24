@@ -27,7 +27,7 @@ classDiagram
 
     EventBus "1" --* Component: event_bus
     Event <.. EventBus: creates
-    Event "1" --* EventType: event_type
+    Event "1" *-- EventType: event_type
     IEventConsumer <|.. Logger
     IEventConsumer <-- EventBus: notifies
     EventBus <-- IEventConsumer: (un)registers callbacks

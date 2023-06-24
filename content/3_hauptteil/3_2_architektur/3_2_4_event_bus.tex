@@ -1,27 +1,26 @@
 \subsection{Der Eventbus}
-\todo{Deadline: 25.06.}
 
-Der \emph{Eventbus} stellt für Softwarekomponenten die Möglichkeit bereit, Ereignisse untereinander auszutauschen. Für jedes Ereignis stellt er eine $m$:$n$-Beziehung zwischen den Komponenten, welche das Ereignis emittieren und denen, die es empfangen her. Der \emph{Eventbus} wurde in Zusammenarbeit mit \citeauthor{persitzky_fehlerinjektion_2023} entwickelt. Wir haben uns dazu entschieden, das Entwurfsmuster \emph{Mediator} auf den \emph{Eventbus} anzuwenden, um zu verhindern, dass die voneinander Abhängigen Komponenten direkt miteinander kommunizieren müssen. Das senkt die Kopplung erheblich. Weiterhin kapselt der \emph{Mediator} das kommunikationsspezifische Verhalten, was es an einer zentralen Stelle verfügbar macht und den einzelnen Komponenten die Verantwortung abnimmt, Kommunikationsdetails zu kennen.\\
+Der Eventbus stellt für Softwarekomponenten die Möglichkeit bereit, Ereignisse untereinander auszutauschen. Für jedes Ereignis stellt er eine $m$:$n$-Beziehung zwischen den Komponenten, welche das Ereignis emittieren und denen, die es empfangen her. Der Eventbus wurde in Zusammenarbeit mit \citeauthor{persitzky_fehlerinjektion_2023} entwickelt. Wir haben uns dazu entschieden, das Entwurfsmuster \emph{Mediator} auf den Eventbus anzuwenden, um zu verhindern, dass die voneinander Abhängigen Komponenten direkt miteinander kommunizieren müssen. Das senkt die Kopplung erheblich. Weiterhin kapselt der \emph{Mediator} das kommunikationsspezifische Verhalten, was es an einer zentralen Stelle verfügbar macht und den einzelnen Komponenten die Verantwortung abnimmt, Kommunikationsdetails zu kennen.\\
 \\
-Um eine zu große Komplexität des \emph{Eventbus} selbst und eine monolithische Struktur zu verhindern, wird als Kommunikationsmechanismus das Entwurfsmuster \emph{Observer} verwendet. Abhängigkeiten zwischen den Komponenten lassen sich so flexibler ändern. Weiterhin ermöglicht dieses Entwurfsmuster, Komponenten auf verschiedenen Abstraktionsniveaus zu verbinden. Wir haben den Nachteil des \emph{Observers} umgangen, dass er stets alle Empfänger benachrichtigt. Dazu wird jeder registrierte Empfänger mit einem Ereignistyp verknüpft. Der Empfänger wird so nur benachrichtigt, wenn ein Ereignis des verknüpften Typs eingangen ist.\\
+Um eine zu große Komplexität des Eventbus selbst und eine monolithische Struktur zu verhindern, wird als Kommunikationsmechanismus das Entwurfsmuster \emph{Observer} verwendet. Abhängigkeiten zwischen den Komponenten lassen sich so flexibler ändern. Weiterhin ermöglicht dieses Entwurfsmuster, Komponenten auf verschiedenen Abstraktionsniveaus zu verbinden. Wir haben den Nachteil des \emph{Observers} umgangen, dass er stets alle Empfänger benachrichtigt. Dazu wird jeder registrierte Empfänger mit einem Ereignistyp verknüpft. Der Empfänger wird so nur benachrichtigt, wenn ein Ereignis des verknüpften Typs eingangen ist.\\
 \\
-Um die Kopplung weiter zu verringern, werden beim \emph{EventBus} nicht die Empfänger selbst registriert, sondern nur \emph{Callbacks}\footnote{Funktionen, welche als Argument übergeben werden, um zu einem späteren Zeitpunkt vom Empfänger des Arguments aufgerufen werden zu können}, bei welchen es sich jeweils um Methoden der Empfänger handelt. Dies schränkt die Funktionalität nicht ein, da der Empfännger das Ereginis nachwievor erhält. Der \emph{Eventbus} muss nun jedoch nur noch Pythons \code{Callable}-Schnittstelle verwenden und benötigt keine Kenntnis mehr über die Kommunizierenden Komponenten. Die Registrierung und die Deregistrierung von Empfängern ist in den Abbildungen \ref{fig:eventbus-register-seq} und \ref{fig:eventbus-unregister-seq} dargestellt. Für die Registrierung wird das \emph{Callback} und der Ereignistyp (\code{event\_type}) übergeben. Der \emph{Eventbus} gibt daraufhin ein \emph{Handle} zurück, mit welchem das registrierte \emph{Callback} identifiziert werden kann. Um ein \emph{Callback} zu deregistrieren, lediglich das \emph{Handle} and den \emph{Eventbus} übergeben werden.
+Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger selbst registriert, sondern nur \emph{Callbacks}\footnote{Funktionen, welche als Argument übergeben werden, um zu einem späteren Zeitpunkt vom Empfänger des Arguments aufgerufen werden zu können}, bei welchen es sich jeweils um Methoden der Empfänger handelt. Dies schränkt die Funktionalität nicht ein, da der Empfännger das Ereginis nachwievor erhält. Der Eventbus muss nun jedoch nur noch Pythons \code{Callable}-Schnittstelle verwenden und benötigt keine Kenntnis mehr über die Kommunizierenden Komponenten. Die Registrierung und die Deregistrierung von Empfängern ist in den Abbildungen \ref{fig:eventbus-register-seq} und \ref{fig:eventbus-unregister-seq} dargestellt. Für die Registrierung wird das \emph{Callback} und der Ereignistyp (\code{event\_type}) übergeben. Der Eventbus gibt daraufhin ein \emph{Handle} zurück, mit welchem das registrierte \emph{Callback} identifiziert werden kann. Um ein \emph{Callback} zu deregistrieren, lediglich das \emph{Handle} and den Eventbus übergeben werden.
 
-\begin{figure}[!hb]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-register-seq.png}
-	\caption{Sequenzdiagramm Registrierung Eventbus}
+	\caption{Sequenzdiagramm der Registrierung eines Empfängers beim Eventbus.}
 	\label{fig:eventbus-register-seq}
 \end{figure}
 
-\begin{figure}[!hb]
+\begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-unregister-seq.png}
-	\caption{Sequenzdiagramm Deregistrierung Eventbus}
+	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus.}
 	\label{fig:eventbus-unregister-seq}
 \end{figure}
 
-Die Implementierung des \emph{Eventbus} erfolgte vergleichsweise spät im Projektverlauf. Die Codebasis war bereits entsprechend groß, was uns vor die Herausforderung stellte, wie der \emph{Eventbus} am besten zu integrieren sei. Auch spielte die Zeitplanung dabei eine Rolle.\\
+Die Implementierung des Eventbus erfolgte vergleichsweise spät im Projektverlauf. Die Codebasis war bereits entsprechend groß, was uns vor die Herausforderung stellte, wie der Eventbus am besten zu integrieren sei. Auch spielte die Zeitplanung dabei eine Rolle.\\
 \\
 Da der \emph{Logger}\cite{reisener_entwurf_2023} bereits die Aufgabe übernahm, Ereignisse zu sammeln, lag der Gedanke nahe, ihn entsprechend zu erweitern. Diese Möglichkeit ist im Folgenden unter ''Variante 1'' beschrieben.\\
 \\
@@ -29,34 +28,44 @@ Da diese Variante gewisse Nachteile mit sich bringt, wird unter ''Variante 2'' e
 
 \subsubsection*{Variante 1}
 
-Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgaben des \emph{Eventbus} zu übernehmen. Wie Abbildung \ref{fig:eventbus-v1-class} zeigt, erstellt der \emph{Logger} für jedes Ereignis ein \code{LogEntry}-Objekt, welches in die Datenbank geschrieben wird. Das \code{LogEntry}-Objekt erbt daher von \code{BaseModel} und besitzt eine \code{save}-Methode, welche bei Erzeugung des Objektes stets ausgeführt wird.
+Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgaben des Eventbus zu übernehmen. Wie Abbildung \ref{fig:eventbus-v1-class} zeigt, erstellt der \emph{Logger} für jedes Ereignis ein \code{LogEntry}-Objekt, welches in die Datenbank geschrieben wird. Das \code{LogEntry}-Objekt erbt daher von \code{BaseModel} und besitzt eine \code{save}-Methode, welche bei Erzeugung des Objektes stets ausgeführt wird. Darin wird der Eventbus benachrichtigt, welcher dann die registrierten Empfänger über das neue Ereignis informiert. Die Empfänger realisieren dazu die \code{IEventConsumer}-Schnittstelle, welche eine \code{on\_event}-Methode zur Ereignisbehandlung und ein \code{event\_handle}-Attribut zur Referenzierung der Registrierung beim \code{EventBus} bereitstellt. Die registrierten \emph{Callbacks} werden im Attribut \code{callbacks} gehalten. Es handelt sich dabei um eine Liste von 2-Tupeln, welche das \emph{Callback} und den Ereignistyp enthalten. Ein \emph{Callback} nimmt dabei ein \emph{LogEntry}-Objekt entgegen und hat keinen Rückgabewert.
 
-\begin{figure}[!hb]
+\begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-v1-class.png}
-	\caption{Klassendiagramm Variante 1 Eventbus}
+	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v1-class.png}
+	\caption{Klassendiagramm der ersten Variante des Eventbus.}
 	\label{fig:eventbus-v1-class}
 \end{figure}
 
-\begin{figure}[!hb]
+Abbildung \ref{fig:eventbus-v1-seq} zeigt den Vorgang der Meldung eines Ereignisses an den \emph{Logger} bis hin zur Benachrichtigung der abhängigen Empfänger. Eine Komponenten (\code{Component}) sendet ein Ereignis durch Aufruf von \code{log} an den \code{Logger} (1). Dieser erzeugt durch \code{create} ein \code{LogEntry}-Objekt (2) und ruft dessen \code{save}-Methode auf (3). Diese benachrichtigt den Eventbus durch Senden von \code{notify} und übergibt dabei das \code{LogEntry}-Objekt selbst (4). Der Eventbus iteriert über die Liste der registrierten \emph{Callbacks} und ruft für jeden Eintrag das \emph{Callback} auf, sofern der Ereignistyp übereinstimmt (5).\\
+
+\begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-v1-seq.png}
-	\caption{Sequenzdiagramm Variante 1 Eventbus}
+	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v1-seq.png}
+	\caption{Sequenzdiagramm der ersten Variante des Eventbus.}
 	\label{fig:eventbus-v1-seq}
 \end{figure}
 
+Der Vorteil dieser Variante ist die einfache Integration in das bestehende System. Die Änderungen am bestehenden Quelltext sind minimal. Damit kann die Implementierung des Eventbus schnell erfolgen, was einen positiven Einfluss auf die Zeitplanung hat. Nachteilhaft ist jedoch, dass das \emph{Logging}-System nun auch Teilaufgaben des Eventbus übernimmt. Dies widerspricht dem Prinzip der \emph{Single Responsibility}\footnote{Eine Komponente, Klasse oder Funktion soll nur ein Konzept implementieren oder nur eine Aufgabe erledigen.} und kann zu einer unübersichtlichen Codebasis führen.
+
 \subsubsection*{Variante 2}
 
-\begin{figure}[!hb]
+Bei dieser Variante wird der Eventbus als eigenständige Komponente implementiert. Abbildung \ref{fig:eventbus-v2-class} zeigt das Klassendiagramm. Jede Komponente hält nun eine Referenz auf den Eventbus, um sich als Empfänger registrieren zu können. Die Registrierung und Deregistrierung, sowie die Verwaltung der registrieren \emph{Callbacks} erfolgt wie in ''Variante 1''. Der Unterschied besteht darin, dass die Ereignisse nun nicht mehr durch \code{LogEntry}-Objekte, sondern durch \code{Event}-Objekte repräsentiert werden. Komponenten benachrichtigen hier selbst den \code{EventBus}. Der \emph{Logger} implementiert die \code{IEventConsumer}-Schnittstelle und registriert sich ebenfalls beim Eventbus, um seine Aufgabe erfüllen zu können.
+
+\begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-v2-class.png}
-	\caption{Klassendiagramm Variante 2 Eventbus}
+	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v2-class.png}
+	\caption{Klassendiagramm der zweiten Variante des Eventbus.}
 	\label{fig:eventbus-v2-class}
 \end{figure}
 
-\begin{figure}[!hb]
+Abbildung \ref{fig:eventbus-v2-seq} zeigt den Ablauf der Meldung eines Ereignisses an den Eventbus. Eine Komponente (\code{Component}) sendet die Parameter eines Ereignisses, durch Aufruf von \code{log}, an den \code{EventBus} (1). Dieser instanziiert ein \code{Event}-Objekt mit den übergebenen Parametern (2). Anschließend iteriert er über die Liste der registrierten \emph{Callbacks} und ruft diese auf, sofern der Ereignistyp übereinstimmt (3).
+
+\begin{figure}[htb]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-v2-seq.png}
-	\caption{Sequenzdiagramm Variante 2 Eventbus}
+	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v2-seq.png}
+	\caption{Sequenzdiagramm der zweiten Variante des Eventbus.}
 	\label{fig:eventbus-v2-seq}
 \end{figure}
+
+Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwändiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \emph{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.
