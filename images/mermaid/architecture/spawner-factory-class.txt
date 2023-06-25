@@ -1,0 +1,20 @@
+classDiagram
+    direction TB
+    class Spawner {
+        +configuration: SpawnerConfiguration
+        +schedules: list[Schedule]
+    }
+    class Schedule {
+        <<abstract>>
+        +strategy: ScheduleStrategy
+        +from_schedule_configuration(configuration: ScheduleConfiguration)
+    }
+    class ScheduleStrategy {
+        <<abstract>>
+        +from_schedule_configuration(configuration: ScheduleConfiguration)
+    }
+
+    Spawner o-- Schedule: schedules
+    Schedule *-- ScheduleStrategy: strategy
+    Schedule --> Schedule: Factory
+    ScheduleStrategy --> ScheduleStrategy: Factory

@@ -8,23 +8,16 @@ classDiagram
     class Component {
         <<abstract>>
         +event_bus: EventBus
-        +priority: int
         +next_tick(tick: int)
     }
     class Spawner {
         +configuration: SpawnerConfiguration
         -schedules: dict[str, Schedule]
-        +get_schedule(schedule_id: str) Schedule
     }
     class Schedule {
         <<abstract>>
-        +id: str
         +strategy: ScheduleStrategy
-        + << class >> strategy_from_schedule_configuration(schedule_configuration: ScheduleConfiguration)
-        -seconds_to_be_spawned: list[int]
         +maybe_spawn(seconds: int, spawner: Spawner)
-        +block()
-        +unblock()
         -spawn(seconds: int, spawner: Spawner) bool
     }
     class TrainSchedule {
@@ -42,22 +35,19 @@ classDiagram
     }
     class RandomScheduleStrategy {
         +trains_per_1000_seconds: float
+        +seed: int
     }
     class DemandScheduleStrategy {
         +power_station: str
-        +scaling_factor: float
         +start_datetime: datetime
-        +spawn_seconds: list[int]
-        +compute_coal_consumption(produced_electrical_energy: float) float
-        -compute_trains_to_spawn(produced_electrical_power: float) float
-        -calculate_spawn_ticks()
+        +scaling_factor: float
     }
 
     ISpawnerDisruptor <|.. Spawner
     Component <|-- Spawner
-    Schedule "0..*" --o Spawner: schedules
+    Schedule --o Spawner: schedules
     Schedule <|-- TrainSchedule
-    ScheduleStrategy "1" --* Schedule: strategy
+    ScheduleStrategy --* Schedule: strategy
     ScheduleStrategy <|-- RegularScheduleStrategy
     ScheduleStrategy <|-- RandomScheduleStrategy
     ScheduleStrategy <|-- DemandScheduleStrategy

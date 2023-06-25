@@ -1,11 +1,11 @@
 classDiagram
-    direction BT
+    direction RL
     class BaseModel {
         <<abstract>>
     }
     class ScheduleConfigurationXSimulationPlatform {
         +schedule_configuration: ScheduleConfiguration
-        +simulation_platform_is: str
+        +simulation_platform_id: str
         +index: int
     }
     class SpwanerConfigurationXSchedule {
@@ -13,9 +13,7 @@ classDiagram
         +schedule_configuration: ScheduleConfiguration
     }
     class Spawner {
-        -schedules: dict[str, Schedule]
-        +next_tick(tick: int)
-        +get_schedule(schedule_id: str) Schedule
+
     }
     class SpawnerConfiguration {
 
@@ -34,11 +32,11 @@ classDiagram
         +demand_strategy_start_datetime: datetime
     }
 
-    BaseModel <|-- ScheduleConfigurationXSimulationPlatform
-    BaseModel <|-- SpwanerConfigurationXSchedule
     BaseModel <|-- SpawnerConfiguration
     BaseModel <|-- ScheduleConfiguration
-    ScheduleConfiguration "1" --* ScheduleConfigurationXSimulationPlatform: schedule_configuration
-    ScheduleConfiguration "1" --* SpwanerConfigurationXSchedule: Schedule_configuration
-    SpawnerConfiguration "1" --* SpwanerConfigurationXSchedule: spawner_configuration
-    SpawnerConfiguration "1" --* Spawner: configuration
+    ScheduleConfiguration --* ScheduleConfigurationXSimulationPlatform: schedule_configuration
+    ScheduleConfiguration --* SpwanerConfigurationXSchedule: Schedule_configuration
+    BaseModel <|-- SpwanerConfigurationXSchedule
+    BaseModel <|-- ScheduleConfigurationXSimulationPlatform
+    SpawnerConfiguration --* SpwanerConfigurationXSchedule: spawner_configuration
+    SpawnerConfiguration --* Spawner: configuration

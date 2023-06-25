@@ -1,0 +1,12 @@
+sequenceDiagram
+    autonumber
+    participant Spawner
+    participant Schedule
+    participant ScheduleStrategy
+
+    activate Spawner
+    Spawner --)+ Schedule: from_schedule_configuration(configuration)
+    Schedule --)+ ScheduleStrategy: from_schedule_configuration(configuration)
+    ScheduleStrategy -->>- Schedule: return strategy
+    Schedule -->>- Spawner: return schedule
+    deactivate Spawner
