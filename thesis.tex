@@ -36,30 +36,34 @@
 	% Textteil
 	\pagenumbering{arabic}
 
+	\newpage
 	\chapter{Einleitung}
 	\todo{Deadline: 30.06.}
-	\include{content/1_einleitung/1_1_strukturwandel}
-	\include{content/1_einleitung/1_2_schienennetz}
-	\include{content/1_einleitung/1_3_gemeinsame_nutzung}
-	\include{content/1_einleitung/1_4_anforderungen}
-	\include{content/1_einleitung/1_5_team}
+	\input{content/1_einleitung/1_1_strukturwandel}
+	\input{content/1_einleitung/1_2_schienennetz}
+	\input{content/1_einleitung/1_3_gemeinsame_nutzung}
+	\input{content/1_einleitung/1_4_anforderungen}
+	\input{content/1_einleitung/1_5_team}
 
+	\newpage
 	\chapter{Grundlagen}
-	\include{content/2_grundlagen/2_1_fahrplaene}
-	\include{content/2_grundlagen/2_2_abfahrtsplaene}
-	\include{content/2_grundlagen/2_3_design_patterns}
-	\include{content/2_grundlagen/2_4_orm}
-	\include{content/2_grundlagen/2_5_smard}
+	\input{content/2_grundlagen/2_1_fahrplaene}
+	\input{content/2_grundlagen/2_2_abfahrtsplaene}
+	\input{content/2_grundlagen/2_3_design_patterns}
+	\input{content/2_grundlagen/2_4_orm}
+	\input{content/2_grundlagen/2_5_smard}
 
+	\newpage
 	\chapter{Hauptteil}
-	\include{content/3_hauptteil/3_1_kohlebedarf}
-	\include{content/3_hauptteil/3_2_architektur}
-	\include{content/3_hauptteil/3_3_implementierung}
-	\include{content/3_hauptteil/3_4_ergebnisse}
+	\input{content/3_hauptteil/3_1_kohlebedarf}
+	\input{content/3_hauptteil/3_2_architektur}
+	\input{content/3_hauptteil/3_3_implementierung}
+	\input{content/3_hauptteil/3_4_ergebnisse}
 
+	\newpage
 	\chapter{Schlussbetrachtung}
-	\include{content/4_schlussbetrachtung/4_1_ergebnisse}
-	\include{content/4_schlussbetrachtung/4_2_ausblick}
+	\input{content/4_schlussbetrachtung/4_1_ergebnisse}
+	\input{content/4_schlussbetrachtung/4_2_ausblick}
 
 	% Bibliographie
 	\ifisbook\cleardoubleemptypage\fi
