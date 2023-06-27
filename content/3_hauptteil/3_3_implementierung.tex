@@ -1,67 +1,108 @@
 \section{Implementierungsdetails}
-\todo{Deadline: 27.06.}
-\todo{Noch in Arbeit}
-\todo{Hier zeige ich Code, der interessant sein könnte.}
-\todo{FRAGE: Ist es ok, wenn ich nur ''interessanten'' Code zeige? Ansonsten bin ich der Meinung, dass die Sequenzdiagramme und der Text in der Architekturdiskussion das implementierte Verhalten bereits gut beschreibt.}
 
-\subsection{Warteschlange für die Zugerzeugung}
-\todo{Noch in Arbeit}
+In diesem Abschnitt eine Auswahl Implementierungsdetails auf Quelltext-Ebene vorgestellt. Da das frundlegende Verhalten der Komponenten bereits in der Architekturdiskussion beschrieben wurde, konzentriert sich dieser Teil auf Details, die sich in Sequenzdiagrammen nicht gut darstellen lassen aber für das Verständnis der Komponenten von Bedeutung sind.
+
+\subsection{\emph{Template Method} in \code{Schedule}}
+
+Quelltext \ref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
+\\
+Zuerst wird geprüft, ob der Abfahrtsplan durch einen injizierten Fehler deaktiviert wurde (\code{blocked}). Im Anschluss wird der \code{should\_spawn} auf der konkreten Strategie (\code{strategy}) aufgerufen, um zu prüfen, ob zum aktuellen Zeitpunkt (\code{seconds}) ein Zug erzeugt werden soll. Ein bisher nicht diskutiertes Problem, welches es zu lösen galt, war die Tatsache, dass es möglich war, dass ein Zug in einem Abschnitt erzeugt wird, der bereits durch einen anderen Zug belegt ist. Dieses Problem wird ebenfalls in \code{maybe\_spawn} gelöst. Zeigen beide zuvor geprüften Bedingungen an, dass ein Zug erzeugt werden soll, wird dessen Erzeugungszeitpunkt zunächst einer Warteschlange (\code{seconds\_to\_be\_spawned}) hinzugefügt. Wenn die Warteschlange im Anschluss nicht leer ist, wird versucht, durch Aufruf von \code{spawn}, einen Zug zu erzeugen. \code{spawn} wird in den Subklassen von \code{Schedule} implementiert und gibt einen Wahrheitswert zurück, der angibt, ob die Erzeugung erfolgreich war. In \code{spawn} findet auch die Prüfung auf belegte Abschnitte statt. War die Erzeugung erfolgreich, wird der entsprechende Zeitpunkt aus der Warteschlange entfernt.\\
+\\
+Dieses Vorgehen hat zur Folge, dass Züge, deren Erzeugung im Moment nicht möglich ist, zwischengespeichert werden, um zum nächstmöglichen Zeitpunkt erzeugt werden zu können.
 
 \lstset{language=python}
-\begin{lstlisting}[caption={Quelltextunterschrift}, label=code:template-method-code]
+\begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{Schedule}, welcher die \emph{Template Method} \code{maybe\_spawn} und weitere relevante Attribute zeigt. \code{maybe\_spawn} prüft, ob zum Zeitpunkt \code{seconds} ein Zug erzeugt werden soll und erzeugt ihn dann ggf.}, label=code:template-method-code]
 class Schedule(ABC):
 
-    _seconds_to_be_spawned: list[int]
-    _blocked: bool
+    strategy: ScheduleStrategy
+    seconds_to_be_spawned: list[int]
+    blocked: bool
 
     def maybe_spawn(self, seconds: int, spawner: Spawner):
-        if not self._blocked and self.strategy.should_spawn(seconds):
-            self._seconds_to_be_spawned.append(seconds)
+        if not self.blocked and self.strategy.should_spawn(seconds):
+            self.seconds_to_be_spawned.append(seconds)
 
-        if len(self._seconds_to_be_spawned) > 0:
-            if self._spawn(spawner, self._seconds_to_be_spawned[-1]):
-                self._seconds_to_be_spawned.pop()
+        if len(self.seconds_to_be_spawned) > 0:
+            if self.spawn(spawner, self.seconds_to_be_spawned[-1]):
+                self.seconds_to_be_spawned.pop()
 
     @abstractmethod
-    def _spawn(self, spawner: Spawner, seconds: int) -> bool:
+    def spawn(self, spawner: Spawner, seconds: int) -> bool:
     	raise NotImplementedError()
 \end{lstlisting}
 
-\subsection{Erzeugung bedarfsorientierter Züge}
-\todo{Noch in Arbeit}
+\subsection{Algorithmen zur Zugerzeugung}
+
+Im Folgenden wird die Implementierung der Algorithmen für die verschiedenen Arten der Zugerzeugung vorgestellt. Der entsprechende Code dafür befindet sich in der Klasse \code{ScheduleStrategy} und ihren Subklassen, jeweils in der Methode \code{should\_spawn}. Diese Methode nimmt den aktuellen Zeitpunkt \code{seconds} entgegen und gibt einen Wahrheitswert zurück, der angibt, ob zum aktuellen Zeitpunkt ein Zug erzeugt werden muss.\\
+\\
+Quelltext \ref{code:schedule-strategy-code} zeigt die abstrakte Klasse \code{ScheduleStrategy}. In ihrer \code{should\_spawn}-Methode werden Bedingungen geprüft, die für jede Art von Abfahrtsplan erfüllt sein müssen. Speziell ist das die Prüfung, ob der aktuelle Zeitpunkt innerhalb des Intervalls liegt, welches von den Attributen \code{start\_time} und \code{end\_time} definiert wird. Diese Attribute sind optional, sodass auch ein offenes Intervall definiert werden kann.
 
 \lstset{language=python}
-\begin{lstlisting}[caption={Quelltextunterschrift}, label=code:template-method-code]
-class DemandScheduleStrategy(ScheduleStrategy):
-    SECONDS_PER_QUARTER_HOUR: int
-    COAL_PER_TRAIN: float
+\begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{ScheduleStrategy}. Gezeigt wird die Methode \code{should\_spawn}, sowie die relevanten Attribute \code{start\_time} und \code{end\_time}.}, label=code:schedule-strategy-code]
+class ScheduleStrategy(ABC):
 
-    start_datetime: datetime
+    start_time: int
+    end_time: int
+
+    def should_spawn(self, seconds: int) -> bool:
+        is_after_start_second = seconds >= (self.start_time if self.start_time else 0)
+        is_before_end_second = seconds <= (self.end_time if self.end_time else seconds)
+        return is_after_start_second and is_before_end_second
+\end{lstlisting}
+
+In den Subklassen wird zuerst stets die \code{should\_spawn}-Methode der Superklasse aufgerufen, um die allgemeingültigen Bedingungen zu prüfen. Anschließend werden die spezifischen Bedingungen der jeweiligen Strategie geprüft.\\
+\\
+Quelltext \ref{code:regular-strategy-code} zeigt die Implementierung der Klasse \code{RegularScheduleStrategy}. Diese Strategie erzeugt Züge in regelmäßigen Abständen. Dazu wird das Attribut \code{frequency} verwendet, welches die Anzahl der Sekunden zwischen zwei Zügen angibt. Die \code{should\_spawn}-Methode prüft, ob die Anzahl der Sekunden, die seit dem Start des Abfahrtsplans (\code{start\_time}) vergangen sind, durch die \code{frequency} teilbar ist.\\
+
+\lstset{language=python}
+\begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{RegularScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:regular-strategy-code]
+class RegularScheduleStrategy(ScheduleStrategy):
+
+    frequency: int
+
+    def should_spawn(self, seconds: int) -> bool:
+        return (
+            super().should_spawn(seconds)
+            and (seconds - self.start_time) % self.frequency == 0
+        )
+\end{lstlisting}
+
+Quelltext \ref{code:random-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{RandomScheduleStrategy}. Diese Strategie erzeugt Züge mit einer bestimmten Wahrscheinlichkeit. Dazu wird das Attribut \code{trains\_per\_1000\_seconds} verwendet, welches die mittlere Anzahl der Züge pro 1000 Sekunden angibt. Die \code{should\_spawn}-Methode prüft, ob eine Zufallszahl zwischen 0 und 1000 kleiner als \code{trains\_per\_1000\_seconds} ist. Außerdem wird der Initialisierungsmethode (\code{\_\_init\_\_}) ein Startwert (\code{seed}) für den Zufallszahlengenerator (\code{random\_number\_generator}) übergeben, um die Reproduzierbarkeit auch bei preudo-zufälligen Ergebnissen zu gewährleisten.
+
+\begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{RandomScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:random-strategy-code]
+class RandomScheduleStrategy(ScheduleStrategy):
+
+    trains_per_1000_seconds: float
+    random_number_generator: Random
+
+    def __init__(
+        self,
+        start_time: int,
+        end_time: int,
+        trains_per_1000_seconds: float,
+        seed: int = None
+    ):
+        super().__init__(start_time, end_time)
+        self.trains_per_1000_seconds = trains_per_1000_seconds
+        self.random_number_generator = Random(seed)
+
+    def should_spawn(self, seconds: int) -> bool:
+        return (
+            super().should_spawn(seconds)
+            and self.random_number_generator.random() * 1000
+            < self.trains_per_1000_seconds
+        )
+\end{lstlisting}
+
+Quelltext \ref{code:demand-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{DemandScheduleStrategy}. Die Zeitpunkte, zu denen Züge erzeugt werden sollen, werden nach dem im Hauptteil beschriebenen Verfahren, vorberechnet und in der Liste \code{spawn\_seconds} gespeichert. In \code{should\_spawn} wird dann geprüft, ob der aktuelle Zeitpunkt in der Liste enthalten ist.
+
+\begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{DemandScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:demand-strategy-code]
+class DemandScheduleStrategy(ScheduleStrategy):
+
     spawn_seconds: list[int]
 
-    def __init__(self, ...):
-        ...
-        self._calculate_spawn_seconds()
-        ...
+    def should_spawn(self, seconds: int) -> bool:
+        return super().should_spawn(seconds) and seconds in self.spawn_seconds
 
-    def _compute_trains_to_spawn(self, produced_electrical_power: float) -> float:
-        coal_consumption = self.compute_coal_consumption(produced_electrical_power)
-        return coal_consumption / self.COAL_PER_TRAIN
-
-    def _calculate_spawn_seconds(self):
-        end_datetime = self.start_datetime + timedelta(
-            seconds=self.end_time - self.start_time
-        )
-        data = self._api.get_data(self.start_datetime, end_datetime)
-        train_accumulator = 0.0
-        for quarter_hour, entry in enumerate(data):
-            train_accumulator += self._compute_trains_to_spawn(entry.value)
-            seconds = int(quarter_hour * self.SECONDS_PER_QUARTER_HOUR + self.start_time)
-            while train_accumulator >= 1.0:
-                self.spawn_ticks.append(seconds)
-                train_accumulator -= 1.0
-                tick += 1
-
-	def should_spawn(self, seconds: int) -> bool:
-    	return super().should_spawn(seconds) and seconds in self.spawn_seconds
 \end{lstlisting}
+
