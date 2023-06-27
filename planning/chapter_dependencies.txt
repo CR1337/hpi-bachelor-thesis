@@ -3,7 +3,7 @@ flowchart RL
     1[[1 Einleitung]]
     1_1(1_1 Strukturwandel in der Lausitz)
     1_2(1_2 Das Schienennetz der LEAG)
-    1_3(1_3 FlexiDug - Geminsam Nutzung durch Personen- und Güterzüge)
+    1_3(1_3 FlexiDug - Gemeinsam Nutzung durch Personen- und Güterzüge)
     1_4(1_4 Das Softwareprojekt und die Interaktion im Tea)
     2[[2 Grundlagen]]
     2_1(2_1 Fahrpläne)

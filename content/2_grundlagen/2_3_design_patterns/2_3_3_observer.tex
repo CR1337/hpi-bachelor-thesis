@@ -18,7 +18,7 @@ Das Observer-Pattern besteht aus einem Sender (\code{Publisher}) und mehreren Em
 	\label{fig:observer-class}
 \end{figure}
 
-Abbildung \ref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Meenschen.} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender sendet sich draufhin selbst \code{notify} (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
+Abbildung \ref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Menschen.} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender sendet sich draufhin selbst \code{notify} (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
 
 \begin{figure}[htb]
 	\centering
