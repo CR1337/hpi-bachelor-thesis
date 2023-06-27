@@ -8,7 +8,7 @@ Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es l�
 \end{itemize}
 Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} überschrieben, um darin den Feldern \code{created\_at}, \code{updated\_at} und \code{readable\_id} ihre Werte zuzuweisen.
 
-\begin{figure}[!hb]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-class.png}
 	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \code{BaseModel} erbt von \code{peewee.Model}, um weitere Funktionalität hinzuzufügen. Davon erbt \code{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
@@ -17,8 +17,8 @@ Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} �
 
 Von \code{BaseModel} erbt \code{SerializableBaseModel}, welches die zusätzliche Methode \code{to\_dict} implementiert. Damit lässt sich das Objekt JSON-serialisieren, um es bei Bedarf an das Forntend der Anwendung senden zu können.
 
-% \begin{figure}[!hb]
-\begin{figure}[htb]
+% \begin{figure}[H]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-seq.png}
 	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \code{create}.}

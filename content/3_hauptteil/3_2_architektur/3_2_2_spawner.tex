@@ -4,7 +4,7 @@
 
 Das zentrale Element der Zugerzeugung ist die Klasse \code{Spawner}. Die Architektur aller an der Zeugerzeugung beteiligten Klassen ist in Abbildung \ref{fig:spawner-class} dargestellt. Die Klasse \code{Spawner} erbt, wie die anderen zentralen Klassen des Systems, von der Klasse \code{Component} und erhält damit Zugriff auf den \code{EventBus}, welcher in einem folgenden Abschnitt beschrieben wird, und auf die Methode \code{next\_tick}. Diese Methode wird in jedem Zeitintervall der Simulation einmal aufgerufen und gibt der Komponente die Möglichkeit, auf die Simulation zu reagieren. Weiterhin realisiert die Klasse \code{Spawner} die \code{ISpawnerDisruptor}-Schnittstelle, welche eine Fehlerinjektion\cite{persitzky_fehlerinjektion_2023} ermöglicht. Der \code{Spawner} besitzt die Attribute \code{configuration}, welches im folgenden Abschnitt näher beleuchtet wird, und \code{schedules}, bei dem es sich um eine Liste Abfahrtsplänen (\code{Schedule}-Objekte) handelt.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-class.png}
 	\caption{Klassendiagramm der Zugerzeugung}
@@ -19,7 +19,7 @@ Die Klasse \code{RegularScheduleStrategy} implementiert die regulären Abfahrtsp
 
 Abbildung \ref{fig:spawner-seq} zeigt das Verhalten der Zugerzeugung innerhalb eines Zeitintervalls der Simulation. Ein \code{Communicator}-Objekt\footnote{beschrieben in der Arbeit von \citeauthor{kamp_architektur_2023}\cite{kamp_architektur_2023}} sendet \code{nect\_tick} an das \code{Spawner}-Objekt (1). Dieser sendet daraufhin \code{maybe\_spawn} an jedes Element in der Liste \code{schedules} und übergibt sich dabei selbst (2). Durch Aufruf von \code{should\_spawn} wird überprüft, ob ein Zug zu erzeugen ist (3). Ist dies der Fall, ruft das \code{Schedule}-Objekt auf sich selbst \code{spawn} auf (5), was dazu führt, dass \code{spawn\_train} an die übergebene \code{Spawner}-Instanz gesendet wird (6). Dort wird letztendlich die Schnittstelle zu SUMO angesprochen, um einen Zug in die Simulation zu setzen.
 
-\begin{figure}[htb]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-seq.png}
 	\caption{Sequenzdiagramm der Zugerzeugung}
