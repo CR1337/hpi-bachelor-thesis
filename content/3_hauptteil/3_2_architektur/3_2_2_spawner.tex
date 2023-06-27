@@ -1,6 +1,4 @@
 \subsection{Der \emph{Spawner}}
-\todo{Noch in Arbeit}
-\todo{Deadline: 26.06.}
 
 Das zentrale Element der Zugerzeugung ist die Klasse \code{Spawner}. Die Architektur aller an der Zeugerzeugung beteiligten Klassen ist in Abbildung \ref{fig:spawner-class} dargestellt. Die Klasse \code{Spawner} erbt, wie die anderen zentralen Klassen des Systems, von der Klasse \code{Component} und erhält damit Zugriff auf den \code{EventBus}, welcher in einem folgenden Abschnitt beschrieben wird, und auf die Methode \code{next\_tick}. Diese Methode wird in jedem Zeitintervall der Simulation einmal aufgerufen und gibt der Komponente die Möglichkeit, auf die Simulation zu reagieren. Weiterhin realisiert die Klasse \code{Spawner} die \code{ISpawnerDisruptor}-Schnittstelle, welche eine Fehlerinjektion\cite{persitzky_fehlerinjektion_2023} ermöglicht. Der \code{Spawner} besitzt die Attribute \code{configuration}, welches im folgenden Abschnitt näher beleuchtet wird, und \code{schedules}, bei dem es sich um eine Liste Abfahrtsplänen (\code{Schedule}-Objekte) handelt.
 
