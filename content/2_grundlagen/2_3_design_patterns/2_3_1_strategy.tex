@@ -6,7 +6,7 @@ Es kann vorkommen, dass mehrere Varianten eines Algorithmus benötigt werden, we
 
 \subsubsection*{Lösung}
 
-Wie in Abbildung \ref{fig:strategy-class} abgebildet, besitzt der Kontext (\code{Context}), welcher einen Algorithmus verwenden soll, eine Referenz auf eine Strategie (\code{Strategy}). Die konkrete Strategie (\code{ConcreteStrategy}) wurde dem Kontext zuvor durch den Anwender (\code{Client})\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Menschen.} mithilfe von \code{setStrategy} zugewiesen. Die konkrete Strategie realisiert die \code{Strategy}-Schnittstelle, sodass Kontext und konkrete Strategie lediglich lose gekoppelt sind. Jede Strategie stellt die Methode \code{execute} bereit, um den gekapselten Algorithmus auszuführen.
+Wie in Abbildung \ref{fig:strategy-class} abgebildet, besitzt der Kontext (\code{Context}), welcher einen Algorithmus verwenden soll, eine Referenz auf eine Strategie (\code{Strategy}). Die konkrete Strategie (\code{ConcreteStrategy}) wurde dem Kontext zuvor durch den Anwender (\code{Client})\footnote{Der Anwender (\code{Client}) ist in der Regel eine weitere Klasse, welche den beschriebenen Mechanismus verwendet. Es handelt sich in aller Regel nicht um einen Menschen.\label{ftn:client}} mithilfe von \code{setStrategy} zugewiesen. Die konkrete Strategie realisiert die \code{Strategy}-Schnittstelle, sodass Kontext und konkrete Strategie lediglich lose gekoppelt sind. Jede Strategie stellt die Methode \code{execute} bereit, um den gekapselten Algorithmus auszuführen.
 
 \begin{figure}[H]
 	\centering

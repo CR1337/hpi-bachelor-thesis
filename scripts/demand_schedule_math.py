@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
+matplotlib.use('TkAgg')
 matplotlib.rcParams.update({'font.size': 14})
 
 START = 0
@@ -23,9 +24,9 @@ s = np.fmod(a, CAPACITY)
 c = np.repeat(CAPACITY, len(x))
 
 fig, ax = plt.subplots()
-ax.plot(x, k_dummy, label='k(t)', linestyle='dotted', color='black')
-ax.plot(x, a, label='a(t)', linestyle='dashed', color='black')
-ax.plot(x, s, label='f(t, c)', linestyle='solid', color='black')
+ax.plot(x, k_dummy, label='$k(t)$', linestyle='dotted', color='black')
+ax.plot(x, a, label='$a(t)$', linestyle='dashed', color='black')
+ax.plot(x, s, label='$a_f(t, c)$', linestyle='solid', color='black')
 ax.plot(x, c, label='_nolegend_', linestyle='solid', color='lightgray')
 
 # https://stackoverflow.com/questions/4624970/finding-local-maxima-minima-with-numpy-in-a-1d-numpy-array
