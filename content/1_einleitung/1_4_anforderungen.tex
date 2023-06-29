@@ -6,10 +6,10 @@ Die Anforderungen an das Softwareprojekt haben wir als Team selbst aufgestellt. 
     \item Verschiedene Fehler, welche unvorhergesehene Ereignisse simulieren (wie z.B. Wiechenstörungen oder ausgefallene Züge)
     \item Eine textuelle Beschreibung der konfigurierten Simulation
 \end{itemize}
-Die Simulation wird von dem Verkehrssimulator SUMO \cite{noauthor_eclipse_nodate} durchgeführt. Da dieser den Schienenverkehr jedoch nicht ausreichend realistisch abbilden kann, haben wir ihn um entsprechende Funktionalitäten erweitert. Diese waren:
+Die Simulation wird von dem Verkehrssimulator \emph{SUMO} \cite{noauthor_eclipse_nodate} durchgeführt. Da dieser den Schienenverkehr jedoch nicht ausreichend realistisch abbilden kann, haben wir ihn um entsprechende Funktionalitäten erweitert. Diese waren:
 \begin{itemize}
     \item Eine eigens entwickelte realistische Stellwerkslogik, die wir vom Lehrstuhl für Betriebssysteme und Middleware übernommen und angepasst haben \cite{noauthor_interlocking_2023}
-    \item Die Schaffung einer objektorientierten Schnittstelle zu den Teilen der prozeduralen SUMO-API, welche wir für die Simulation von Schienenverkehr benötigen
+    \item Die Schaffung einer objektorientierten Schnittstelle zu den Teilen der prozeduralen \emph{SUMO}-API, welche wir für die Simulation von Schienenverkehr benötigen
     \item Ein Algorithmus, welcher die Züge durch das Schienennetz leitet, dabei Deadlocks vermeidet und die Stellwerkslogik entsprechend steuert.
     \item Die Beachtung von Zugprioritäten in Abhängigkeit des Zugtyps
 \end{itemize}
@@ -23,7 +23,7 @@ Letztendlich sollen folgende Ergebnisse durch die Simulation generiert werden k�
 
 Im Kontext unseres Projektes dient die Software außerdem dazu, den Zugverkehr auf dem Schienenetz in der Lausitz zu simulieren. Da wir die Fragestellung untersuchen möchten, ob eine gemeinsame Nutzung durch Kohle- und Personenzüge möglich ist, kommen weitere Anforderungen hinzu, die spezifisch für das untersuchte Schienennetz sind. So besteht die Notwendigkeit, die Züge zu entsprechend realistischen Zeitpunkten abfahren zu lassen. Dazu soll die Möglichkeit bestehen, die Kohlezüge anhand eines Kohlebadarfs zu erzeugen, welcher aus historischen Daten stammt. Weiterhin sollen dieser Bedarf und die dazu erzeugten Kohlezüge Teil der generierten Ergebnisse sein.
 
-Diese Arbeit beschäftigt sich mit dem Teil der Anwendung, welcher für die Erstellung der Züge zuständig ist. Die spezifischen Anforderungen an diesen Teil der Software sind, wie bereits zuvor erwähnt, die Erzeugung von Zügen zu den korrekten Zeitpunkten an den richtigen Abfahrtsorten. Dazu muss die hier betrachtete Softwarekomponente mit der Schnittstelle zu SUMO kommunizieren und dabei auch den Zugtyp und die Zwischenstationen eines jeden Zuges übergeben. Es soll möglich sein, einen Zug von jeder Station über beliebig viele weitere Stationen zu jeder Station fahren zu lassen. Die Zeitpunkte der Abfahrt sollen durch drei verschiedene Mechanismen erzeugbar sein:
+Diese Arbeit beschäftigt sich mit dem Teil der Anwendung, welcher für die Erstellung der Züge zuständig ist. Die spezifischen Anforderungen an diesen Teil der Software sind, wie bereits zuvor erwähnt, die Erzeugung von Zügen zu den korrekten Zeitpunkten an den richtigen Abfahrtsorten. Dazu muss die hier betrachtete Softwarekomponente mit der Schnittstelle zu \emph{SUMO} kommunizieren und dabei auch den Zugtyp und die Zwischenstationen eines jeden Zuges übergeben. Es soll möglich sein, einen Zug von jeder Station über beliebig viele weitere Stationen zu jeder Station fahren zu lassen. Die Zeitpunkte der Abfahrt sollen durch drei verschiedene Mechanismen erzeugbar sein:
 \begin{itemize}
     \item Züge fahren in regelmäßigen Zeitabständen ab.
     \item Züge fahren in zufälligen (einer Gleichverteilung folgenden) Zeitabständen ab.
