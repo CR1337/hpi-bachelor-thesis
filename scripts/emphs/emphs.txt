@@ -1,0 +1,170 @@
+82 results - 16 files
+
+content/1_einleitung/1_5_team.tex:
+  15  		\hline
+  16: 		\emph{REST-API} & \citetitle{kamp_architektur_2023}\cite{kamp_architektur_2023} & \citeauthor{kamp_architektur_2023} \\
+  17  		\hline
+
+  30
+  31: ⟪ 459 characters skipped ⟫chnung plant und steuert die Bewegung der Züge durch das Schienennetz. Sie interagiert mit der Stellwerkslogik und bedient die Schnittstelle zu SUMO. Die SUMO-Schnittstelle ist ein objektorientierter \emph{Wrapper}\footnote{Ein Wrapper dient der Bereitstellung einer anderen Schnittstelle für bereits existierenden Code.}, welcher die für uns wichtigen Aspekte der Schnittstelle zu SUMO kapselt und für uns die Arbeit mit ihnen erleichtert. Die Datenauswertung stellt die Ergebnisse der Simulation grafisch dar und ermöglicht die Analyse der Simulationsergebnisse. Die Zugerzeugung wird in dieser Arbeit ausführlich behandelt.
+  32
+
+content/2_grundlagen/2_2_abfahrtsplaene.tex:
+  2
+  3: Zur Abgrenzung von dem Begriff Fahrplan wird hier der Begriff \emph{Abfahrtsplan} eingeführt. Im Gegensatz zu einem Fahrplan enthält ein Abfahrtsplan lediglich folgende Informationen:
+  4  \begin{itemize}
+
+content/2_grundlagen/2_3_design_patterns/2_3_1_strategy.tex:
+  4
+  5: ⟪ 339 characters skipped ⟫tierung der Algorithmen-Varianten innerhalb der ausführenden Klasse, würde deren Komplexität deutlich erhöhen. Außerdem soll die Möglichkeit bestehen, in Zukunft weitere Algorithmen hinzuzufügen. Das \emph{Strategy-Pattern} kann die Übersichtlichkeit verbessern, wenn viele ähnliche Klassen existieren, die sich lediglich in ihrem verhalten unterscheiden. Weiterhin sollen Implementierungsdetails und Algorithmus-spezifische Daten vom Kontext abgekapselt werden. \cite{gamma_design_1995}
+  6
+
+content/2_grundlagen/2_3_design_patterns/2_3_2_template_method.tex:
+  17
+  18: Quelltext\ref{code:template-method-code} zeigt exemplarisch, wie eine solche \emph{Template-Method} aussehen kann. Die Reihenfolge und Interaktion der drei Einzelschritte \code{step1}, \code{step2} und \code{step3} sind festgelegt. Deren konkretes Verhalten kann jedoch in den Subklassen von \code{AbstractClass} überschrieben werden.
+  19
+
+  33
+  34: Bei der Verwendung der Template-Method ist jedoch zu beachten, wie die einzelnen Methoden zu verwenden sind. Diese lassen sich grob in zwei Arten einteilen, die \emph{Hook}\footnote{Schnittstelle zur Integration fremden Codes in ein bestehendes System}-Methoden und die abstrakten Methoden. Während die Hook-Methoden eine Standard-Implementierung in der abstrakten Basisklasse bereitstellen, ist dies bei den abstrakten Methoden nicht der Fall. Entsprechend müssen die abstrakten Methoden zwingend von einer konkreten Subklasse implementiert werden. Bei den Hook-Methoden ist das optional.
+  35
+
+content/2_grundlagen/2_3_design_patterns/2_3_3_observer.tex:
+  5
+  6: ⟪ 445 characters skipped ⟫atz wäre, jedem abhängigen Objekt eine Referenz auf das Objekt zu geben, von welchem es abhängt. Die Objekte könnten dann in regelmäßigen Abständen prüfen, ob eine Zustandsänderung stattgefunden hat (\emph{Polling}). Dieser Ansatz weist jedoch nicht nur eine hohe Kopplung auf, er ist auch wenig performant. Auch wenn keine Zustandsänderung stattgefunden hat, wird auf diese geprüft. Der Aufwand für diese Prüfung steigt dabei linear mit der Anzahl der beteiligten Objekte.
+  7
+  8: Das \emph{Observer-Pattern} kann Anwendung finden, wenn es zwei voneinander getrennte Konzepte gibt und eines von dem anderen abhängig ist. Die Abhängigkeit muss modelliert werden können, ohne die Objekte stark zu koppeln. Weiterhin soll es möglich sein, die Anzahl der abhängigen Objekte variablen zu halten. \cite{gamma_design_1995}
+  9
+
+content/2_grundlagen/2_3_design_patterns/2_3_4_mediator.tex:
+  5
+  6: ⟪ 306 characters skipped ⟫n Objekten lassen sich nicht immer verhindern, da sie die inhärente Komplexität des modellierten Problems wiederspiegeln. In diesem Fall ist eine Lösung notwending, die diese Komplexität kapselt. Das \emph{Mediator-Pattern} ist in der Lage, solche Fälle von komplexer Interaktion zu vereinfachen. \cite{gamma_design_1995}
+  7
+
+content/2_grundlagen/2_3_design_patterns/2_3_5_visitor.tex:
+   5
+   6: Gelegentlich muss eine Operation auf einer Menge von Objekten durchgeführt, die alle Teil einer Objekthiearchie aber unterschiedlich sind. Diese Objekte besitzen daher unter Umständen voneinander abweichende Interfaces. Das \emph{Visitor-Pattern} erlaubt es, solche Operationen außerhalb der Objekte und für alle betroffenen Objekte innerhalb einer separaten Klasse zu definieren. \cite{gamma_design_1995}
+   7
+
+   9
+  10: Der konkrete \emph{Visitor}\footnote{Die deutsche Übersetzung ''Besucher'' ist in diesem Kontext eher unüblich.} (\code{ConcreteVisitor}) realisiert die Visitor-Schnittstelle (\code{Visitor}), welche die Methode \code{visit} bereitstellt, wie in Abbildung \ref{fig:visitor-class} zu erkennen ist. Diese erlaubt es dem Visitor, ein Element (\code{Element}) zu ''besuchen'' und auf ihm eine Operation durchzuführen. Die Elemente ''akzeptieren'' den ''Besuch'' des Visitors mit Hilfe der Methode \code{accept}, welche als Argument den besuchenden Visitor erhält.
+  11
+
+  18
+  19: ⟪ 717 characters skipped ⟫mente unterschiedliche Implementierungen ausführen. Somit kann der Visitor nach Erhalt von \code{accept} die zum Typ des sendenden Elements passende Operation ausführen. Dieser Mechanismus nennt sich \emph{Double-Dispatch}.
+  20
+
+content/2_grundlagen/2_3_design_patterns/2_3_6_factory_method.tex:
+  4
+  5: Es wird eine Schnittstelle benötigt, um eine Reihe von Objekten erzeugen zu können. Jedes Objekt hat jedoch andere Anforderungen an seine Erzeugung. Eine \emph{Factory-Method} kann eingesetzt werden, wenn eine Klasse kein Wissen darüber besitzt oder besitzen soll, welches konkrete Objekt sie zu erzeugen hat oder wenn eine Klasse die Verantwortlichkeit über diese Entscheidung ihren Subklassen überlassen soll. \cite{gamma_design_1995}
+  6
+
+content/3_hauptteil/3_1_kohlebedarf.tex:
+  11
+  12: ⟪ 330 characters skipped ⟫twerk befindet. Diese Daten wurden einmalig in Form einer CSV-Datei heruntergeladen. Im Anschluss wurden die Daten gefiltert, sodass nur noch Kraftwerke mit dem Energieträger Braunkohle innerhalb der \emph{50Hertz}-Regelzone übrige blieben. Diese Zone umfasst die neuen Bundesländer und Hamburg. Aus diesen gefilterten Kraftwerksdaten wurde dann die Gesamtleistung $P_T$ aller Braunkohlekraftwerke in der Regelzone durch Aufsummieren berechnet. Diese Gesamtleistung beträgt rund 10.600 MW. Außerdem wurden für die weitere Berechnung nur noch die drei Lausitzer Kraftwerke betrachtet, welche über das Schienennetz der LEAG mit Braunkohle versorgt werden. Diese Kraftwerke sind \emph{Boxberg}, \emph{Jänschwalde} und \emph{Schwarze Pumpe}.\\
+  13  \\
+
+  35  \begin{itemize}
+  36:     \item Alle Kraftwerke der \emph{50Hertz}-Regelzone werden gleichmäßig (gewichtet mit ihrer jeweiligen Maximalleistung) ausgelastet.
+  37      \item Das Verhältnis zwischen elektrischer Leistung $P_e$ und thermischer Leistung $P_t$ eines Kraftwerkes ist konstant.
+
+content/3_hauptteil/3_3_implementierung.tex:
+   4
+   5: \subsection{\emph{Template-Method} in \code{Schedule}}
+   6
+   7: Quelltext \ref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template-Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
+   8  \\
+
+  13  \lstset{language=python}
+  14: \begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{Schedule}, welcher die \emph{Template-Method} \code{maybe\_spawn} und weitere relevante Attribute zeigt. \code{maybe\_spawn} prüft, ob zum Zeitpunkt \code{seconds} ein Zug erzeugt werden soll und erzeugt ihn dann ggf.}, label=code:template-method-code]
+  15  class Schedule(ABC):
+
+content/3_hauptteil/3_4_ergebnisse.tex:
+  13  \\
+  14: In Abbildung \ref{fig:results-periods}b sind die mittleren Abfahrtsperioden in Zeitraum A für die Kraftwerke \emph{Jänschwalde}, \emph{Boxberg} und \emph{Schwarze Pumpe} zu erkennen. Das Kraftwerk \emph{Jänschwalde} besitzt hierbei den niedrigsten Wert mit etwa 44 Minuten. Das Kraftwerk \emph{Boxberg} besitzt eine mittlere Abfahrtsperiode von ca. 64 Minuten und den höchsten Wert weist das Kraftwerk \emph{Schwarze Pumpe} mit rund 95 Minuten auf.
+  15
+
+content/3_hauptteil/3_2_architektur/3_2_2_spawner.tex:
+   1: \subsection{Der \emph{Spawner}}
+   2
+
+  26
+  27: Bei diesem Mechanismus finden zwei Entwurfsmuster Anwendung. Der \code{Spawner} fungiert and \emph{Visitor} und besucht jedes Element in der Liste von \code{Schedule}-Objekten. Über einen \emph{Double-Dispatch} mit den Methoden \code{maybe\_spawn} und \code{spawn\_train} wird dabei erreicht, dass die Verantwortlichkeit der Implementierung zur Erzeugung von Zügen (und zukünftig evtl. weiterer Verkehrsteilnehmer) bei der Klasse \code{Spawner} liegt. Die Entscheidung hingegen wird von den \code{Schedule}-Objekten getroffen. Dadurch lassen sich in Zukunft relativ einfach weitere Arten von \code{Schedule}-Klassen hinzufügen. Die Klasse \code{Spawner} muss dazu nur um jeweils eine weitere Methode erweitert werden. Bei der Methode \code{maybe\_spawn} handelt es sich weiterhin um eine im abstrakten \code{Schedule} implementierte \emph{Template-Method}. Sie gibt den Ablauf der Entscheidung über die Zugerzeugug vor. Die konkreten Implementierungen für \code{spawn} und \code{should\_spawn} liegen jedoch in den konkreten Subklassen von \code{Schedule}  bzw. \code{ScheduleStrategy}. Auch hier ist der Vorteil, dass sich neue Algorithmen zur Bestimmung der Abfahrtszeiten relativ einfach hinzufügen lassen, ohne dass die Klasse \code{Spawner} angepasst werden muss.
+
+content/3_hauptteil/3_2_architektur/3_2_3_spawner_config.tex:
+   2
+   3: ⟪ 467 characters skipped ⟫{ScheduleStrategy} von \code{BaseModel}. Somit ließen sich Instanzen dieser Klassen und ihrer Subklassen direkt in die Datenbank schreiben. Dieser Ansatz wurde jedoch verworfen, da das verwendete ORM \emph{peewee} nicht in der Lage ist, objektorientierte Vererbungshierachien ausreichend gut abzubilden. \emph{peewee} ordnet jeder Klasse eine Tabelle in der Datenbank zu. Es spielt dabei keine Rolle, ob es sich um eine abstrakte oder eine konkrete Klasse handelt. Ein \code{Schedule}-Objekt kann bspw. ein \code{RegularScheduleStrategy}-Objekt enthalten. Die Klasse \code{Schedule} ''kennt'' jedoch nur die abstrakte Klasse \code{ScheduleStrategy}. Die Abbildung durch \emph{peewee} erzeugt daher für die Tabelle \code{Schedule} lediglich einen Fremdschlüssel, der auf die ''abstrakte'' Tabelle \code{ScheduleStrategy} verweist. Referenzen auf abstrakte Klassen lassen sich also mit \emph{peewee} nicht abbilden.\\
+   4  \\
+
+   9  	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-config-class.png}
+  10: 	\caption{Klassendiagramm der \emph{Spawner}-Konfiguration}
+  11  	\label{fig:spawner-config-class}
+
+  13
+  14: Alle zur Konfiguration gehörenden Klassen werden in JSON-serialisierter Form vom Benutzer über die REST-API übertragen\cite{kamp_architektur_2023}. Sie werden daraufhin deserialisiert und in der Datenbank abgelegt. Aus diesen Kofigurationsobjekten können dann ein \code{Spawner}, \code{Schedule}-Objekte und \code{ScheduleStrategy}-Objekte erzeugt werden. Dafür wurde das Entwurfsmuster der \emph{Factory-Method} verwendet. Abbildung \ref{fig:spawner-factory-class} zeigt, dass die Klassen \code{Schedule} und \code{ScheduleStrategy} bzw. ihre Subklassen ihre eigenen \emph{Factories} sind. Sie besitzen zu diesem Zweck jeweils eine \emph{Klassen}-Methode \code{from\_schedule\_configuration}, welche als \emph{Factory-Method} fungiert.
+  15
+
+  18  	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-factory-class.png}
+  19: 	\caption{Klassendiagramm der \emph{Spawner}-Konstruktion}
+  20  	\label{fig:spawner-factory-class}
+
+  22
+  23: Abbildung \ref{fig:spawner-factory-seq} zeigt, wie aus einer Konfiguration, entsprechende Objekte erzeugt werden. Das \code{Spawner}-Objekt ruft für jedes referenzierte \code{ScheduleConfiguration}-Objekt die \emph{Factory-Method} der Klasse \code{Schedule} auf (1). Diese instanziiert daraufhin ein dem Wert des Attributes \code{ScheduleType} entsprechendes \code{Schedule}-Objekt und ein \code{ScheduleStrategy}-Objekt durch Aufruf der \emph{Factory-Method} der Klasse \code{ScheduleStrategy} und erneute Übergabe des Konfigurationsobjektes (2). Beide \emph{Factory-Methods} lesen die benötigten Werte für die Attribute der zu erzeugenden Objekte aus dem Konfigurationsobjekt und geben dann das fertige Objekt zurück. Jedes \code{Schedule}-Objekt kann dass das erzeugte \code{ScheduleStrategy}-Objekt im Attribut \code{strategy} speichern. Das \code{Spawner}-Objekt kann die erzeugten \code{Schedule}-Objekte in der Liste \code{schedules} speichern.
+  24
+
+  27  	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-factory-seq.png}
+  28: 	\caption{Sequenzdiagramm der \emph{Spawner}-Konstruktion}
+  29  	\label{fig:spawner-factory-seq}
+
+content/3_hauptteil/3_2_architektur/3_2_4_event_bus.tex:
+   2
+   3: Der Eventbus stellt für Softwarekomponenten die Möglichkeit bereit, Ereignisse untereinander auszutauschen. Für jeden Typ von Ereignis stellt er eine $m$:$n$-Beziehung zwischen den Komponenten, welche das Ereignis emittieren und denen, die es empfangen her. Der Eventbus wurde in Zusammenarbeit mit \citeauthor{persitzky_fehlerinjektion_2023} entwickelt. Wir haben uns dazu entschieden, das Entwurfsmuster \emph{Mediator} auf den Eventbus anzuwenden, um zu verhindern, dass die voneinander Abhängigen Komponenten direkt miteinander kommunizieren müssen. Das senkt die Kopplung erheblich. Weiterhin kapselt der \emph{Mediator} das kommunikationsspezifische Verhalten, was es an einer zentralen Stelle verfügbar macht und den einzelnen Komponenten die Verantwortung abnimmt, Kommunikationsdetails zu kennen.\\
+   4  \\
+   5: Um eine zu große Komplexität des Eventbus selbst und eine monolithische Struktur zu verhindern, wird als Kommunikationsmechanismus das Entwurfsmuster \emph{Observer} verwendet. Abhängigkeiten zwischen den Komponenten lassen sich so flexibler ändern. Weiterhin ermöglicht dieses Entwurfsmuster, Komponenten auf verschiedenen Abstraktionsniveaus zu verbinden. Wir haben den Nachteil des \emph{Observers} umgangen, dass er stets alle Empfänger benachrichtigt. Dazu wird jeder registrierte Empfänger mit einem Ereignistyp verknüpft. Der Empfänger wird so nur benachrichtigt, wenn ein Ereignis des verknüpften Typs eingangen ist.\\
+   6  \\
+   7: Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger selbst registriert, sondern nur \emph{Callbacks}\footnote{Funktionen, welche als Argument übergeben werden, um zu einem späteren Zeitpunkt vom Empfänger des Arguments aufgerufen werden zu können}, bei welchen es sich jeweils um Methoden der Empfänger handelt. Dies schränkt die Funktionalität nicht ein, da der Empfännger das Ereginis nachwievor erhält. Der Eventbus muss nun jedoch nur noch Pythons \code{Callable}-Schnittstelle verwenden und benötigt keine Kenntnis mehr über die Kommunizierenden Komponenten. Die Registrierung und die Deregistrierung von Empfängern ist in den Abbildungen \ref{fig:eventbus-register-seq} und \ref{fig:eventbus-unregister-seq} dargestellt. Für die Registrierung wird das \emph{Callback} und der Ereignistyp (\code{event\_type}) übergeben. Der Eventbus gibt daraufhin ein \emph{Handle} zurück, mit welchem das registrierte \emph{Callback} identifiziert werden kann. Um ein \emph{Callback} zu deregistrieren, lediglich das \emph{Handle} and den Eventbus übergeben werden.
+   8
+
+  24  \\
+  25: Da der \emph{Logger}\cite{reisener_entwurf_2023} bereits die Aufgabe übernahm, Ereignisse zu sammeln, lag der Gedanke nahe, ihn entsprechend zu erweitern. Diese Möglichkeit ist im Folgenden unter ''Variante 1'' beschrieben.\\
+  26  \\
+
+  30
+  31: Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgaben des Eventbus zu übernehmen. Wie Abbildung \ref{fig:eventbus-v1-class} zeigt, erstellt der \emph{Logger} für jedes Ereignis ein \code{LogEntry}-Objekt, welches in die Datenbank geschrieben wird. Das \code{LogEntry}-Objekt erbt daher von \code{BaseModel} und besitzt eine \code{save}-Methode, welche bei Erzeugung des Objektes stets ausgeführt wird. Darin wird der Eventbus benachrichtigt, welcher dann die registrierten Empfänger über das neue Ereignis informiert. Die Empfänger realisieren dazu die \code{IEventConsumer}-Schnittstelle, welche eine \code{on\_event}-Methode zur Ereignisbehandlung und ein \code{event\_handle}-Attribut zur Referenzierung der Registrierung beim \code{EventBus} bereitstellt. Die registrierten \emph{Callbacks} werden im Attribut \code{callbacks} gehalten. Es handelt sich dabei um eine Liste von 2-Tupeln, welche das \emph{Callback} und den Ereignistyp enthalten. Ein \emph{Callback} nimmt dabei ein \code{LogEntry}-Objekt entgegen und hat keinen Rückgabewert.
+  32
+
+  39
+  40: Abbildung \ref{fig:eventbus-v1-seq} zeigt den Vorgang der Meldung eines Ereignisses an den \emph{Logger} bis hin zur Benachrichtigung der abhängigen Empfänger. Eine Komponenten (\code{Component}) sendet ein Ereignis durch Aufruf von \code{log} an den \code{Logger} (1). Dieser erzeugt durch \code{create} ein \code{LogEntry}-Objekt (2) und ruft dessen \code{save}-Methode auf (3). Diese benachrichtigt den Eventbus durch Senden von \code{notify} und übergibt dabei das \code{LogEntry}-Objekt selbst (4). Der Eventbus iteriert über die Liste der registrierten \emph{Callbacks} und ruft für jeden Eintrag das \emph{Callback} auf, sofern der Ereignistyp übereinstimmt (5).\\
+  41
+
+  48
+  49: Der Vorteil dieser Variante ist die einfache Integration in das bestehende System. Die Änderungen am bestehenden Quelltext sind minimal. Damit kann die Implementierung des Eventbus schnell erfolgen, was einen positiven Einfluss auf die Zeitplanung hat. Nachteilhaft ist jedoch, dass das \emph{Logging}-System nun auch Teilaufgaben des Eventbus übernimmt. Dies widerspricht dem Prinzip der \emph{Single Responsibility}\footnote{Eine Komponente, Klasse oder Funktion soll nur ein Konzept implementieren oder nur eine Aufgabe erledigen.} und kann zu einer unübersichtlichen Codebasis führen.
+  50
+
+  52
+  53: Bei dieser Variante wird der Eventbus als eigenständige Komponente implementiert. Abbildung \ref{fig:eventbus-v2-class} zeigt das Klassendiagramm. Jede Komponente hält nun eine Referenz auf den Eventbus, um sich als Empfänger registrieren zu können. Die Registrierung und Deregistrierung, sowie die Verwaltung der registrieren \emph{Callbacks} erfolgt wie in ''Variante 1''. Der Unterschied besteht darin, dass die Ereignisse nun nicht mehr durch \code{LogEntry}-Objekte, sondern durch \code{Event}-Objekte repräsentiert werden. Komponenten benachrichtigen hier selbst den \code{EventBus}. Der \emph{Logger} implementiert die \code{IEventConsumer}-Schnittstelle und registriert sich ebenfalls beim Eventbus, um seine Aufgabe erfüllen zu können.
+  54
+
+  61
+  62: Abbildung \ref{fig:eventbus-v2-seq} zeigt den Ablauf der Meldung eines Ereignisses an den Eventbus. Eine Komponente (\code{Component}) sendet die Parameter eines Ereignisses, durch Aufruf von \code{log}, an den \code{EventBus} (1). Dieser instanziiert ein \code{Event}-Objekt mit den übergebenen Parametern (2). Anschließend iteriert er über die Liste der registrierten \emph{Callbacks} und ruft diese auf, sofern der Ereignistyp übereinstimmt (3).
+  63
+
+  70
+  71: Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwändiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \emph{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.\\
+  72  \\
+
+content/4_schlussbetrachtung/4_1_ergebnisse.tex:
+  2
+  3: ⟪ 471 characters skipped ⟫ nach tatsächlichem Bedarf auch höher oder niedriger sein. Umgerechnet ergibt sich aus diesem Wert eine mittlere Abfahrtsperiodenlänge von 18 Minuten. Das Ergebnis für das größte der drei Kraftwerke, \emph{Jänschwalde}, liegt mit eine mittleren Abfahrtsperiodenlänge von etwa 44 Minuten etwa bei dem 2,5-fachen dieses Wertes. Dies kann daran liegen, dass das Kraftwerk im betrachteten Zeitraum nicht vollständig ausgelastet war. Wahrscheinlicher ist jedoch, dass die für die Berechnung getroffenen Annahmen der Grund für diese Abweichung sind.\\
+  4  \\
+  5: Die mittlere Abfahrtsperiodenlänge der drei Kraftwerke \emph{Jänschwalde}, \emph{Boxberg} und \emph{Schwarze Pumpe} deckt sich mit der Realität. Das Kraftwerk Jänschwalde hat mit einer Gesamtleistung von run 3,3 GW die höchste der drei Kraftwerke. Entsprechend muss es den höchsten Kohlebedarf besitzen, was die niedrigste Abfahrtsperiodenlänge von ca. 44 Minuten plausibel macht. Gleiches gilt für das zweit-leistungsfähigste Kraftwerk \emph{Boxberg} mit einer Gesamtleistung von eta 2,7 GW und auch für das Kraftwerk\emph{Schwarze Pumpe} mit ca. 1,7 GW. \cite{noauthor_bundesnetzagentur_nodate}\\
+  6  \\
+  7: Zusammenfassend lässt sich sagen, dass die berechneten Werte durchaus Abweichungen von der Realität zeigen, sie jedoch in der selben Größenordung liegen. Dies liegt aller Wahrscheinlichkeit nach in den getroffenen Annhamen und Vereinfachungen begründet. Am Beispiel des Kraftwerkes \emph{Jänschwalde}, bei welchem die Abweichung einen Faktor von 2,5 aufweist, ließe sich diese Ungenauigkeit durch die Verwendung eines Skalierungsfaktors von 2,5 beheben. Für einen solchen Skalierungsfaktor ist das konfigurierbare Attribut \code{scaling\_factor} in der Klasse \code{DemandScheduleStrategy} vorgesehen. Abweichungen von der Realität lassen sich also damit korrigieren.
+
+content/4_schlussbetrachtung/4_2_ausblick.tex:
+  2
+  3: ⟪ 458 characters skipped ⟫erden, als auch solche, die sich aus dem Kohlebedarf eines Krafterkes ergeben. Insbesondere die letzte Möglichkeit ist von besonderer Bedeutung für die Fragestellungen, die es im Rahmen des Projektes \emph{FlexiDug} zu beantworten gilt. Natürlich gibt es nach wie vor Aspekte des Bahnverkehrs, welche nicht durch unser System abgebildet werden können.\\
+  4  \\
+  5: Eine Möglichkeit zur Erweiterung der Software, um den Realismus der Simulation zu erhöhen, sind \emph{Reaktive Abfahrtspläne}. Diese würden es ermöglichen, dass Züge auf Ereignisse in der Simulation reagieren. Zentrales Element der Implementierung dieser Abfahrtspläne ist der Eventus, welcher in der Software bereits implementiert ist. Die Routenberechnung könnte Beispielsweise ein Ereignis auslösen, wenn ein Zug seinen Endhaltestelle erreicht hat. Ein reaktiver Abfahrtsplan könnte dann auf dieses Ereignis reagieren und einen neuen Zug abfahren lassen. Damit ließe sich die Rückfahrt eines Zuges simulieren. Auch können damit Abhängigkeiten zwischen Abfahrten modelliert werden. So könnte ein Zug erst abfahren, wenn ein anderer Zug eine bestimmte Haltestelle erreicht hat, beispielsweise weil das Zugpersonal selbst erst mit der Bahn anreisen muss. Eine weitere zukünftige Verwendungsmöglichkeit des Eventbus wird von \citeauthor{persitzky_fehlerinjektion_2023} in seiner Arbeit\cite{persitzky_fehlerinjektion_2023} diskutiert.\\
+  6  \\
+  7: Es liegt nun in der Hand der Projektpartner von \emph{FlexiDug}, ihre Fragestellungen mithilfe unseres Systems zu untersuchen. Sie verfügen damit über ein Werkzeug, welches es ihnen ermöglicht, die Auswirkungen verschiedener Szenarien für den Bahnverkehr im Schienennetz der LEAG zu untersuchen. Aufgrund der Flexibilität und Erweiterbarkeit der Software, kann diese in Zukunft auch für andere Schienennetze und ähnliche Fragestellungen eingesetzt werden.
+  8

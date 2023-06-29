@@ -9,12 +9,12 @@ Das \emph{Observer-Pattern} kann Anwendung finden, wenn es zwei voneinander getr
 
 \subsubsection*{Lösung}
 
-Das Observer-Pattern besteht aus einem Sender (\code{Publisher}) und mehreren Empfängern (\code{ConcreteSubscriber}). Die Empfänger implementieren die Empfänger-Schnittstelle (\code{Subscriber}), welches eine Methode \code{update} zur Aktualisierung des Zustandes bereitstellt. Der Sender hält eine Liste von Referenzen auf Empfänger und verfügt über die Methoden \code{subscribe} und \code{unsubscribe}, welche es ermöglichen, der Liste Empfänger hinzuzufügen, oder sie zu entfernen (siehe Abbildung \ref{fig:observer-class}).
+Das \emph{Observer-Pattern} besteht aus einem Sender (\code{Publisher}) und mehreren Empfängern (\code{ConcreteSubscriber}). Die Empfänger implementieren die Empfänger-Schnittstelle (\code{Subscriber}), welches eine Methode \code{update} zur Aktualisierung des Zustandes bereitstellt. Der Sender hält eine Liste von Referenzen auf Empfänger und verfügt über die Methoden \code{subscribe} und \code{unsubscribe}, welche es ermöglichen, der Liste Empfänger hinzuzufügen, oder sie zu entfernen (siehe Abbildung \ref{fig:observer-class}).
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/patterns/observer-class.png}
-	\caption{Klassendiagramm des Observer-Patterns \cite{skobeleva_observer_2023}}
+	\caption{Klassendiagramm des \emph{Observer-Patterns} \cite{skobeleva_observer_2023}}
 	\label{fig:observer-class}
 \end{figure}
 
@@ -23,7 +23,7 @@ Abbildung \ref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footre
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/patterns/observer-seq.png}
-	\caption{Sequenzdiagramm des Observer-Patterns \cite{skobeleva_observer_2023}}
+	\caption{Sequenzdiagramm des \emph{Observer-Patterns} \cite{skobeleva_observer_2023}}
 	\label{fig:observer-seq}
 \end{figure}
 
@@ -42,4 +42,4 @@ class Publisher
 
 Durch Separation von Sender und Empfänger und durch die Abstraktion der Empfänger-Schnittstelle wird eine lose Kopplung der beiden erreicht. Diese lose Kopplung ermöglicht es, sowohl den Sender, als auch die Empfänger beliebig auszutauschen. Weiterhin können sich der Sender und die Empfänger auf unterschiedlichen Abstraktionsniveaus befinden. Ein Sender auf einem niedrigen Level kann einen Empfänger auf einem hohen Level benachrichtigen. Wären Empfänger und Sender nicht getrennt, so wäre dafür ein Objekt notwendig, welches mehrere Abrstraktionsebenen umfasst, wodurch die Trennung der Abstraktionsschichten beeinträchtigen würde. Ein weiterer Vorteil ist die dynamische Anzahl der Empfänger, mit denen ein Sender interagieren kann. So kann der Anwender über den Sender eine beliebige Zahl an Empfängern erreichen.
 
-Ein Nachteil des Observer-Patterns ist, dass der Sender stets alle seine Empfänger benachrichtigt. Es kann vorkommen, dass nur eine Teilmenge der Empfänger die Benachrichtigung benötigt, was in unnötigen Methodenaufrufen resultiert. \cite{gamma_design_1995}
+Ein Nachteil des \emph{Observer-Patterns} ist, dass der Sender stets alle seine Empfänger benachrichtigt. Es kann vorkommen, dass nur eine Teilmenge der Empfänger die Benachrichtigung benötigt, was in unnötigen Methodenaufrufen resultiert. \cite{gamma_design_1995}

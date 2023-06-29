@@ -2,16 +2,16 @@
 
 In diesem Abschnitt eine Auswahl Implementierungsdetails auf Quelltext-Ebene vorgestellt. Da das frundlegende Verhalten der Komponenten bereits in der Architekturdiskussion beschrieben wurde, konzentriert sich dieser Teil auf Details, die sich in Sequenzdiagrammen nicht gut darstellen lassen aber für das Verständnis der Komponenten von Bedeutung sind.
 
-\subsection{\emph{Template Method} in \code{Schedule}}
+\subsection{\emph{Template-Method} in \code{Schedule}}
 
-Quelltext \ref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
+Quelltext \ref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template-Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
 \\
 Zuerst wird geprüft, ob der Abfahrtsplan durch einen injizierten Fehler deaktiviert wurde (\code{blocked}). Im Anschluss wird der \code{should\_spawn} auf der konkreten Strategie (\code{strategy}) aufgerufen, um zu prüfen, ob zum aktuellen Zeitpunkt (\code{seconds}) ein Zug erzeugt werden soll. Ein bisher nicht diskutiertes Problem, welches es zu lösen galt, war die Tatsache, dass es möglich war, dass ein Zug in einem Abschnitt erzeugt wird, der bereits durch einen anderen Zug belegt ist. Dieses Problem wird ebenfalls in \code{maybe\_spawn} gelöst. Zeigen beide zuvor geprüften Bedingungen an, dass ein Zug erzeugt werden soll, wird dessen Erzeugungszeitpunkt zunächst einer Warteschlange (\code{seconds\_to\_be\_spawned}) hinzugefügt. Wenn die Warteschlange im Anschluss nicht leer ist, wird versucht, durch Aufruf von \code{spawn}, einen Zug zu erzeugen. \code{spawn} wird in den Subklassen von \code{Schedule} implementiert und gibt einen Wahrheitswert zurück, der angibt, ob die Erzeugung erfolgreich war. In \code{spawn} findet auch die Prüfung auf belegte Abschnitte statt. War die Erzeugung erfolgreich, wird der entsprechende Zeitpunkt aus der Warteschlange entfernt.\\
 \\
 Dieses Vorgehen hat zur Folge, dass Züge, deren Erzeugung im Moment nicht möglich ist, zwischengespeichert werden, um zum nächstmöglichen Zeitpunkt erzeugt werden zu können.
 
 \lstset{language=python}
-\begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{Schedule}, welcher die \emph{Template Method} \code{maybe\_spawn} und weitere relevante Attribute zeigt. \code{maybe\_spawn} prüft, ob zum Zeitpunkt \code{seconds} ein Zug erzeugt werden soll und erzeugt ihn dann ggf.}, label=code:template-method-code]
+\begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{Schedule}, welcher die \emph{Template-Method} \code{maybe\_spawn} und weitere relevante Attribute zeigt. \code{maybe\_spawn} prüft, ob zum Zeitpunkt \code{seconds} ein Zug erzeugt werden soll und erzeugt ihn dann ggf.}, label=code:template-method-code]
 class Schedule(ABC):
 
     strategy: ScheduleStrategy
