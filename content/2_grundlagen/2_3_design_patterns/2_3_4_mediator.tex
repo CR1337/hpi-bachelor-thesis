@@ -3,7 +3,7 @@
 
 \subsubsection*{Problembeschreibung}
 
-Große Softwareprojekte bestehen meist aus einer enormen Anzahl von Klassen bzw. Objekten, welche miteinander interagieren. Ziel ist es stets, die Kopplung zwischen diesen Komponenten so gering wie möglich zu halten, um die Übersichtlichkeit des Codes zu bewahren. Komplexe Interaktionsmuster zwischen diesen Objekten lassen sich nicht immer verhindern, da sie die inhärente Komplexität des modellierten Problems wiederspiegeln. In diesem Fall ist eine Lösung notwending, die diese Komplexität kapselt. Das \emph{Mediator-Pattern} ist in der Lage, solche Fälle von komplexer Interaktion zu vereinfachen. \cite{gamma_design_1995}
+Große Softwareprojekte bestehen meist aus einer großen Anzahl von Klassen bzw. Objekten, welche miteinander interagieren. Ziel ist es stets, die Kopplung zwischen diesen Komponenten so lose wie möglich zu halten, um die Übersichtlichkeit des Codes zu bewahren. Komplexe Interaktionsmuster zwischen diesen Objekten lassen sich nicht immer verhindern, da sie die inhärente Komplexität des modellierten Problems wiederspiegeln. In diesem Fall ist eine Lösung notwending, die diese Komplexität kapselt. Das \emph{Mediator Pattern} ist in der Lage, solche Fälle von komplexer Interaktion zu vereinfachen. \cite{gamma_design_1995}
 
 \subsubsection*{Lösung}
 
@@ -12,7 +12,7 @@ Der konkrete \emph{Mediator} (\code{ConcreteMediator}) implementiert die \emph{M
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/mediator-class.png}
-	\caption{Klassendiagramm des \emph{Mediator}-Patterns \cite{skobeleva_mediator_2023}}
+	\caption{Klassendiagramm des \emph{Mediator} Patterns. Die Komponenten kommunizieren nur über den konkreten \code{Mediator} miteinander. Er dirigiert die Interaktion zwischen den Komponenten. \cite{skobeleva_mediator_2023}}
 	\label{fig:mediator-class}
 \end{figure}
 
@@ -22,4 +22,4 @@ Der \emph{Mediator} kapselt Verhalten, welches ansonsten über mehrere Klassen v
 
 Der \emph{Mediator} bündelt Kontrolle an einem einzigen Punkt. Dies kann zur Übersichtlichkeit beitragen, kann dieser jedoch bei ausreichend komplexer Logik auch entgegenwirken. Das kann dem \emph{Mediator} eine monolithische Struktur geben, deren Verhinderung seine eigentliche Aufgabe ist.
 
-Sind die Abhängigkeiten zwischen den Komponenten zu Komplex, so kann das \emph{Observer-Pattern} zur Kommunikation zwischen den Komponenten und dem \emph{Mediator} verwendet werden. Dadurch lassen sich die Abhängigkeiten außerdem flexibler gestalten, sie können also zur Laufzeit einfacher geändert werden. \cite{gamma_design_1995}
+Sind die Abhängigkeiten zwischen den Komponenten zu Komplex, so kann das \emph{Observer Pattern} zur Kommunikation zwischen den Komponenten und dem \emph{Mediator} verwendet werden. Dadurch lassen sich die Abhängigkeiten außerdem flexibler gestalten, sie können also zur Laufzeit einfacher geändert werden. \cite{gamma_design_1995}

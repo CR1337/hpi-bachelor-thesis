@@ -1,17 +1,17 @@
 \section{Anforderungen}
-Die Anforderungen an das Softwareprojekt haben wir als Team selbst aufgestellt. Dabei orientierten wir uns an den Bedürfnissen anderer Teilnehmer von \emph{FlexiDug} und bereits am Lehrstuhl existierenden Projekten. Unser Projekt hat das Ziel, eine möglichst realistische Simulationumgebung für Schienenverkehr bereitzustellen. Konkret soll ein Benutzer in der Lage sein, ein Szenario zu konfigurieren, es im Anschluss durch Simulation auszuführen und zuletzt produzierte Ergebnisse zu erhalten. Die Konfiguration eines Szenarios sollte folgende Parameter beinhalten:
+Die Anforderungen an das Softwareprojekt haben wir als Team selbst aufgestellt. Dabei orientierten wir uns an den Bedürfnissen anderer Teilnehmer von \emph{FlexiDug} und bereits existierenden Projekten\footnote{Es handelt sich um Software, die bei der Professur für Betriebssysteme und Middleware am HPI entwickelt wurde.}. Unser Projekt hat das Ziel, eine möglichst realistische Simulationumgebung für Schienenverkehr bereitzustellen. Konkret soll ein nutzende Person in der Lage sein, ein Szenario zu konfigurieren, es im Anschluss durch Simulation auszuführen und zuletzt produzierte Ergebnisse zu erhalten. Die Konfiguration eines Szenarios sollte folgende Parameter beinhalten:
 \begin{itemize}
     \item Abfahrtsorte und Zeitpunkte von beliebig vielen Zügen, sowie deren Zwischenstationen
-    \item Der Typ jedes Zuges (z.B. Güter- oder Personenzug)
-    \item Verschiedene Fehler, welche unvorhergesehene Ereignisse simulieren (wie z.B. Wiechenstörungen oder ausgefallene Züge)
+    \item Der Typ jedes Zuges (z.~B. Güter- oder Personenzug)
+    \item Verschiedene Fehler, welche unvorhergesehene Ereignisse simulieren (wie z.~B. Wiechenstörungen oder ausgefallene Züge)
     \item Eine textuelle Beschreibung der konfigurierten Simulation
 \end{itemize}
-Die Simulation wird von dem Verkehrssimulator \emph{SUMO} \cite{noauthor_eclipse_nodate} durchgeführt. Da dieser den Schienenverkehr jedoch nicht ausreichend realistisch abbilden kann, haben wir ihn um entsprechende Funktionalitäten erweitert. Diese waren:
+Die Simulation wird von dem Verkehrssimulator \emph{SUMO} \cite{noauthor_eclipse_nodate} durchgeführt. Da dieser den Schienenverkehr jedoch nicht ausreichend realistisch abbilden kann, haben wir ihn um entsprechende Funktionalitäten erweitert. Diese sind:
 \begin{itemize}
-    \item Eine eigens entwickelte realistische Stellwerkslogik, die wir vom Lehrstuhl für Betriebssysteme und Middleware übernommen und angepasst haben \cite{noauthor_interlocking_2023}
-    \item Die Schaffung einer objektorientierten Schnittstelle zu den Teilen der prozeduralen \emph{SUMO}-API, welche wir für die Simulation von Schienenverkehr benötigen
+    \item Eine eigens entwickelte Stellwerkslogik, die wir von der Professur für Betriebssysteme und Middleware übernommen und angepasst haben. \cite{noauthor_interlocking_2023}
+    \item Die Schaffung einer objektorientierten Schnittstelle zu den Teilen der prozeduralen \emph{SUMO}-API, welche wir für die Simulation von Schienenverkehr benötigen.
     \item Ein Algorithmus, welcher die Züge durch das Schienennetz leitet, dabei Deadlocks vermeidet und die Stellwerkslogik entsprechend steuert.
-    \item Die Beachtung von Zugprioritäten in Abhängigkeit des Zugtyps
+    \item Die Beachtung von Zugprioritäten in Abhängigkeit des Zugtyps.
 \end{itemize}
 Letztendlich sollen folgende Ergebnisse durch die Simulation generiert werden können:
 \begin{itemize}
