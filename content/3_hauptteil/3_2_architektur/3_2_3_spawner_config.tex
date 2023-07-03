@@ -11,7 +11,7 @@ Wir haben uns stattdessen für die in \autoref{fig:spawner-config-class} dargest
 	\label{fig:spawner-config-class}
 \end{figure}
 
-Alle zur Konfiguration gehörenden Klassen werden in JSON-serialisierter Form vom Benutzer über die \emph{REST-API} übertragen\cite{kamp_architektur_2023}. Sie werden daraufhin deserialisiert und in der Datenbank abgelegt. Aus diesen Kofigurationsobjekten können dann ein \code{Spawner}, \code{Schedule}-Objekte und \code{ScheduleStrategy}-Objekte erzeugt werden. Dafür wurde das Entwurfsmuster der \emph{Factory-Method} verwendet. \autoref{fig:spawner-factory-class} zeigt, dass die Klassen \code{Schedule} und \code{ScheduleStrategy} bzw. ihre Subklassen ihre eigenen \emph{Factories} sind. Sie besitzen zu diesem Zweck jeweils eine \emph{Klassen}-Methode \code{from\_schedule\_configuration}, welche als \emph{Factory-Method} fungiert.
+Alle zur Konfiguration gehörenden Klassen werden in JSON-serialisierter Form vom Benutzer über die \emph{REST-API} übertragen \cite{kamp_architektur_2023}. Sie werden daraufhin deserialisiert und in der Datenbank abgelegt. Aus diesen Kofigurationsobjekten können dann ein \code{Spawner}, \code{Schedule}-Objekte und \code{ScheduleStrategy}-Objekte erzeugt werden. Dafür wurde das Entwurfsmuster der \emph{Factory-Method} verwendet. \autoref{fig:spawner-factory-class} zeigt, dass die Klassen \code{Schedule} und \code{ScheduleStrategy} bzw. ihre Subklassen ihre eigenen \emph{Factories} sind. Sie besitzen zu diesem Zweck jeweils eine \emph{Klassen}-Methode \code{from\_schedule\_configuration}, welche als \emph{Factory-Method} fungiert.
 
 \begin{figure}[!ht]
 	\centering
