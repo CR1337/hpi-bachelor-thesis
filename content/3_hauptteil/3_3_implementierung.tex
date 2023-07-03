@@ -4,7 +4,7 @@ In diesem Abschnitt eine Auswahl Implementierungsdetails auf Quelltext-Ebene vor
 
 \subsection{\emph{Template-Method} in \code{Schedule}}
 
-Quelltext \ref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template-Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
+\autoref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die in der Architekturdiskussion bereits beschriebene \emph{Template-Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
 \\
 Zuerst wird geprüft, ob der Abfahrtsplan durch einen injizierten Fehler deaktiviert wurde (\code{blocked}). Im Anschluss wird der \code{should\_spawn} auf der konkreten Strategie (\code{strategy}) aufgerufen, um zu prüfen, ob zum aktuellen Zeitpunkt (\code{seconds}) ein Zug erzeugt werden soll. Ein bisher nicht diskutiertes Problem, welches es zu lösen galt, war die Tatsache, dass es möglich war, dass ein Zug in einem Abschnitt erzeugt wird, der bereits durch einen anderen Zug belegt ist. Dieses Problem wird ebenfalls in \code{maybe\_spawn} gelöst. Zeigen beide zuvor geprüften Bedingungen an, dass ein Zug erzeugt werden soll, wird dessen Erzeugungszeitpunkt zunächst einer Warteschlange (\code{seconds\_to\_be\_spawned}) hinzugefügt. Wenn die Warteschlange im Anschluss nicht leer ist, wird versucht, durch Aufruf von \code{spawn}, einen Zug zu erzeugen. \code{spawn} wird in den Subklassen von \code{Schedule} implementiert und gibt einen Wahrheitswert zurück, der angibt, ob die Erzeugung erfolgreich war. In \code{spawn} findet auch die Prüfung auf belegte Abschnitte statt. War die Erzeugung erfolgreich, wird der entsprechende Zeitpunkt aus der Warteschlange entfernt.\\
 \\
@@ -35,7 +35,7 @@ class Schedule(ABC):
 
 Im Folgenden wird die Implementierung der Algorithmen für die verschiedenen Arten der Zugerzeugung vorgestellt. Der entsprechende Code dafür befindet sich in der Klasse \code{ScheduleStrategy} und ihren Subklassen, jeweils in der Methode \code{should\_spawn}. Diese Methode nimmt den aktuellen Zeitpunkt \code{seconds} entgegen und gibt einen Wahrheitswert zurück, der angibt, ob zum aktuellen Zeitpunkt ein Zug erzeugt werden muss.\\
 \\
-Quelltext \ref{code:schedule-strategy-code} zeigt die abstrakte Klasse \code{ScheduleStrategy}. In ihrer \code{should\_spawn}-Methode werden Bedingungen geprüft, die für jede Art von Abfahrtsplan erfüllt sein müssen. Speziell ist das die Prüfung, ob der aktuelle Zeitpunkt innerhalb des Intervalls liegt, welches von den Attributen \code{start\_time} und \code{end\_time} definiert wird. Diese Attribute sind optional, sodass auch ein offenes Intervall definiert werden kann.
+\autoref{code:schedule-strategy-code} zeigt die abstrakte Klasse \code{ScheduleStrategy}. In ihrer \code{should\_spawn}-Methode werden Bedingungen geprüft, die für jede Art von Abfahrtsplan erfüllt sein müssen. Speziell ist das die Prüfung, ob der aktuelle Zeitpunkt innerhalb des Intervalls liegt, welches von den Attributen \code{start\_time} und \code{end\_time} definiert wird. Diese Attribute sind optional, sodass auch ein offenes Intervall definiert werden kann.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Ausschnitt aus der abstrakten Klasse \code{ScheduleStrategy}. Gezeigt wird die Methode \code{should\_spawn}, sowie die relevanten Attribute \code{start\_time} und \code{end\_time}.}, label=code:schedule-strategy-code]
@@ -52,7 +52,7 @@ class ScheduleStrategy(ABC):
 
 In den Subklassen wird zuerst stets die \code{should\_spawn}-Methode der Superklasse aufgerufen, um die allgemeingültigen Bedingungen zu prüfen. Anschließend werden die spezifischen Bedingungen der jeweiligen Strategie geprüft.\\
 \\
-Quelltext \ref{code:regular-strategy-code} zeigt die Implementierung der Klasse \code{RegularScheduleStrategy}. Diese Strategie erzeugt Züge in regelmäßigen Abständen. Dazu wird das Attribut \code{frequency} verwendet, welches die Anzahl der Sekunden zwischen zwei Zügen angibt. Die \code{should\_spawn}-Methode prüft, ob die Anzahl der Sekunden, die seit dem Start des Abfahrtsplans (\code{start\_time}) vergangen sind, durch die \code{frequency} teilbar ist.\\
+\autoref{code:regular-strategy-code} zeigt die Implementierung der Klasse \code{RegularScheduleStrategy}. Diese Strategie erzeugt Züge in regelmäßigen Abständen. Dazu wird das Attribut \code{frequency} verwendet, welches die Anzahl der Sekunden zwischen zwei Zügen angibt. Die \code{should\_spawn}-Methode prüft, ob die Anzahl der Sekunden, die seit dem Start des Abfahrtsplans (\code{start\_time}) vergangen sind, durch die \code{frequency} teilbar ist.\\
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{RegularScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:regular-strategy-code]
@@ -67,7 +67,7 @@ class RegularScheduleStrategy(ScheduleStrategy):
         )
 \end{lstlisting}
 
-Quelltext \ref{code:random-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{RandomScheduleStrategy}. Diese Strategie erzeugt Züge mit einer bestimmten Wahrscheinlichkeit. Dazu wird das Attribut \code{trains\_per\_1000\_seconds} verwendet, welches die mittlere Anzahl der Züge pro 1000 Sekunden angibt. Die \code{should\_spawn}-Methode prüft, ob eine Zufallszahl zwischen 0 und 1000 kleiner als \code{trains\_per\_1000\_seconds} ist. Außerdem wird der Initialisierungsmethode (\code{\_\_init\_\_}) ein Startwert (\code{seed}) für den Zufallszahlengenerator (\code{random\_number\_generator}) übergeben, um die Reproduzierbarkeit auch bei preudo-zufälligen Ergebnissen zu gewährleisten.
+\autoref{code:random-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{RandomScheduleStrategy}. Diese Strategie erzeugt Züge mit einer bestimmten Wahrscheinlichkeit. Dazu wird das Attribut \code{trains\_per\_1000\_seconds} verwendet, welches die mittlere Anzahl der Züge pro 1000 Sekunden angibt. Die \code{should\_spawn}-Methode prüft, ob eine Zufallszahl zwischen 0 und 1000 kleiner als \code{trains\_per\_1000\_seconds} ist. Außerdem wird der Initialisierungsmethode (\code{\_\_init\_\_}) ein Startwert (\code{seed}) für den Zufallszahlengenerator (\code{random\_number\_generator}) übergeben, um die Reproduzierbarkeit auch bei preudo-zufälligen Ergebnissen zu gewährleisten.
 
 \begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{RandomScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:random-strategy-code]
 class RandomScheduleStrategy(ScheduleStrategy):
@@ -94,7 +94,7 @@ class RandomScheduleStrategy(ScheduleStrategy):
         )
 \end{lstlisting}
 
-Quelltext \ref{code:demand-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{DemandScheduleStrategy}. Die Zeitpunkte, zu denen Züge erzeugt werden sollen, werden nach dem im Hauptteil beschriebenen Verfahren, vorberechnet und in der Liste \code{spawn\_seconds} gespeichert. In \code{should\_spawn} wird dann geprüft, ob der aktuelle Zeitpunkt in der Liste enthalten ist.
+\autoref{code:demand-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{DemandScheduleStrategy}. Die Zeitpunkte, zu denen Züge erzeugt werden sollen, werden nach dem im Hauptteil beschriebenen Verfahren, vorberechnet und in der Liste \code{spawn\_seconds} gespeichert. In \code{should\_spawn} wird dann geprüft, ob der aktuelle Zeitpunkt in der Liste enthalten ist.
 
 \begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{DemandScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:demand-strategy-code]
 class DemandScheduleStrategy(ScheduleStrategy):

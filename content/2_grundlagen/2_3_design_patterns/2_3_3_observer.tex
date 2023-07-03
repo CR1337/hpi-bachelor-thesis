@@ -9,25 +9,25 @@ Das \emph{Observer-Pattern} kann Anwendung finden, wenn es zwei voneinander getr
 
 \subsubsection*{Lösung}
 
-Das \emph{Observer-Pattern} besteht aus einem Sender (\code{Publisher}) und mehreren Empfängern (\code{ConcreteSubscriber}). Die Empfänger implementieren die Empfänger-Schnittstelle (\code{Subscriber}), welches eine Methode \code{update} zur Aktualisierung des Zustandes bereitstellt. Der Sender hält eine Liste von Referenzen auf Empfänger und verfügt über die Methoden \code{subscribe} und \code{unsubscribe}, welche es ermöglichen, der Liste Empfänger hinzuzufügen, oder sie zu entfernen (siehe Abbildung \ref{fig:observer-class}).
+Das \emph{Observer-Pattern} besteht aus einem Sender (\code{Publisher}) und mehreren Empfängern (\code{ConcreteSubscriber}). Die Empfänger implementieren die Empfänger-Schnittstelle (\code{Subscriber}), welches eine Methode \code{update} zur Aktualisierung des Zustandes bereitstellt. Der Sender hält eine Liste von Referenzen auf Empfänger und verfügt über die Methoden \code{subscribe} und \code{unsubscribe}, welche es ermöglichen, der Liste Empfänger hinzuzufügen, oder sie zu entfernen (siehe \autoref{fig:observer-class}).
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/patterns/observer-class.png}
 	\caption{Klassendiagramm des \emph{Observer-Patterns} \cite{skobeleva_observer_2023}}
 	\label{fig:observer-class}
 \end{figure}
 
-Abbildung \ref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footref{ftn:client} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender sendet sich draufhin selbst \code{notify} (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
+\autoref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footref{ftn:client} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender sendet sich draufhin selbst \code{notify} (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/patterns/observer-seq.png}
 	\caption{Sequenzdiagramm des \emph{Observer-Patterns} \cite{skobeleva_observer_2023}}
 	\label{fig:observer-seq}
 \end{figure}
 
-Quelltext \ref{code:observer-code} veranschaulicht die Benachrichtigung aller Empfänger. In \code{notify} wird an jeden im Sender referenzierten Empfänger \code{update} gesendet. Dabei wird der Kontext des Senders an jeden Empfänger übergeben.
+\autoref{code:observer-code} veranschaulicht die Benachrichtigung aller Empfänger. In \code{notify} wird an jeden im Sender referenzierten Empfänger \code{update} gesendet. Dabei wird der Kontext des Senders an jeden Empfänger übergeben.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Quelltext der Methode \code{notify} des Publishers, welche über alle Empfänger iteriert und diese benachrichtigt.}, label=code:observer-code]

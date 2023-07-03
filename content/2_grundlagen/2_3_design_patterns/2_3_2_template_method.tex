@@ -6,19 +6,19 @@ Ein Algorithmus besteht aus mehreren Schritten, die jeweils eine bestimmte Aufga
 
 \subsubsection*{Lösung}
 
-Jede Klasse, welche einen Algorithmus der selben Struktur implementiert, erbt von einer abstrakten Klassen (\code{AbstractClass}), welche die \code{templateMethod} implementiert. Das wird in Abbildung \ref{fig:template-method-class} gezeigt. Diese gibt das Grundgerüst des Algorithmus vor und ruft darin die einzelnen Teilschritte auf. Diese sind jeweils in eigenen Methoden implementiert. Die Subklassen (\code{ConcreteClass}) definieren diese Methoden zum Teil neu, wenn eine Veränderung des Verhaltens dieses Teilschrittes notwendig ist.
+Jede Klasse, welche einen Algorithmus der selben Struktur implementiert, erbt von einer abstrakten Klassen (\code{AbstractClass}), welche die \code{templateMethod} implementiert. Das wird in \autoref{fig:template-method-class} gezeigt. Diese gibt das Grundgerüst des Algorithmus vor und ruft darin die einzelnen Teilschritte auf. Diese sind jeweils in eigenen Methoden implementiert. Die Subklassen (\code{ConcreteClass}) definieren diese Methoden zum Teil neu, wenn eine Veränderung des Verhaltens dieses Teilschrittes notwendig ist.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/template-method-class.png}
 	\caption{Klassendiagramm der \emph{Template-Method} \cite{skobeleva_template_2023}}
 	\label{fig:template-method-class}
 \end{figure}
 
-Quelltext\ref{code:template-method-code} zeigt exemplarisch, wie eine solche \emph{Template-Method} aussehen kann. Die Reihenfolge und Interaktion der drei Einzelschritte \code{step1}, \code{step2} und \code{step3} sind festgelegt. Deren konkretes Verhalten kann jedoch in den Subklassen von \code{AbstractClass} überschrieben werden.
+\autoref{code:template-method-code-example} zeigt exemplarisch, wie eine solche \emph{Template-Method} aussehen kann. Die Reihenfolge und Interaktion der drei Einzelschritte \code{step1}, \code{step2} und \code{step3} sind festgelegt. Deren konkretes Verhalten kann jedoch in den Subklassen von \code{AbstractClass} überschrieben werden.
 
 \lstset{language=python}
-\begin{lstlisting}[caption={Exemplarische Implementierung einer \emph{Template-Method}}, label=code:template-method-code]
+\begin{lstlisting}[caption={Exemplarische Implementierung einer \emph{Template-Method}}, label=code:template-method-code-example]
 class AbstractClass:
 	def templateMethod(self):
     	if self.step1():

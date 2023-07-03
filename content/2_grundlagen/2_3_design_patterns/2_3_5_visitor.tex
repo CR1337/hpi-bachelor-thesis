@@ -7,18 +7,18 @@ Gelegentlich muss eine Operation auf einer Menge von Objekten durchgeführt, die
 
 \subsubsection*{Lösung}
 
-Der konkrete \emph{Visitor}\footnote{Die deutsche Übersetzung ''Besucher'' ist in diesem Kontext eher unüblich.} (\code{ConcreteVisitor}) realisiert die \emph{Visitor}-Schnittstelle (\code{Visitor}), welche die Methode \code{visit} bereitstellt, wie in Abbildung \ref{fig:visitor-class} zu erkennen ist. Diese erlaubt es dem \emph{Visitor}, ein Element (\code{Element}) zu ''besuchen'' und auf ihm eine Operation durchzuführen. Die Elemente ''akzeptieren'' den ''Besuch'' des \emph{Visitors} mit Hilfe der Methode \code{accept}, welche als Argument den besuchenden\emph{Visitor} erhält.
+Der konkrete \emph{Visitor}\footnote{Die deutsche Übersetzung ''Besucher'' ist in diesem Kontext eher unüblich.} (\code{ConcreteVisitor}) realisiert die \emph{Visitor}-Schnittstelle (\code{Visitor}), welche die Methode \code{visit} bereitstellt, wie in \autoref{fig:visitor-class} zu erkennen ist. Diese erlaubt es dem \emph{Visitor}, ein Element (\code{Element}) zu ''besuchen'' und auf ihm eine Operation durchzuführen. Die Elemente ''akzeptieren'' den ''Besuch'' des \emph{Visitors} mit Hilfe der Methode \code{accept}, welche als Argument den besuchenden\emph{Visitor} erhält.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/visitor-class.png}
 	\caption{Klassendiagramm des \emph{Visitor-Patterns}. \cite{skobeleva_visitor_2023}}
 	\label{fig:visitor-class}
 \end{figure}
 
-Abbildung \ref{fig:visitor-seq} zeigt das Verhalten des \emph{Visitor-Patterns}. Der Anwender\footref{ftn:client} trägt dem\emph{Visitor} auf, eine Operation auf einem Element oder einer Menge von Elementen durchzuführen (1). Der\emph{Visitor} sendet daraufhin \code{visit} an alle Elemente, auf die er eine Referenz hält (2). Jedes Element ruft daraufhin eine \code{accept}-Methode auf dem\emph{Visitor} auf (3). Zu beachten ist hierbei, dass es für jede Element-Klasse eine eigene Methode im\emph{Visitor} gibt. Dies kann realisiert werden durch das Bereitstellen von Methoden mit unterschiedlichen, zu den aufrufenden Klassen korrespondierenden Namen oder durch Multimethoden. Multimethoden sind Methoden, welche je nach Typ der übergebenen Argumente unterschiedliche Implementierungen ausführen. Somit kann der\emph{Visitor} nach Erhalt von \code{accept} die zum Typ des sendenden Elements passende Operation ausführen. Dieser Mechanismus nennt sich \emph{Double-Dispatch}.
+\autoref{fig:visitor-seq} zeigt das Verhalten des \emph{Visitor-Patterns}. Der Anwender\footref{ftn:client} trägt dem\emph{Visitor} auf, eine Operation auf einem Element oder einer Menge von Elementen durchzuführen (1). Der\emph{Visitor} sendet daraufhin \code{visit} an alle Elemente, auf die er eine Referenz hält (2). Jedes Element ruft daraufhin eine \code{accept}-Methode auf dem\emph{Visitor} auf (3). Zu beachten ist hierbei, dass es für jede Element-Klasse eine eigene Methode im\emph{Visitor} gibt. Dies kann realisiert werden durch das Bereitstellen von Methoden mit unterschiedlichen, zu den aufrufenden Klassen korrespondierenden Namen oder durch Multimethoden. Multimethoden sind Methoden, welche je nach Typ der übergebenen Argumente unterschiedliche Implementierungen ausführen. Somit kann der\emph{Visitor} nach Erhalt von \code{accept} die zum Typ des sendenden Elements passende Operation ausführen. Dieser Mechanismus nennt sich \emph{Double-Dispatch}.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/visitor-seq.png}
 	\caption{Sequenzdiagramm des \emph{Visitor-Patterns}. \cite{skobeleva_visitor_2023}}

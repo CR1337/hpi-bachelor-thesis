@@ -18,21 +18,21 @@ Der zufällige Abfahrtsplan beschreibt die Abfahrt von Zügen in zufälligen zei
 
 \subsection{Bedarfsorientierte Abfahrtspläne}
 
-Der bedarfsorientierte Abfahrtsplan beschreibt die Abfahrt von Zügen in zeitlichen Abständen, die sich nach einem historischen Kohlebedarf richten. Er dient damit der Modellierung von Kohlezügen. Dieser Abfahrtsplan besitzt eine Kohlebedarfsfunktion $k:\mathbb{N}\to\mathbb{R}$, die angibt, wie viel Kohle zu einem Zeitpunkt $t$ benötigt wird. Sie ergibt sich aus den historischen Kohlebedarfsdaten. Weiterhin existieren der Zeitpunkt $t_0 \in \mathbb{N}$, an welchem die historischen Daten beginnen und die Zeitspanne $t_r \in \mathbb{N}$, welche die zeitliche Auflösung der Daten angibt.Weiterhin ist $c\in\mathbb{R}$ die Menge an Kohle, die ein Kohlezug transportieren kann.  Sowohl $t_0$, als auch $t_r$ und $c$ sind konstant und ergeben sich aus domänenspezifischen Vorgaben. Zur Berechnung der Abfahrtszeiten wird zunächst die Funktion $a: \mathbb{N} \to \mathbb{R}$ aufgestellt, die den akkumulierten Kohlebedarf zum Zeitpunkt $t$ berechnet (siehe Formel \ref{eq:kohle-accu}). Dabei ist $n\in\mathbb{N}$ die Anzahl der Datenpunkte.
+Der bedarfsorientierte Abfahrtsplan beschreibt die Abfahrt von Zügen in zeitlichen Abständen, die sich nach einem historischen Kohlebedarf richten. Er dient damit der Modellierung von Kohlezügen. Dieser Abfahrtsplan besitzt eine Kohlebedarfsfunktion $k:\mathbb{N}\to\mathbb{R}$, die angibt, wie viel Kohle zu einem Zeitpunkt $t$ benötigt wird. Sie ergibt sich aus den historischen Kohlebedarfsdaten. Weiterhin existieren der Zeitpunkt $t_0 \in \mathbb{N}$, an welchem die historischen Daten beginnen und die Zeitspanne $t_r \in \mathbb{N}$, welche die zeitliche Auflösung der Daten angibt.Weiterhin ist $c\in\mathbb{R}$ die Menge an Kohle, die ein Kohlezug transportieren kann.  Sowohl $t_0$, als auch $t_r$ und $c$ sind konstant und ergeben sich aus domänenspezifischen Vorgaben. Zur Berechnung der Abfahrtszeiten wird zunächst die Funktion $a: \mathbb{N} \to \mathbb{R}$ aufgestellt, die den akkumulierten Kohlebedarf zum Zeitpunkt $t$ berechnet (siehe \autoref{eq:kohle-accu}). Dabei ist $n\in\mathbb{N}$ die Anzahl der Datenpunkte.
 
 \begin{equation}
     a(t)=\sum_{i=0}^{(\frac{t-t_0}{t_r})} k(t_ri+t_0)\label{eq:kohle-accu}
 \end{equation}
 
-Der Abfahrtsplan soll nun stets dann Züge abfahren lassen, wenn die Menge an Kohle, die transportiert werden muss, die Menge erreicht, die ein Zug transportieren kann. Die transportierte Menge wird dann von der bisher akkumulierten Menge abgezogen. Formel \ref{eq:kohle-fmod} stellt das dar.Die Funktion $fmod:(\mathbb{R},\mathbb{R}) \to \mathbb{R}$ ist dabei definiert als $(x,y)\mapsto x-ny$ mit $n\in\mathbb{Z}$, $x<0\Leftrightarrow fmod(x,y)<0$, $fmod(x,y)<|y|$ und $y\neq 0$. Intuitiv formuliert, gibt die Funktion den Rest der Division $\frac{x}{y}$ zurück.
+Der Abfahrtsplan soll nun stets dann Züge abfahren lassen, wenn die Menge an Kohle, die transportiert werden muss, die Menge erreicht, die ein Zug transportieren kann. Die transportierte Menge wird dann von der bisher akkumulierten Menge abgezogen. \autoref{eq:kohle-fmod} stellt das dar.Die Funktion $fmod:(\mathbb{R},\mathbb{R}) \to \mathbb{R}$ ist dabei definiert als $(x,y)\mapsto x-ny$ mit $n\in\mathbb{Z}$, $x<0\Leftrightarrow fmod(x,y)<0$, $fmod(x,y)<|y|$ und $y\neq 0$. Intuitiv formuliert, gibt die Funktion den Rest der Division $\frac{x}{y}$ zurück.
 
 \begin{equation}
     a_f(t, c)=fmod(a(t), c)\label{eq:kohle-fmod}
 \end{equation}
 
-Abbildung \ref{fig:demand-math} zeigt schematisch das Verhalten eines bedarfsorientierten Abfahrtsplans. Die Funktion $k$ zeigt den (hier zur Vereinfachung konstanten) Kohlebedarf. Die Funktion $a$ stellt den akkumulierten Kohlebedarf dar. Die Funktion $a_f$ zeigt die akkumulierte Kohlemenge abzüglich der transportierten Kohlemenge. Die Abfahrtszeiten sind durch rote Pfeile markiert.
+\autoref{fig:demand-math} zeigt schematisch das Verhalten eines bedarfsorientierten Abfahrtsplans. Die Funktion $k$ zeigt den (hier zur Vereinfachung konstanten) Kohlebedarf. Die Funktion $a$ stellt den akkumulierten Kohlebedarf dar. Die Funktion $a_f$ zeigt die akkumulierte Kohlemenge abzüglich der transportierten Kohlemenge. Die Abfahrtszeiten sind durch rote Pfeile markiert.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/demand-math.png}
 	\caption{Schematisches Verhalten eines bedarfsorientierten Abfahrtsplans mit dem Kohlebedarf $k(t)$, dem akkumulierten Kohlebedarf $a(t)$ und der akkumulierten Kohlemenge abzüglich der transportierten Kohlemenge $a_f(t,c)$. Die roten Pfeile markieren die Abfahrtszeiten der Kohlezüge.}
