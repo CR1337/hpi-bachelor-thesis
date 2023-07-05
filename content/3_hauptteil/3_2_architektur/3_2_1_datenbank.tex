@@ -2,7 +2,7 @@
 
 Das in unserem System verwendete Datenbank-Management-System ist \emph{Postgres}. Es läuft in einem eigenen \emph{Docker}-Container. Als Datenbankschnittstelle verwendeten wir das ORM \emph{peewee}, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\code{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \code{peewee.Model} erbt, wie in \autoref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind
 \begin{itemize}
-	\item die expilizite Definition eines Primärschlüssels (\code{id}) mit dem Typ einer Zeichenkette, welcher einen Universally unique identifier (UUID) enthält,
+	\item die expilizite Definition eines Primärschlüssels (\code{id}) mit dem Typ einer Zeichenkette, welcher einen \emph{Universally unique identifier} (UUID) enthält,
 	\item Daten, wann ein Objekt erzeugt und wann es zuletzt aktualisiert wurde
 	\item und einen menschenlesbaren Bezeichner (\code{readable\_id}), welcher prozedural erzeugt wird und einer verbesserten Nutzerinteraktion dient.
 \end{itemize}
