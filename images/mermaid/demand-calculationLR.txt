@@ -12,14 +12,14 @@
 flowchart LR
     bnetza[(Bundesnetzagentur)]
     kwdata([Kraftwerksdaten])
-    annotation[[Name\nelektrische Leistung in MW\nthermische Leistung in MW\nWirkungsgrad\nEnergieträger\nBundesland]]
+    annotation[[Name\nelektrische Leistung\nthermische Leistung\nWirkungsgrad\nEnergieträger\nBundesland]]
     filkwdata([gefilterte\nKraftwerksdaten])
     leagkwdata([Lausitzer\nKraftwerksdaten])
-    coal([Kohlebedarf in t])
-    totprod([Gesamte\nStromproduktions-\nleistung in MW])
-    econtent{{Energiegehalt von\nBraunkohle in MWh/t}}
-    proddata([Stromproduktions-\ndaten in MWh])
-    cap{{Füllkapazität eines Zuges in t}}
+    coal([Kohlebedarf])
+    totprod([Gesamte\nStromproduktions-\nleistung])
+    econtent{{Energiegehalt von\nBraunkohle}}
+    proddata([Stromproduktions-\ndaten])
+    cap{{Füllkapazität eines Zuges}}
     depart([Abfahrtszeiten])
 
     bnetza --einmaliger\nDatenabruf--> kwdata
@@ -38,5 +38,5 @@ flowchart LR
         proddata --> coal
     end
 
-    coal ---> depart
+    coal --> depart
     cap --> depart
