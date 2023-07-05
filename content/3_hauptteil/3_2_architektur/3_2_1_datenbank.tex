@@ -10,7 +10,7 @@ Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} �
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/database-class.png}
+	\includegraphics[width=0.75\linewidth]{images/diagrams/database-class.pdf}
 	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \code{BaseModel} erbt von \code{peewee.Model}, um weitere Funktionalität hinzuzufügen. Davon erbt \code{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
 	\label{fig:database-class}
 \end{figure}
@@ -19,7 +19,7 @@ Von \code{BaseModel} erbt \code{SerializableBaseModel}, welches die zusätzliche
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/database-seq.png}
+	\includegraphics[width=0.75\linewidth]{images/diagrams/database-seq.pdf}
 	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \code{create}. In \code{create} wird sowohl das Objekt initialisiert, als auch auch Selbstaufruf von \code{save} in der Datenbank abgelegt.}
 	\label{fig:database-seq}
 \end{figure}
