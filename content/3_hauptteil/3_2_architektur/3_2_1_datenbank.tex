@@ -1,6 +1,6 @@
 \subsection{Die Datenbank}
 
-Das in unserem System verwendete Datenbank-Management-System ist Postgres. Es läuft in einem eigenen Docker-Container. Als Datenbankinterface verwendeten wir das ORM \emph{peewee}, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\code{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \code{peewee.Model} erbt, wie in \autoref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind
+Das in unserem System verwendete Datenbank-Management-System ist \emph{Postgres}. Es läuft in einem eigenen \emph{Docker}-Container. Als Datenbankschnittstelle verwendeten wir das ORM \emph{peewee}, welches Tabellen einer relationalen Datenbank auf sogenannte Modell-Klassen abbildet. Da jede unserer Modell-Klassen weitere Funktionalität benötigt, haben wir eine abstrakte Modell-Klasse (\code{BaseModel}) definiert, welche als Superklasse für jede weitere Modellklasse dient, und welche selbst von \code{peewee.Model} erbt, wie in \autoref{fig:database-class} zu erkennen ist. Diese Funktionalitäten sind
 \begin{itemize}
 	\item die expilizite Definition eines Primärschlüssels (\code{id}) mit dem Typ einer Zeichenkette, welcher einen Universally unique identifier (UUID) enthält,
 	\item Daten, wann ein Objekt erzeugt und wann es zuletzt aktualisiert wurde
@@ -17,11 +17,10 @@ Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} �
 
 Von \code{BaseModel} erbt \code{SerializableBaseModel}, welches die zusätzliche Methode \code{to\_dict} implementiert. Damit lässt sich das Objekt JSON-serialisieren, um es bei Bedarf an das Forntend der Anwendung senden zu können.
 
-% \begin{figure}[!ht]
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-seq.png}
-	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \code{create}.}
+	\caption{Sequenzdiagramm der Erstellung eines Objektes über die Methode \code{create}. In \code{create} wird sowohl das Objekt initialisiert, als auch auch Selbstaufruf von \code{save} in der Datenbank abgelegt.}
 	\label{fig:database-seq}
 \end{figure}
 
