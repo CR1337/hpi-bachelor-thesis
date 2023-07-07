@@ -2,6 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 
+import matplotlib_inline
+matplotlib_inline.backend_inline.set_matplotlib_formats('svg')
+
 matplotlib.use('TkAgg')
 matplotlib.rcParams.update({'font.size': 14})
 
