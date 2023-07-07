@@ -5,7 +5,7 @@ Das zentrale Element der Zugerzeugung ist die Klasse \code{Spawner}. Die Archite
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-class.pdf}
-	\caption{Klassendiagramm der Zugerzeugung}
+	\caption{Klassendiagramm der Zugerzeugung. Der \code{Spawner} erbt von \code{Component}, um in jedem \emph{Tick} der Simulation benachrichtigt werden zu können und Zugriff auf den Eventbus zu erhalten. Außerdem realisiert er die Schnittstelle \code{ISpawnerDisruptor} um eine Beeinflussung durch die Fehlerinjektion zu ermöglichen. Der \code{Spawner} besitzt eine Liste von \code{Schedule}-Objekten, welche die Abfahrtspläne repräsentieren. Jedes \code{Schedule}-Objekt besitzt eine Referenz auf ein \code{ScheduleStrategy}-Objekt, welches den Algorithmus zur Bestimmung der Abfahrtszeiten implementiert.}
 	\label{fig:spawner-class}
 \end{figure}
 
@@ -20,7 +20,7 @@ Die Klasse \code{RegularScheduleStrategy} implementiert die regulären Abfahrtsp
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-seq.pdf}
-	\caption{Sequenzdiagramm der Zugerzeugung}
+	\caption{Sequenzdiagramm der Zugerzeugung. Zu jedem Simulations-\emph{Tick} (1), veranlasst der \code{Spawner} jedes seiner \code{Schedule}-Objekte, zu prüfen, ob es einen Zug zu erzeugen gibt (2). Die \code{Schedule}-Objekte führen dazu den Algorithmus aus, welcher in der \code{ScheduleStrategy}-Instanz implementiert ist (3). Gibt der Algorithmus ein positives Ergebnis zurück und wurde das \code{Schedule}-Objekt nicht durch die Fehlerinjektion blockiert, wird die Erzeugung eines Zuges veranlasst (5, 6).}
 	\label{fig:spawner-seq}
 \end{figure}
 

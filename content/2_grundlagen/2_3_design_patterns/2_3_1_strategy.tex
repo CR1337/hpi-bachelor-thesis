@@ -11,7 +11,7 @@ Wie in \autoref{fig:strategy-class} abgebildet, besitzt der Kontext (\code{Conte
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/strategy-class.pdf}
-	\caption{Klassendiagramm des \emph{Strategy Patterns}. Der \code{Context} kann durch Nutzung der abstrakten \code{Strategy}-Schnittstelle eine Menge verschiedener Algorithmen nutzen, welche in konkreten Strategien implementiert sind. \cite{skobeleva_strategy_2023}}
+	\caption{Klassendiagramm des \emph{Strategy Patterns}. Der \code{Context} kann durch Nutzung der abstrakten \code{Strategy}-Schnittstelle eine Menge verschiedener Algorithmen nutzen. Die konkrete Strategie ist austauschbar und kann zur Laufzeit neu zugewiesen werden. \cite{skobeleva_strategy_2023}}
 	\label{fig:strategy-class}
 \end{figure}
 
@@ -20,7 +20,7 @@ Wie in \autoref{fig:strategy-class} abgebildet, besitzt der Kontext (\code{Conte
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/patterns/strategy-seq.pdf}
-	\caption{Sequenzdiagramm des \emph{Strategy Patterns}. Eine konkrete Strategie wird erzeugt und dem \code{Kontext} übergeben. Dieser kann nun den in der Strategie implemenierten Algorithmus nutzen. \cite{skobeleva_strategy_2023}}
+	\caption{Sequenzdiagramm des \emph{Strategy Patterns}. Der \code{Client} erzeugt eine neue konkrete Strategie (1) und weist sie dem \code{Context} zu (3). Dieser kann den in der Strategie implementierten Algorithmus dann nutzen (6), wenn er dazu aufgefordert wird (5). \cite{skobeleva_strategy_2023}}
 	\label{fig:strategy-seq}
 \end{figure}
 

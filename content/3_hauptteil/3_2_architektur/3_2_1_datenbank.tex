@@ -11,7 +11,7 @@ Weiterhin wurde die Methode \code{save} überschrieben aus \code{peewee.Model} �
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/database-class.pdf}
-	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \code{BaseModel} erbt von \code{peewee.Model}, um weitere Funktionalität hinzuzufügen. Davon erbt \code{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
+	\caption{Klassendiagramm der abstrakten Modell-Klassen des ORM. \code{BaseModel} erbt von \code{peewee.Model}, um weitere Funktionalität hinzuzufügen. Dazu geöhren Felder für \code{datetime}-Objekte, welche angeben, wann das Objekt erstellt und aktualisiert wurde. Weiterhin besitzt jedes Objekt eine \code{readable\_id}, welche die Indentifizierung durch einen Menschen vereinfachen soll. Davon erbt \code{SerializableBaseModel}, um die Serialisierung von Objekten zu ermöglichen.}
 	\label{fig:database-class}
 \end{figure}
 
