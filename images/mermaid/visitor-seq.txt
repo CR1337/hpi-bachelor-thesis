@@ -7,8 +7,8 @@ sequenceDiagram
 
     activate Client
     Client ->>+ Visitor: doSomething()
-    Visitor ->>+ Element: visit(visitor)
-    Element ->>+ Visitor: accept(element)
+    Visitor ->>+ Element: accept(visitor)
+    Element ->>+ Visitor: visit(element)
     Visitor --)- Element: return
     Element --)- Visitor: return
     Visitor --)- Client: return

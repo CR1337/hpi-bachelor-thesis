@@ -1,3 +1,2 @@
 TODO
-- Visitor Pattern-Sequenzdiagramm: Methoden sind vertauscht
 - Abbildungsunterschriften in 3_2_3 und 3_2_4
