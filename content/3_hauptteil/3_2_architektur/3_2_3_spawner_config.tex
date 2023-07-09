@@ -15,7 +15,7 @@ Alle zur Konfiguration gehörenden Klassen werden in JSON-serialisierter Form vo
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=1.0\linewidth]{images/diagrams/spawner-factory-class.pdf}
+	\includegraphics[width=0.80\linewidth]{images/diagrams/spawner-factory-class.pdf}
 	\caption{Klassendiagramm der \emph{Spawner}-Konstruktion. Die Klasse \code{Spawner} besitzt eine Liste von \code{Schedule}-Objekten. Die Klasse \code{Schedule} ist ihre eigene \emph{Factory} und kann aus \code{ScheduleConfiguration}-Objekten Instanzen ihrer selbst erstellen. Analog dazu besitzt jedes \code{Schedule}-Objekt eine Referenz auf ein \code{ScheduleStrategy}-Objekt. Auch die Klasse \code{ScheduleStrategy} kann sich selbst mithilfe eines \code{ScheduleConfiguration}-Objektes instanziieren.}
 	\label{fig:spawner-factory-class}
 \end{figure}

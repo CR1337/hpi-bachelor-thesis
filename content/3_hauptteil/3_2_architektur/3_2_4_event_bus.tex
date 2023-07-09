@@ -8,25 +8,25 @@ Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger 
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-register-seq.pdf}
+	\includegraphics[width=0.70\linewidth]{images/diagrams/eventbus-register-seq.pdf}
 	\caption{Sequenzdiagramm der Registrierung eines Empfängers beim Eventbus. Ein \code{EvenConsumer}-Objekt registriert eine \emph{Callback}-Funktion und einen zugehörigen Ereignistyp beim Eventbus. Der Eventbus gibt ein \emph{Handle} zur Referenzierung des \emph{Callbacks} zurück.}
 	\label{fig:eventbus-register-seq}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-unregister-seq.pdf}
+	\includegraphics[width=0.70\linewidth]{images/diagrams/eventbus-unregister-seq.pdf}
 	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus. Unter Verwendung des zuvor erhaltenen \emph{Handles} deregistriert der \code{EventConsumer} die referenzierte \emph{Callback}-Funktion.}
 	\label{fig:eventbus-unregister-seq}
 \end{figure}
 
 Die Implementierung des Eventbus erfolgte vergleichsweise spät im Projektverlauf. Die Codebasis war bereits entsprechend groß, was uns vor die Herausforderung stellte, wie der Eventbus am besten zu integrieren sei. Auch spielte die Zeitplanung dabei eine Rolle.\\
 \\
-Da der \emph{Logger} \cite{reisener_entwurf_2023} bereits die Aufgabe übernahm, Ereignisse zu sammeln, lag der Gedanke nahe, ihn entsprechend zu erweitern. Diese Möglichkeit ist im Folgenden unter ''Variante 1 - Erweiterung des \emph{Loggers}'' beschrieben.\\
+Da der \emph{Logger} \cite{reisener_entwurf_2023} bereits die Aufgabe übernahm, Ereignisse zu sammeln, lag der Gedanke nahe, ihn entsprechend zu erweitern. Diese Möglichkeit ist im Folgenden unter ''Variante~1~--~Erweiterung des \emph{Loggers}'' beschrieben.\\
 \\
-Da diese Variante gewisse Nachteile mit sich bringt, wird unter ''Variante 2 - Eigenständige Komponente'' eine architektonisch sauberere Lösung vorgestellt. Für diese zweite Lösung haben wir uns aus unten genannten Gründen letztendlich entschieden.
+Da diese Variante gewisse Nachteile mit sich bringt, wird unter ''Variante~2~--~Eigenständige Komponente'' eine architektonisch sauberere Lösung vorgestellt. Für diese zweite Lösung haben wir uns aus unten genannten Gründen letztendlich entschieden.
 
-\subsubsection*{Variante 1 - Erweiterung des \emph{Loggers}}
+\subsubsection*{Variante~1~--~Erweiterung des \emph{Loggers}}
 
 Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgaben des Eventbus zu übernehmen. Wie \autoref{fig:eventbus-v1-class} zeigt, erstellt der \emph{Logger} für jedes Ereignis ein \code{LogEntry}-Objekt, welches in die Datenbank geschrieben wird. Das \code{LogEntry}-Objekt erbt daher von \code{BaseModel} und besitzt eine \code{save}-Methode, welche bei Erzeugung des Objektes stets ausgeführt wird. Darin wird der Eventbus benachrichtigt, welcher dann die registrierten Empfänger über das neue Ereignis informiert. Die Empfänger realisieren dazu die \code{IEventConsumer}-Schnittstelle, welche eine \code{on\_event}-Methode zur Ereignisbehandlung und ein \code{event\_handle}-Attribut zur Referenzierung der Registrierung beim \code{EventBus} bereitstellt. Die registrierten \emph{Callbacks} werden im Attribut \code{callbacks} gehalten. Es handelt sich dabei um eine Liste von 2-Tupeln, welche das \emph{Callback} und den Ereignistyp enthalten. Ein \emph{Callback} nimmt dabei ein \code{LogEntry}-Objekt entgegen und hat keinen Rückgabewert.
 
@@ -48,7 +48,7 @@ Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgabe
 
 Der Vorteil dieser Variante ist die einfache Integration in das bestehende System. Die Änderungen am bestehenden Quelltext sind gering. Damit kann die Implementierung des Eventbus schnell erfolgen, was einen positiven Einfluss auf die Zeitplanung hat. Nachteilhaft ist jedoch, dass das \emph{Logging}-System nun auch Teilaufgaben des Eventbus übernimmt. Dies widerspricht dem Prinzip der \emph{Single Responsibility}\footnote{Eine Komponente, Klasse oder Funktion soll nur ein Konzept implementieren oder nur eine Aufgabe erledigen.} und kann zu einer unübersichtlichen Codebasis führen.
 
-\subsubsection*{Variante 2 - Eigenständige Komponente}
+\subsubsection*{Variante~2~--~Eigenständige Komponente}
 
 Bei dieser Variante wird der Eventbus als eigenständige Komponente implementiert. \autoref{fig:eventbus-v2-class} zeigt das Klassendiagramm. Jede Komponente hält nun eine Referenz auf den Eventbus, um sich als Empfänger registrieren zu können. Die Registrierung und Deregistrierung, sowie die Verwaltung der registrieren \emph{Callbacks} erfolgt wie bei der ''Erweiterung des \emph{Loggers}''. Der Unterschied besteht darin, dass die Ereignisse nun nicht mehr durch \code{LogEntry}-Objekte, sondern durch \code{Event}-Objekte repräsentiert werden. Komponenten benachrichtigen hier selbst den \code{EventBus}. Der \emph{Logger} implementiert die \code{IEventConsumer}-Schnittstelle und registriert sich ebenfalls beim Eventbus, um seine Aufgabe erfüllen zu können.
 
