@@ -18,12 +18,12 @@ Die Unterschiede zwischen beiden Paradigmen rufen eine Reihe von Problemen hervo
     \item Referenzen in objektorientierten und relationalen Modellen besitzen unterschiedliche Richtungen. Entsprechend muss die Navigation durch die Modelle abgebildet werden.
     \item In der Praxis kann es vorkommen, dass die Datenbank und die darauf aufbauende Software von unterschiedlichen Teams gepflegt werden. Außerdem besteht die Möglichkeit, dass eine Datenbank von mehreren Softwaresystemen genutzt wird. Dabei gilt es, eine einheitliche Kommunikation zu gewährleisten.
 \end{itemize}
-Jedes ORM konzentiert sich auf die Aspekte der zu leistenden Abbildung unterschiedlich stark. So kann der Fokus beispielweise mehr auf der strukturellen Abbildung zwischen Klassen und Tabellen liegen oder auf der korrekten Abbildung der Mechanismen. Es gibt daher keine einheitliche oder richtige Lösung. Entsprechend ist die Trennung zwischen objektorientiertem und relationalem Paradigma nie vollständig und hängt vom Einzelfall und den Bedürfnissen des Anwenders ab.
+Jedes ORM konzentriert sich auf die Aspekte der zu leistenden Abbildung unterschiedlich stark. So kann der Fokus beispielsweise mehr auf der strukturellen Abbildung zwischen Klassen und Tabellen liegen oder auf der korrekten Abbildung der Mechanismen. Es gibt daher keine einheitliche oder richtige Lösung. Entsprechend ist die Trennung zwischen objektorientiertem und relationalem Paradigma nie vollständig und hängt vom Einzelfall und den Bedürfnissen des Anwenders ab.
 
 \subsection{\emph{peewee}}
 Für unser Softwareprojekt haben wir das ORM \emph{peewee} \cite{leifer_coleiferpeewee_2023} ausgewählt. Da das ORM einer der Grundsteine unseres Projektes darstellt, stand die Auswahl des ORM am Anfang Planungsprozesses. Daher war es uns nicht möglich, das ORM  anhand der Anforderungen unserer Softwarearchitektur auszuwählen. Diese stand zu diesem Zeitpunkt, aufgrund der agilen Arbeitsweise unseres Teams, noch nicht in ausreichendem Detailgrad zur Verfügung. Wir haben die Entscheidung stattdessen anhand der allgemeinen Funktionsübersicht und der Benutzerfreundlichkeit getroffen. Zur Auswahl stand außerdem das ORM ''SQLAlchemy'' \cite{noauthor_sqlalchemy_2023}. Obwohl SQLAlchemy einen größeren Funktionsumfang bietet, ist \emph{peewee} einfacher zu bedienen und man erreicht viele der meistbenutzten Funktionen mit weniger Code. Da dies zugunsten der Entwicklungsgeschwindigkeit geht, haben wir uns letztendlich für \emph{peewee} entschieden. Außerdem sinkt die Wahrscheinlichkeit für das Machen von Fehlern mit weniger Code.
 
-Im folgenden wird eine Reihe von Grundfunktionalitäten von \emph{peewee} vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
+Im Folgenden wird eine Reihe von Grundfunktionalitäten von \emph{peewee} vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
 
 \subsubsection*{Definition von Modellen}
 
@@ -40,11 +40,11 @@ class Person(Model):
     age: int
 \end{lstlisting}
 
-Der Klasse können dann beliebige Attribute und auch Methoden zugewiesen werden. Soll ein Attribut persistent sein, soll es also in der Datenbank abgelegt werden, so muss ihm in der Klassendefinition ein Feld vom Typ \code{peewee.Field} zugeweisen werden. Über den Subtyp dieses Feldes wird der Typ der korrespondierenden Spalte in der Datenbanktabelle festgelegt. Andere Attribute, wie \code{age} in \autoref{code:peewee-model} sind Teil des Objektes, aber nicht persistent.
+Der Klasse können dann beliebige Attribute und auch Methoden zugewiesen werden. Soll ein Attribut persistent sein, soll es also in der Datenbank abgelegt werden, so muss ihm in der Klassendefinition ein Feld vom Typ \code{peewee.Field} zugewiesen werden. Über den Subtyp dieses Feldes wird der Typ der korrespondierenden Spalte in der Datenbanktabelle festgelegt. Andere Attribute, wie \code{age} in \autoref{code:peewee-model} sind Teil des Objektes, aber nicht persistent.
 
 \subsubsection*{Speichern von Objekten}
 
-Objekte lassen sich auf mittels zwei verschiedener Methoden in der Datenbank ablegen. Jede Modell-Klasse erbt die Methode \code{create} von \code{peewee.Model}. Diese nimmt die gleichen Argumente entgegen wie der eigentlich Konstruktor der Klasse. Wird \code{create} aufgerufen, so wird eine Instanz der Klasse erstellt, in die Datenbank geschrieben und im Anschluss zurück gegeben, wie in \autoref{code:peewee-storing1} ersichtlich wird.
+Objekte lassen sich auf mittels zwei verschiedener Methoden in der Datenbank ablegen. Jede Modell-Klasse erbt die Methode \code{create} von \code{peewee.Model}. Diese nimmt die gleichen Argumente entgegen wie der eigentlich Konstruktor der Klasse. Wird \code{create} aufgerufen, so wird eine Instanz der Klasse erstellt, in die Datenbank geschrieben und im Anschluss zurückgegeben, wie in \autoref{code:peewee-storing1} ersichtlich wird.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Python-Code zum Erzeugen eines Personen-Objektes und zur Speicherung in der Datenbank in einem Schritt.  \cite{noauthor_quickstart_2023}}, label=code:peewee-storing1]
@@ -61,7 +61,7 @@ Alternativ dazu kann das Objekt auch direkt über den Konstruktor erzeugt werden
 
 \subsubsection*{Datenabfragen}
 
-Das Abfragen von Daten orientiert sich in \emph{peewee} an den Konzepten von SQL, bildet die SQL-Schlüsselwörter jedoch auch Methoden ab. \autoref{code:peewee-query} zeigt eine einfach Datenabfrage die zu dem SQL-Statement in \autoref{code:sql-query} äquivalent ist.
+Das Abfragen von Daten orientiert sich in \emph{peewee} an den Konzepten von SQL, bildet die SQL-Schlüsselwörter jedoch auch Methoden ab. \autoref{code:peewee-query} zeigt eine einfache Datenabfrage die zu dem SQL-Statement in \autoref{code:sql-query} äquivalent ist.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Python-Code zum Abfragen eines Objektes aus der Datenbank.  \cite{noauthor_quickstart_2023}}, label=code:peewee-query]

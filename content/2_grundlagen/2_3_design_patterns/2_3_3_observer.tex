@@ -14,7 +14,7 @@ Das \emph{Observer Pattern} besteht aus einem Sender (\code{Publisher}) und mehr
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.95\linewidth]{images/patterns/observer-class.pdf}
-	\caption{Klassendiagramm des \emph{Observer Patterns}. \code{Subscriber} können beim \code{Publisher} registiert werden, um Nachrichten über Ereignisse zu erhalten. Wird ein Ereignis ausgelöst, so informiert der \code{Publisher} alle registierten \code{Subscriber} darüber. \cite{skobeleva_observer_2023}}
+	\caption{Klassendiagramm des \emph{Observer Patterns}. \code{Subscriber} können beim \code{Publisher} registriert werden, um Nachrichten über Ereignisse zu erhalten. Wird ein Ereignis ausgelöst, so informiert der \code{Publisher} alle registrierten \code{Subscriber} darüber. \cite{skobeleva_observer_2023}}
 	\label{fig:observer-class}
 \end{figure}
 
@@ -29,6 +29,6 @@ Das \emph{Observer Pattern} besteht aus einem Sender (\code{Publisher}) und mehr
 
 \subsubsection*{Konsequenzen}
 
-Durch Separation von Sender und Empfänger und durch die Abstraktion der Empfänger-Schnittstelle wird eine lose Kopplung der beiden erreicht. Diese lose Kopplung ermöglicht es, sowohl den Sender, als auch die Empfänger beliebig auszutauschen. Weiterhin können sich der Sender und die Empfänger auf unterschiedlichen Abstraktionsniveaus befinden. Ein Sender auf einem niedrigen Niveau kann einen Empfänger auf einem hohen Niveau benachrichtigen. Wären Empfänger und Sender nicht getrennt, so wäre dafür ein Objekt notwendig, welches mehrere Abrstraktionsebenen umfasst, wodurch die Trennung der Abstraktionsschichten beeinträchtigen würde. Ein weiterer Vorteil ist die dynamische Anzahl der Empfänger, mit denen ein Sender interagieren kann. So kann der Anwender über den Sender eine beliebige Zahl an Empfängern erreichen.
+Durch Separation von Sender und Empfänger und durch die Abstraktion der Empfänger-Schnittstelle wird eine lose Kopplung der beiden erreicht. Diese lose Kopplung ermöglicht es, sowohl den Sender, als auch die Empfänger beliebig auszutauschen. Weiterhin können sich der Sender und die Empfänger auf unterschiedlichen Abstraktionsniveaus befinden. Ein Sender auf einem niedrigen Niveau kann einen Empfänger auf einem hohen Niveau benachrichtigen. Wären Empfänger und Sender nicht getrennt, so wäre dafür ein Objekt notwendig, welches mehrere Abstraktionsebenen umfasst, wodurch die Trennung der Abstraktionsschichten beeinträchtigen würde. Ein weiterer Vorteil ist die dynamische Anzahl der Empfänger, mit denen ein Sender interagieren kann. So kann der Anwender über den Sender eine beliebige Zahl an Empfängern erreichen.
 
 Ein Nachteil des \emph{Observer Patterns} ist, dass der Sender stets alle seine Empfänger benachrichtigt. Es kann vorkommen, dass nur eine Teilmenge der Empfänger die Benachrichtigung benötigt, was in unnötigen Methodenaufrufen resultiert. \cite{gamma_design_1995}

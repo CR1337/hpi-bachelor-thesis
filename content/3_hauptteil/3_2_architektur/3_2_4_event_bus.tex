@@ -2,9 +2,9 @@
 
 Der Eventbus stellt für Softwarekomponenten die Möglichkeit bereit, Ereignisse untereinander auszutauschen. Für jeden Typ von Ereignis stellt er eine $m$:$n$-Beziehung zwischen den Komponenten, welche das Ereignis emittieren und denen, die es empfangen her. Der Eventbus wurde in Zusammenarbeit mit \citeauthor{persitzky_fehlerinjektion_2023} entwickelt. Wir haben uns dazu entschieden, das Entwurfsmuster \emph{Mediator} auf den Eventbus anzuwenden, um zu verhindern, dass die voneinander Abhängigen Komponenten direkt miteinander kommunizieren müssen, was die Kopplung senkt. Weiterhin kapselt der \emph{Mediator} das kommunikationsspezifische Verhalten, was es an einer zentralen Stelle verfügbar macht und den einzelnen Komponenten die Verantwortung abnimmt, Kommunikationsdetails zu kennen.\\
 \\
-Um eine zu große Komplexität des Eventbus selbst und eine monolithische Struktur zu verhindern, wird als Kommunikationsmechanismus das Entwurfsmuster \emph{Observer} verwendet. Abhängigkeiten zwischen den Komponenten lassen sich so flexibler ändern. Weiterhin ermöglicht dieses Entwurfsmuster, Komponenten auf verschiedenen Abstraktionsniveaus zu verbinden. Wir haben den Nachteil des \emph{Observers} umgangen, dass er stets alle Empfänger benachrichtigt. Dazu wird jeder registrierte Empfänger mit einem Ereignistyp verknüpft. Der Empfänger wird so nur benachrichtigt, wenn ein Ereignis des verknüpften Typs eingangen ist.\\
+Um eine zu große Komplexität des Eventbus selbst und eine monolithische Struktur zu verhindern, wird als Kommunikationsmechanismus das Entwurfsmuster \emph{Observer} verwendet. Abhängigkeiten zwischen den Komponenten lassen sich so flexibler ändern. Weiterhin ermöglicht dieses Entwurfsmuster, Komponenten auf verschiedenen Abstraktionsniveaus zu verbinden. Wir haben den Nachteil des \emph{Observers} umgangen, dass er stets alle Empfänger benachrichtigt. Dazu wird jeder registrierte Empfänger mit einem Ereignistyp verknüpft. Der Empfänger wird so nur benachrichtigt, wenn ein Ereignis des verknüpften Typs eingegangen ist.\\
 \\
-Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger selbst registriert, sondern nur \emph{Callbacks} (Funktionen, welche als Argument übergeben werden, um zu einem späteren Zeitpunkt vom Empfänger des Arguments aufgerufen werden zu können), bei welchen es sich jeweils um Methoden der Empfänger handelt. Dies schränkt die Funktionalität nicht ein, da der Empfännger das Ereginis nachwievor erhält. Der Eventbus muss nun jedoch nur noch Pythons \code{Callable}-Schnittstelle verwenden und benötigt keine Kenntnis mehr über die Kommunizierenden Komponenten. Die Registrierung und die Deregistrierung von Empfängern ist in \autoref{fig:eventbus-register-seq} und \autoref{fig:eventbus-unregister-seq} dargestellt. Für die Registrierung wird das \emph{Callback} und der Ereignistyp (\code{event\_type}) übergeben. Der Eventbus gibt daraufhin ein \emph{Handle} zurück, mit welchem das registrierte \emph{Callback} identifiziert werden kann. Um ein \emph{Callback} zu deregistrieren, lediglich das \emph{Handle} and den Eventbus übergeben werden.
+Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger selbst registriert, sondern nur \emph{Callbacks} (Funktionen, welche als Argument übergeben werden, um zu einem späteren Zeitpunkt vom Empfänger des Arguments aufgerufen werden zu können), bei welchen es sich jeweils um Methoden der Empfänger handelt. Dies schränkt die Funktionalität nicht ein, da der Empfänger das Ereignis nach wie vor erhält. Der Eventbus muss nun jedoch nur noch Pythons \code{Callable}-Schnittstelle verwenden und benötigt keine Kenntnis mehr über die kommunizierenden Komponenten. Die Registrierung und die Deregistrierung von Empfängern ist in \autoref{fig:eventbus-register-seq} und \autoref{fig:eventbus-unregister-seq} dargestellt. Für die Registrierung wird das \emph{Callback} und der Ereignistyp (\code{event\_type}) übergeben. Der Eventbus gibt daraufhin ein \emph{Handle} zurück, mit welchem das registrierte \emph{Callback} identifiziert werden kann. Um ein \emph{Callback} zu deregistrieren, lediglich das \emph{Handle} and den Eventbus übergeben werden.
 
 \begin{figure}[!ht]
 	\centering
@@ -16,7 +16,7 @@ Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-unregister-seq.pdf}
-	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus. Unter Verwendung des zuvor erhaltenen \emph{Handles} deregistiert der \code{EventConsumer} die referenzierte \emph{Callback}-Funktion.}
+	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus. Unter Verwendung des zuvor erhaltenen \emph{Handles} deregistriert der \code{EventConsumer} die referenzierte \emph{Callback}-Funktion.}
 	\label{fig:eventbus-unregister-seq}
 \end{figure}
 
@@ -42,7 +42,7 @@ Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgabe
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v1-seq.pdf}
-	\caption{Sequenzdiagramm der ersten Variante des Eventbus. Eine Komponente sendet ein Ereignis an den \emph{Logger} (1). Dieser erzeugt ein \code{LogEntry}-Objekt (2)auf welchem \code{save} aufgerufen wird (3). Dabei wirdder Eventbus benachrichtigt (4), welcher die registrierten Empfänger über das neue Ereignis informiert (5).}
+	\caption{Sequenzdiagramm der ersten Variante des Eventbus. Eine Komponente sendet ein Ereignis an den \emph{Logger} (1). Dieser erzeugt ein \code{LogEntry}-Objekt (2)auf welchem \code{save} aufgerufen wird (3). Dabei wird der Eventbus benachrichtigt (4), welcher die registrierten Empfänger über das neue Ereignis informiert (5).}
 	\label{fig:eventbus-v1-seq}
 \end{figure}
 
@@ -55,7 +55,7 @@ Bei dieser Variante wird der Eventbus als eigenständige Komponente implementier
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v2-class.pdf}
-	\caption{Klassendiagramm der zweiten Variante des Eventbus. Die Komponenten benachrichtigen den Eventbus direkt über neue Ereignisse. Der Eventbus leitet die Ereignisse dann an die registrierten Empfänger weiter. Die ereignisspezifischen Informationen sind in \code{Event}-Objekten gekapselt.}
+	\caption{Klassendiagramm der zweiten Variante des Eventbus. Die Komponenten benachrichtigen den Eventbus direkt über neue Ereignisse. Der Eventbus leitet die Ereignisse dann an die registrierten Empfänger weiter. Die ereignis-spezifischen Informationen sind in \code{Event}-Objekten gekapselt.}
 	\label{fig:eventbus-v2-class}
 \end{figure}
 
@@ -68,6 +68,6 @@ Bei dieser Variante wird der Eventbus als eigenständige Komponente implementier
 	\label{fig:eventbus-v2-seq}
 \end{figure}
 
-Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwändiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \code{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.\\
+Der Vorteil dieser Variante ist die saubere Trennung der Aufgaben des \emph{Loggers} und des Eventbus und die klare Zuordnung der Verantwortlichkeiten. Dafür ist die Implementierung aufwendiger, da mehr Änderungen am bestehenden Quelltext notwendig sind. Das bezieht sich vor allem auf den Umbau des \emph{Loggers}, welcher mit \code{Event}-Objekten statt mit direkt übergebenen Argumenten arbeiten muss. Trotz des Mehraufwandes haben wir uns letztendlich zugunsten der Codequalität für diese Variante entschieden.\\
 \\
-Eine Verwendung findet der Eventbus im aktuellen System nicht. Aus Zeitgründen wurder der Eventbus zwar implementiert, jedch nicht mehr verwendet. Mögliche Verwendungensind im Ausblick dieser Arbeit beschrieben.
+Eine Verwendung findet der Eventbus im aktuellen System nicht. Aus Zeitgründen wurder der Eventbus zwar implementiert, jedch nicht mehr verwendet. Mögliche Verwendungen sind im Ausblick dieser Arbeit beschrieben.
