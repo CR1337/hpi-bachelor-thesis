@@ -9,14 +9,14 @@ Um die Kopplung weiter zu verringern, werden beim Eventbus nicht die Empfänger 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-register-seq.pdf}
-	\caption{Sequenzdiagramm der Registrierung eines Empfängers beim Eventbus.}
+	\caption{Sequenzdiagramm der Registrierung eines Empfängers beim Eventbus. Ein \code{EvenConsumer}-Objekt registriert eine \emph{Callback}-Funktion und einen zugehörigen Ereignistyp beim Eventbus. Der Eventbus gibt ein \emph{Handle} zur Referenzierung des \emph{Callbacks} zurück.}
 	\label{fig:eventbus-register-seq}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.75\linewidth]{images/diagrams/eventbus-unregister-seq.pdf}
-	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus.}
+	\caption{Sequenzdiagramm der Deregistrierung eines Empfängers beim Eventbus. Unter Verwendung des zuvor erhaltenen \emph{Handles} deregistiert der \code{EventConsumer} die referenzierte \emph{Callback}-Funktion.}
 	\label{fig:eventbus-unregister-seq}
 \end{figure}
 
@@ -33,7 +33,7 @@ Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgabe
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v1-class.pdf}
-	\caption{Klassendiagramm der ersten Variante des Eventbus.}
+	\caption{Klassendiagramm der ersten Variante des Eventbus. Der \code{Logger} nimmt Ereignisse entgegen. Für jedes Ereignis wird ein \code{LogEntry}-Objekt erzeugt und die von \code{BaseModel} geerbte und überschriebene Methode \code{save} aufgerufen. Diese benachrichtigt den Eventbus, welcher die registrierten Empfänger über das neue Ereignis informiert.}
 	\label{fig:eventbus-v1-class}
 \end{figure}
 
@@ -42,7 +42,7 @@ Bei dieser Variante wird das System des \emph{Loggers} erweitert, um die Aufgabe
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v1-seq.pdf}
-	\caption{Sequenzdiagramm der ersten Variante des Eventbus.}
+	\caption{Sequenzdiagramm der ersten Variante des Eventbus. Eine Komponente sendet ein Ereignis an den \emph{Logger} (1). Dieser erzeugt ein \code{LogEntry}-Objekt (2)auf welchem \code{save} aufgerufen wird (3). Dabei wirdder Eventbus benachrichtigt (4), welcher die registrierten Empfänger über das neue Ereignis informiert (5).}
 	\label{fig:eventbus-v1-seq}
 \end{figure}
 
@@ -55,7 +55,7 @@ Bei dieser Variante wird der Eventbus als eigenständige Komponente implementier
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v2-class.pdf}
-	\caption{Klassendiagramm der zweiten Variante des Eventbus.}
+	\caption{Klassendiagramm der zweiten Variante des Eventbus. Die Komponenten benachrichtigen den Eventbus direkt über neue Ereignisse. Der Eventbus leitet die Ereignisse dann an die registrierten Empfänger weiter. Die ereignisspezifischen Informationen sind in \code{Event}-Objekten gekapselt.}
 	\label{fig:eventbus-v2-class}
 \end{figure}
 
@@ -64,7 +64,7 @@ Bei dieser Variante wird der Eventbus als eigenständige Komponente implementier
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=1.0\linewidth]{images/diagrams/eventbus-v2-seq.pdf}
-	\caption{Sequenzdiagramm der zweiten Variante des Eventbus.}
+	\caption{Sequenzdiagramm der zweiten Variante des Eventbus. Eine Komponente sendet die Parameter eines Ereignisses an den Eventbus (1). Der Eventbus erzeugt daraufhin ein \code{Event}-Objekt (2) und benachrichtigt die registrierten Empfänger (3).}
 	\label{fig:eventbus-v2-seq}
 \end{figure}
 
