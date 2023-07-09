@@ -2,7 +2,7 @@
 
 In diesem Abschnitt eine Auswahl Implementierungsdetails auf Quelltext-Ebene vorgestellt. Da das grundlegende Verhalten der Komponenten bereits beschrieben wurde, konzentriert sich dieser Teil auf Details, die sich in Sequenzdiagrammen nicht gut darstellen lassen aber für das Verständnis der Komponenten von Bedeutung sind.
 
-\subsection{\emph{Template-Method} in \code{Schedule}}
+\subsection{Template-Method in Schedule}
 
 \autoref{code:template-method-code} zeigt einen Ausschnitt aus der abstrakten Klasse \code{Schedule}. Gezeigt wird die bereits beschriebene \emph{Template-Method} \code{maybe\_spawn}, welche das Grundgerüst des Algorithmus für die Zugerzeugung bereitstellt.\\
 \\
@@ -67,7 +67,7 @@ class RegularScheduleStrategy(ScheduleStrategy):
         )
 \end{lstlisting}
 
-\autoref{code:random-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{RandomScheduleStrategy}. Diese Strategie erzeugt Züge mit einer bestimmten Wahrscheinlichkeit. Dazu wird das Attribut \code{trains\_per\_1000\_seconds} verwendet, welches die mittlere Anzahl der Züge pro 1000 Sekunden angibt. Die \code{should\_spawn}-Methode prüft, ob eine Zufallszahl zwischen 0 und 1000 kleiner als \code{trains\_per\_1000\_seconds} ist. Außerdem wird der Initialisierungsmethode (\code{\_\_init\_\_}) ein Startwert (\code{seed}) für den Zufallszahlengenerator (\code{random\_number\_generator}) übergeben, um die Reproduzierbarkeit auch bei pseudozufälligen Ergebnissen zu gewährleisten.
+\autoref{code:random-strategy-code} zeigt einen Ausschnitt der Implementierung der Klasse \code{RandomScheduleStrategy}. Diese Strategie erzeugt Züge mit einer bestimmten Wahrscheinlichkeit. Dazu wird das Attribut \code{trains\_per\_1000\_seconds} verwendet, welches die mittlere Anzahl der Züge pro 1000~Sekunden angibt. Die \code{should\_spawn}-Methode prüft, ob eine Zufallszahl zwischen 0 und 1000 kleiner als \code{trains\_per\_1000\_seconds} ist. Außerdem wird der Initialisierungsmethode (\code{\_\_init\_\_}) ein Startwert (\code{seed}) für den Zufallszahlengenerator (\code{random\_number\_generator}) übergeben, um die Reproduzierbarkeit auch bei pseudozufälligen Ergebnissen zu gewährleisten.
 
 \begin{lstlisting}[caption={Ausschnitt aus der Klasse \code{RandomScheduleStrategy} mit der Implementierung der Methode \code{should\_spawn}.}, label=code:random-strategy-code]
 class RandomScheduleStrategy(ScheduleStrategy):

@@ -9,7 +9,7 @@ Im Folgenden wird erläutert, wie aus Stromproduktionsdaten der Kohlebedarf für
 	\label{fig:demand-calculation}
 \end{sidewaysfigure}
 
-Die Bundesnetzagentur stellt Kenndaten zu allen Kraftwerken Deutschlands bereit \cite{noauthor_bundesnetzagentur_nodate}. Die für uns wichtigen Kraftwerksdaten sind der Name des Kraftwerkes, seine elektrische Leistung in MW, die thermische Leistung in MW, der verwendete Energieträger und das Bundesland, ich welchem sich das Kraftwerk befindet. Diese Daten wurden einmalig in Form einer CSV-Datei heruntergeladen. Im Anschluss wurden die Daten gefiltert, sodass nur noch Kraftwerke mit dem Energieträger Braunkohle innerhalb der \emph{50Hertz}-Regelzone übrige blieben. Diese Zone umfasst die neuen Bundesländer und Hamburg. Aus diesen gefilterten Kraftwerksdaten wurde dann die Gesamtleistung $P_T$ aller Braunkohlekraftwerke in der Regelzone durch Aufsummieren berechnet. Diese Gesamtleistung beträgt rund 10.600 MW. Außerdem wurden für die weitere Berechnung nur noch die drei Lausitzer Kraftwerke betrachtet, welche über das Schienennetz der LEAG mit Braunkohle versorgt werden. Diese Kraftwerke sind \emph{Boxberg}, \emph{Jänschwalde} und \emph{Schwarze Pumpe}.\\
+Die Bundesnetzagentur stellt Kenndaten zu allen Kraftwerken Deutschlands bereit \cite{noauthor_bundesnetzagentur_nodate}. Die für uns wichtigen Kraftwerksdaten sind der Name des Kraftwerkes, seine elektrische Leistung in MW, die thermische Leistung in MW, der verwendete Energieträger und das Bundesland, ich welchem sich das Kraftwerk befindet. Diese Daten wurden einmalig in Form einer CSV-Datei heruntergeladen. Im Anschluss wurden die Daten gefiltert, sodass nur noch Kraftwerke mit dem Energieträger Braunkohle innerhalb der \emph{50Hertz}-Regelzone übrige blieben. Diese Zone umfasst die neuen Bundesländer und Hamburg. Aus diesen gefilterten Kraftwerksdaten wurde dann die Gesamtleistung $P_T$ aller Braunkohlekraftwerke in der Regelzone durch Aufsummieren berechnet. Diese Gesamtleistung beträgt rund 10.600~MW. Außerdem wurden für die weitere Berechnung nur noch die drei Lausitzer Kraftwerke betrachtet, welche über das Schienennetz der LEAG mit Braunkohle versorgt werden. Diese Kraftwerke sind \emph{Boxberg}, \emph{Jänschwalde} und \emph{Schwarze Pumpe}.\\
 \\
 Die produzierte Energiemenge $E$ aus Braunkohle in der \emph{50Hertz}-Regelzone für einen bestimmten Zeitraum kann von der \emph{Smard-API} abgerufen werden. Unter der Annahme, dass alle Kraftwerke dieser Zone gleichmäßig ausgelastet werden, benötigen sie eine Zeitspanne von $\Delta t$, um die Energiemenge $E$ zu produzieren. $\Delta t$ ergibt sich, wie in \autoref{eq:energy-time} dargestellt, aus dem Quotienten aus der produzierten Energie und der Gesamtleistung aller Kraftwerke.
 
@@ -17,13 +17,13 @@ Die produzierte Energiemenge $E$ aus Braunkohle in der \emph{50Hertz}-Regelzone 
     \Delta t = \frac{E}{P_T}\label{eq:energy-time}
 \end{equation}
 
-Die benötigte Kohlemenge $m_k$, die ein Kraftwerk benötigt, um $\Delta t$ lang bei voller Leistung Strom zu produzieren, kann mithilfe von \autoref{eq:coal-mass} berechnet werden. Dabei sind $P_e$ die elektrische Leistung und $P_t$ die thermische Leistung des betrachteten Kraftwerkes in MW. Weiterhin sind $\rho$ die mittlere Energiedichte von Braunkohle mit 2,46 MWh/t\footnote{Die Energiedichte der Rohbraunkohle in der Lausitz schwankt zwischen 2,14 und 2,78 MWh/t. \cite{bundesverband_braunkohle_braunkohle_nodate}} und $\eta$ der Wirkungsgrad des Kraftwerkes.
+Die benötigte Kohlemenge $m_k$, die ein Kraftwerk benötigt, um $\Delta t$ lang bei voller Leistung Strom zu produzieren, kann mithilfe von \autoref{eq:coal-mass} berechnet werden. Dabei sind $P_e$ die elektrische Leistung und $P_t$ die thermische Leistung des betrachteten Kraftwerkes in MW. Weiterhin sind $\rho$ die mittlere Energiedichte von Braunkohle mit 2,46~MWh/t\footnote{Die Energiedichte der Rohbraunkohle in der Lausitz schwankt zwischen 2,14 und 2,78~MWh/t. \cite{bundesverband_braunkohle_braunkohle_nodate}} und $\eta$ der Wirkungsgrad des Kraftwerkes.
 
 \begin{equation}
     m_k=\frac{\Delta t(P_e+P_t)}{\rho\eta}\label{eq:coal-mass}
 \end{equation}
 
-Zusammen mit der Füllkapazität eines Kohlezuges $c$ von 960 t lässt sich durch \autoref{eq:train-amount} die Anzahl der Züge $n_z$ berechnen, die benötigt wird, um die Masse an Kohle zu transportieren.
+Zusammen mit der Füllkapazität eines Kohlezuges $c$ von 960~t lässt sich durch \autoref{eq:train-amount} die Anzahl der Züge $n_z$ berechnen, die benötigt wird, um die Masse an Kohle zu transportieren.
 
 \begin{equation}
     n_z=\frac{m_k}{c}\label{eq:train-amount}
