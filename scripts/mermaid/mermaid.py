@@ -19,7 +19,7 @@ def make_pdfs(path: str):
         print(status_code, filename)
 
 
-DEFAULT_CONFIF: dict = {
+DEFAULT_CONFIG: dict = {
   "theme": "base",
   "themeVariables": {
     "primaryColor": "#ffffff",
@@ -36,16 +36,31 @@ def make_configs(path: str):
             continue
         cfg_filename = ".".join(filename.split(".")[:-1]) + ".json"
         with open(os.path.join(path, cfg_filename), 'w') as file:
-            json.dump(DEFAULT_CONFIF, file)
+            json.dump(DEFAULT_CONFIG, file)
         print(filename)
+
+
+def update_seq_configs(path: str):
+    for filename in os.listdir(path):
+        if not filename.endswith(".json"):
+            continue
+        with open(os.path.join(path, filename), 'r') as file:
+            config = json.load(file)
+        config['themeVariables']['secondaryColor'] = "#aaaaaa"
+        with open(os.path.join(path, filename), 'w') as file:
+            json.dump(config, file)
 
 
 MODE = 'pdf'
 # MODE = 'cfg'
+# MODE = 'ucfg'
 
 if MODE == 'cfg':
     make_configs(MERMAID_PATH)
     make_configs(ARCH_PATH)
-else:
+elif MODE == 'pdf':
     make_pdfs(MERMAID_PATH)
     make_pdfs(ARCH_PATH)
+elif MODE == 'ucfg':
+    update_seq_configs(MERMAID_PATH)
+    update_seq_configs(ARCH_PATH)
