@@ -6,7 +6,7 @@ Für die dauerhafte Speicherung von Daten wird eine Datenbank benötigt. Die Int
 In der Praxis haben sich für die Beschreibung von Datenbanken und Software vor allem zwei verschiedene Paradigmen etabliert. Datenbanken, welche der persistenten Speicherung von Daten dienen, folgen häufig dem relationalen Paradigma. Softwaresysteme hingegen, deren Verhalten und Struktur durch Programmiersprachen beschrieben werden, werden meist objektorientiert modelliert. Da diese beiden Technologien, breite Verwendung finden, ist ihre Kombination innerhalb desselben Systems in der häufig unumgänglich. Solche Systeme nennt man objekt-relationale Systeme. \cite{ireland_understanding_2009}
 
 \subsection{Object-Relational Mapper (ORM)}
-Die Aufgabe eines ORM ist es, die Persistenz von Objekten zu gewährleisten \cite{noauthor_what_2023} und dabei gleichzeitig die darunterliegende relationale Datenbank zu abstrahieren. So kann der Programmierer, welcher eine objektorientierte Programmiersprache verwendet, vollständig in einem objektorientierten Kontext arbeiten. Er ist nicht mehr gezwungen, direkt mit der relationalen Datenbank über SQL zu kommunizieren. Das ORM stellt dabei eine bidirektionale Abbildung zwischen dem objektorientierten und dem relationalen Modell bereit. Dabei muss sichergestellt werden, dass sowohl die Struktur, als auch die Mechanismen beider Paradigmen korrekt aufeinander abgebildet werden. Die Abbildung der Struktur beschäftigt sich mit der Zuordnung von Tabellen zu Klassen. Die Abbildung der Mechanismen behandelt unter anderem die Navigation durch Objektreferenzen und das Schreiben und Lesen von Daten. \cite{ireland_understanding_2009}
+Die Aufgabe eines ORM ist es, die Persistenz von Objekten zu gewährleisten \cite{noauthor_what_2023} und dabei gleichzeitig die darunterliegende relationale Datenbank zu abstrahieren. So kann der Programmierer, welcher eine objektorientierte Programmiersprache verwendet, vollständig in einem objektorientierten Kontext arbeiten. Er ist nicht mehr gezwungen, direkt mit der relationalen Datenbank über \emph{SQL} zu kommunizieren. Das ORM stellt dabei eine bidirektionale Abbildung zwischen dem objektorientierten und dem relationalen Modell bereit. Dabei muss sichergestellt werden, dass sowohl die Struktur, als auch die Mechanismen beider Paradigmen korrekt aufeinander abgebildet werden. Die Abbildung der Struktur beschäftigt sich mit der Zuordnung von Tabellen zu Klassen. Die Abbildung der Mechanismen behandelt unter anderem die Navigation durch Objektreferenzen und das Schreiben und Lesen von Daten. \cite{ireland_understanding_2009}
 
 \subsection{Hindernisse}
 Die Unterschiede zwischen beiden Paradigmen rufen eine Reihe von Problemen hervor, welche das ORM lösen muss. Diese Probleme sind nach \cite{ireland_understanding_2009} die folgenden:
@@ -21,9 +21,9 @@ Die Unterschiede zwischen beiden Paradigmen rufen eine Reihe von Problemen hervo
 Jedes ORM konzentriert sich auf die Aspekte der zu leistenden Abbildung unterschiedlich stark. So kann der Fokus beispielsweise mehr auf der strukturellen Abbildung zwischen Klassen und Tabellen liegen oder auf der korrekten Abbildung der Mechanismen. Es gibt daher keine einheitliche oder richtige Lösung. Entsprechend ist die Trennung zwischen objektorientiertem und relationalem Paradigma nie vollständig und hängt vom Einzelfall und den Bedürfnissen des Anwenders ab.
 
 \subsection{peewee}
-Für unser Softwareprojekt haben wir das ORM \emph{peewee}\footnote{\url{https://github.com/coleifer/peewee}} \cite{leifer_coleiferpeewee_2023} ausgewählt. Da das ORM einer der Grundsteine unseres Projektes darstellt, stand die Auswahl des ORM am Anfang Planungsprozesses. Daher war es uns nicht möglich, das ORM  anhand der Anforderungen unserer Softwarearchitektur auszuwählen. Diese stand zu diesem Zeitpunkt, aufgrund der agilen Arbeitsweise unseres Teams, noch nicht in ausreichendem Detailgrad zur Verfügung. Wir haben die Entscheidung stattdessen anhand der allgemeinen Funktionsübersicht und der Benutzerfreundlichkeit getroffen. Zur Auswahl stand außerdem das ORM ''SQLAlchemy'' \cite{noauthor_sqlalchemy_2023}. Obwohl SQLAlchemy einen größeren Funktionsumfang bietet, ist \emph{peewee} einfacher zu bedienen und man erreicht viele der meistbenutzten Funktionen mit weniger Code. Da dies zugunsten der Entwicklungsgeschwindigkeit geht, haben wir uns letztendlich für \emph{peewee} entschieden. Außerdem sinkt die Wahrscheinlichkeit für das Machen von Fehlern mit weniger Code.
+Für unser Softwareprojekt haben wir das ORM \emph{peewee}\footnote{\url{https://github.com/coleifer/peewee}} \cite{leifer_coleiferpeewee_2023} ausgewählt. Da das ORM einer der Grundsteine unseres Projektes darstellt, stand die Auswahl des ORM am Anfang Planungsprozesses. Daher war es uns nicht möglich, das ORM  anhand der Anforderungen unserer Softwarearchitektur auszuwählen. Diese stand zu diesem Zeitpunkt, aufgrund der agilen Arbeitsweise unseres Teams, noch nicht in ausreichendem Detailgrad zur Verfügung. Wir haben die Entscheidung stattdessen anhand der allgemeinen Funktionsübersicht und der Benutzerfreundlichkeit getroffen. Zur Auswahl stand alternativ das ORM \emph{SQLAlchemy} \cite{noauthor_sqlalchemy_2023}. Obwohl \emph{SQLAlchemy} einen größeren Funktionsumfang bietet, ist \emph{peewee} einfacher zu bedienen und man erreicht viele der meistbenutzten Funktionen mit weniger Code. Da dies zugunsten der Entwicklungsgeschwindigkeit geht, haben wir uns letztendlich für \emph{peewee} entschieden. Außerdem sinkt die Wahrscheinlichkeit für das Begehen von Fehlern mit weniger Code.
 
-Im Folgenden wird eine Reihe von Grundfunktionalitäten von \emph{peewee} vorgestellt, welche häufig in unserem Projekt Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
+Im Folgenden wird eine Reihe von Grundfunktionalitäten von \emph{peewee} vorgestellt, welche in unserem Projekt häufig Verwendung fanden und die auch im Rahmen dieser Arbeit eine Rolle spielen.
 
 \subsubsection*{Definition von Modellen}
 
@@ -61,7 +61,7 @@ Alternativ dazu kann das Objekt auch direkt über den Konstruktor erzeugt werden
 
 \subsubsection*{Datenabfragen}
 
-Das Abfragen von Daten orientiert sich in \emph{peewee} an den Konzepten von SQL, bildet die SQL-Schlüsselwörter jedoch auch Methoden ab. \autoref{code:peewee-query} zeigt eine einfache Datenabfrage die zu dem SQL-Statement in \autoref{code:sql-query} äquivalent ist.
+Das Abfragen von Daten orientiert sich in \emph{peewee} an den Konzepten von SQL, bildet die \emph{SQL}-Schlüsselwörter jedoch auch Methoden ab. \autoref{code:peewee-query} zeigt eine einfache Datenabfrage die zu dem \emph{SQL}-Statement in \autoref{code:sql-query} äquivalent ist.
 
 \lstset{language=python}
 \begin{lstlisting}[caption={Python-Code zum Abfragen eines Objektes aus der Datenbank.  \cite{noauthor_quickstart_2023}}, label=code:peewee-query]
@@ -69,6 +69,6 @@ Das Abfragen von Daten orientiert sich in \emph{peewee} an den Konzepten von SQL
 \end{lstlisting}
 
 \lstset{language=sql}
-\begin{lstlisting}[caption={SQL-Abfrage mit SELECT und WHERE.}, label=code:sql-query]
+\begin{lstlisting}[caption={\emph{SQL}-Abfrage mit SELECT und WHERE.}, label=code:sql-query]
     SELECT * FROM Person WHERE name = 'Grandma L.';
 \end{lstlisting}

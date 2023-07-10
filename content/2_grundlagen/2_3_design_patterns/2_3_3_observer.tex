@@ -5,7 +5,7 @@
 
 Häufig müssen verschiedene Komponenten eines Systems synchron gehalten werden. Gleichzeitig soll aber auch eine enge Kopplung dieser Komponenten vermieden werden. Es wird eine $1$:$n$-Beziehung zwischen den Objekten benötigt, wobei $n$ Objekte von einem Objekt abhängen. Wenn das eine Objekt seinen Zustand ändert, so sollen alle abhängigen Objekte benachrichtigt werden, sodass auch sie ihren Zustand aktualisieren können. Ein naiver Lösungsansatz wäre, jedem abhängigen Objekt eine Referenz auf das Objekt zu geben, von welchem es abhängt. Die Objekte könnten dann in regelmäßigen Abständen prüfen, ob eine Zustandsänderung stattgefunden hat (\emph{Polling}). Dieser Ansatz weist jedoch nicht nur eine hohe Kopplung auf, er ist auch wenig performant. Auch wenn keine Zustandsänderung stattgefunden hat, wird auf diese geprüft.
 
-Das \emph{Observer Pattern} kann Anwendung finden, wenn es zwei voneinander getrennte Konzepte gibt und eines von dem anderen abhängig ist. Die Abhängigkeit muss modelliert werden können, ohne die Objekte stark zu koppeln. Weiterhin soll es möglich sein, die Anzahl der abhängigen Objekte variablen zu halten. \cite{gamma_design_1995}
+Das \emph{Observer Pattern} kann Anwendung finden, wenn es zwei voneinander getrennte Konzepte gibt und eines von dem anderen abhängig ist. Die Abhängigkeit muss modelliert werden können, ohne die Objekte stark zu koppeln. Weiterhin soll es möglich sein, die Anzahl der abhängigen Objekte variabel zu halten. \cite{gamma_design_1995}
 
 \subsubsection*{Lösung}
 
@@ -18,7 +18,7 @@ Das \emph{Observer Pattern} besteht aus einem Sender (\code{Publisher}) und mehr
 	\label{fig:observer-class}
 \end{figure}
 
-\autoref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footref{ftn:client} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender sendet sich draufhin selbst \code{notify} (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
+\autoref{fig:observer-seq} zeigt, dass der Anwender (\code{Client})\footref{ftn:client} den Zustand des Sender durch Senden von \code{updateSate} verändern kann (1). Der Sender ruft draufhin auf sich selbst \code{notify} auf (2) und beginnt über seine Liste von Empfängern zu iterieren. Jedem Empfänger sendet er dann \code{update} (3, 5) und übergibt den notwendigen Kontext, sodass der Empfänger seinen Zustand entsprechend aktualisieren kann.
 
 \begin{figure}[!ht]
 	\centering
@@ -29,6 +29,6 @@ Das \emph{Observer Pattern} besteht aus einem Sender (\code{Publisher}) und mehr
 
 \subsubsection*{Konsequenzen}
 
-Durch Separation von Sender und Empfänger und durch die Abstraktion der Empfänger-Schnittstelle wird eine lose Kopplung der beiden erreicht. Diese lose Kopplung ermöglicht es, sowohl den Sender, als auch die Empfänger beliebig auszutauschen. Weiterhin können sich der Sender und die Empfänger auf unterschiedlichen Abstraktionsniveaus befinden. Ein Sender auf einem niedrigen Niveau kann einen Empfänger auf einem hohen Niveau benachrichtigen. Wären Empfänger und Sender nicht getrennt, so wäre dafür ein Objekt notwendig, welches mehrere Abstraktionsebenen umfasst, wodurch die Trennung der Abstraktionsschichten beeinträchtigen würde. Ein weiterer Vorteil ist die dynamische Anzahl der Empfänger, mit denen ein Sender interagieren kann. So kann der Anwender über den Sender eine beliebige Zahl an Empfängern erreichen.
+Durch Separation von Sender und Empfänger und durch die Abstraktion der Empfänger-Schnittstelle wird eine lose Kopplung von Sender und Empfänger erreicht. Diese lose Kopplung ermöglicht es, sowohl den Sender, als auch die Empfänger beliebig auszutauschen. Weiterhin können sich der Sender und die Empfänger auf unterschiedlichen Abstraktionsniveaus befinden. Ein Sender auf einem niedrigen Niveau kann einen Empfänger auf einem hohen Niveau benachrichtigen. Wären Empfänger und Sender nicht getrennt, so wäre dafür ein Objekt notwendig, welches mehrere Abstraktionsebenen umfasst, wodurch die Trennung der Abstraktionsschichten beeinträchtigen würde. Ein weiterer Vorteil ist die dynamische Anzahl der Empfänger, mit denen ein Sender interagieren kann. So kann der Anwender über den Sender eine beliebige Zahl an Empfängern erreichen.
 
 Ein Nachteil des \emph{Observer Patterns} ist, dass der Sender stets alle seine Empfänger benachrichtigt. Es kann vorkommen, dass nur eine Teilmenge der Empfänger die Benachrichtigung benötigt, was in unnötigen Methodenaufrufen resultiert. \cite{gamma_design_1995}
