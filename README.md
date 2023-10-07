@@ -3,6 +3,7 @@
 [Open PDF File](https://github.com/CR1337/ba-cr/blob/main/thesis.pdf)
 
 **Title:** Design and Implementation of Regular, Randomized and Demand-Driven Departure Schedules for Trains in a Traffic Simulation
+
 **Titel:** Entwurf und Implementierung von regelmäßigen, randomisierten und bedarfsorientierten Abfahrtsplänen für Züge in einer Verkehrssimulation
 
 ## Abstract
