@@ -1,48 +1,14 @@
-Zur Gewährleistung eines einheitlichen Erscheinungsbildes und Vereinfachung der Arbeit an schriftlichen Ausarbeitungen bieten wir eine LaTeX-Vorlage für Bachelor- und Masterarbeiten mit Einstellungen zu Makrotypographie (wie Papiergröße, allgemeines Layout) und auch zur Detailtypographie (wie Schriftwahl) an.
+# My Bachelor Thesis at Hasso-Plattner-Institute
 
-Die Dokumentenvorlage *osm-thesis* enthält Struktur- und Formatierungsvorgaben sowie Hinweise zur Erstellung von formal korrekten Abschlussarbeiten nach den Vorgaben des Studienreferats und Ansprüchen des Fachgebiets Betriebssysteme & Middleware.
+[Open PDF File](https://github.com/CR1337/ba-cr/blob/main/thesis.pdf)
 
-Innerhalb des _osm-thesis_-Templates stehen zwei Dokumentklassen zur Verfügung. Das Layout des Textbereiches ist in beiden Dokumentklassen identisch. `scrbook` ist die Druckversion; sie enthält eine Zusatzseite für den Einband und ist für den Zweiseitendruck formatiert. (u.a. Seitenränder, Kopf- & Fußzeilen, Leerseiten). `scrreprt` ist die Bildschirmversion; sie enthält keine unnötigen (Leer-)Seiten und ist für die Einzelseitenansicht formatiert.
+**Title:** Design and Implementation of Regular, Randomized and Demand-Driven Departure Schedules for Trains in a Traffic Simulation
+**Titel:** Entwurf und Implementierung von regelmäßigen, randomisierten und bedarfsorientierten Abfahrtsplänen für Züge in einer Verkehrssimulation
 
-- [Tipps für schriftliche Ausarbeitungen & Dokumentvorlagen](https://osm.hpi.de/theses/tipps)
-- Das Template gibt es [auch als Overleaf-Template](https://www.overleaf.com/latex/templates/osm-thesis-template/kpzhrwkmhbgq)
-- [Kompiliertes PDF](https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/thesis.pdf?job=build) (Coverpage, Titelseite, Inhaltsverzeichnis, Textteil mit Beispielen und Blindtext, Anhang, Literaturverzeichnis, Eigenständigkeitserklärung, deutsch/englisch, Druckversion/Bildschirmversion, formal korrekt nach den Vorgaben des HPI-Studienreferats)
-- wer weder ein Fork von diesem Repositorium erstellen will,
-  noch das Repositorium klonen will, kann
-  [hier die Dateien des Repositoriums herunterladen](https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/download?job=build)
-  - (Achtung: der Link von GitLab um die Dateien herunterzuladen beinhaltet nicht die Dateien die mit git LFS abgelegt sind).
+## Abstract
 
-PRs welcome.
+The FlexiDug project is researching the potential after-use of rail infrastructure, which was previously used for lignite transport in Lusatia. The aim is to develop a concept for joint use for passenger and freight trains. This work is part of a software project that enables the simulation of train traffic based on an extension of the traffic simulator SUMO. The work deals with the generation of trains within the simulation. For this purpose three different types of of departure schedules are needed: regular, random and on-demand. Demand-based departure schedules are based on the calculated coal demand of power plants. The calculation is based on electricity production data from the Federal Network Agency. The results show that the departure periods of the coal trains correlate with the coal demand and that the software and that the software can simulate realistic train traffic.
 
-<table>
-<tr>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-1.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-2.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-</tr>
-<tr>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-3.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-4.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-</tr>
-<tr>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-5.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-  <td>
-    <img src="https://gitlab.com/hpi-potsdam/osm/thesis-template/-/jobs/artifacts/master/raw/preview-6.png?job=previews"
-      alt="if you can read this, CI is probably building (or failed :)" />
-  </td>
-</tr>
-</table>
+## Zusammenfassung
+
+Das Projekt FlexiDug erforscht die Nachnutzungsmöglichkeiten der Schieneninfrastruktur, die bisher dem Braunkohletransport in der Lausitz diente. Ziel ist es, ein Konzept für eine gemeinsame Nutzung für Personen- und Güterzüge zu erstellen. Diese Arbeit ist Teil eines Softwareprojekts, das die Simulation des Zugverkehrs auf Basis einer Erweiterung des Verkehrssimulators SUMO ermöglicht. Die Arbeit beschäftigt sich mit der Erzeugung von Zügen innerhalb der Simulation. Dafür werden drei verschiedene Arten von Abfahrtsplänen benötigt: regelmäßige, zufällige und bedarfsorientierte. Bedarfsorientierte Abfahrtspläne basieren auf dem berechneten Kohlebedarf von Kraftwerken. Die Berechnung basiert auf Stromproduktionsdaten der Bundesnetzagentur. Die Ergebnisse der Simulation zeigen, dass die Abfahrtsperioden der Kohlezüge mit dem Kohlebedarf korrelieren und dass die Software einen realistischen Zugverkehr simulieren kann.
